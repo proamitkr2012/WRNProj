@@ -1,0 +1,101 @@
+﻿@model StudentMastersDTO
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<div class="container p-3">
+    <ul class="steps">
+        <li class="step step-active">
+           
+                <div class="step-content">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Admission Form</span>
+                </div>
+           
+        </li>
+        <li class="step">
+                 <div class="step-content">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Profile</span>
+                </div>
+           
+        </li>
+        <li class="step">
+               <div class="step-content">
+                    <span class="step-circle">3</span>
+                    <span class="step-text">Qualification</span>
+                </div>
+          
+        </li>
+        <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">4</span>
+                    <span class="step-text">Documents</span>
+                </div>
+           
+        </li>
+        <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Preview</span>
+                </div>
+           
+        </li>
+        <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Payment</span>
+                </div>
+          
+        </li>
+    </ul>
+    <div class="text-center mt-5">
+        <h2>Admission Web Registration  Form - (2023)</h2>
+
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Registration For B.Ed
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Candidate's Profile (अभ्यर्थी का विवरण)
+            </h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Candidate's Name (अभ्यर्थी का नाम) :</label>
+                        <input asp-for="Name" type="text" placeholder="Candidate's Name (अभ्यर्थी का नाम)" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन):</label>
+                        <input type="text" asp-for="Roll" placeholder="Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन)" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            College Code(कॉलेज का कोड):
+                        </label>
+                        <input type="text" asp-for="CollegeCode" readonly placeholder="College Code(कॉलेज का कोड)" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            College Name(कॉलेज का नाम):
+                        </label>
+                        <input type="text" asp-for="CollegeName" readonly placeholder="College Name(कॉलेज का नाम)" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4 offset-md-4 mt-4">
+                    <a asp-action="admissionform_step2" asp-controller="home" asp-route-id="@Model.EncrptedRoll" class="btn btn-primary btn-block">Save & Next</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

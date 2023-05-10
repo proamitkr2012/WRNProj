@@ -1,0 +1,13 @@
+﻿@using AdmissionUI
+@using AdmissionUI.Models
+@using AdmissionModel
+@using AdmissionModel.DTO
+@using AdmissionData.Entities
+@using AdmissionUI.Extensions
+@using AdmissionUI.Helpers
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AdmissionUI
+@inherits AdmissionUI.Helpers.BaseViewPage<TModel>
