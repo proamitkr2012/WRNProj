@@ -102,13 +102,13 @@
                                                 @if (!string.IsNullOrEmpty(item.Board_Universty_Name))
                                                 {
 
-                                                    <option value="AGRA COLLEGE, AGRA" >Agra</option>
-                                                    <option value="Other" selected>Other</option>
+                                                    <option value="agra">DBARU(Agra)</option>
+                                                    <option value="Others" selected>Others</option>
                                                 }
                                                 else
                                                 {
-                                                    <option value="AGRA COLLEGE, AGRA" >Agra</option>
-                                                    <option value="Other" selected>Other</option>
+                                                    <option value="agra">DBARU(Agra)</option>
+                                                    <option value="Others" selected>Others</option>
 
                                                 }
                                             </select>
@@ -262,8 +262,8 @@
     
 
     function UnivOnclick(id) {
-       if($('#Univ option:selected').val()!="Other")
-        $("#" + id + "_Board").val($('#Univ option:selected').val());
+       if($('#Univ option:selected').val()!="Others")
+            $("#" + id + "_Board").val("Dr. Bhimrao Ambedkar University, Agra");
     };
 
     function SubmitButtonCheckOnclick() {

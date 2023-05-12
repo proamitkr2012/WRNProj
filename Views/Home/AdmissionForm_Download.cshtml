@@ -97,9 +97,16 @@
                             @*<td style="border:none"></td>*@
                         </tr>
                         <tr>
+                            <td> Alloted College</td>
+                            <td colspan="1">
+                                <span id="lblFatherName" style="text-transform:uppercase">[@Model.CollegeCode]-@Model.CollegeName</span>
+                            </td>
+                            @*<td style="border:none"></td>*@
+                        </tr>
+                        <tr>
                             <td> Father's Name</td>
                             <td colspan="1">
-                                <span id="lblFatherName">@Model.FatherName</span>
+                                <span id="lblFatherName" style="text-transform:uppercase">@Model.FatherName</span>
                             </td>
                             @*<td style="border:none"></td>*@
                         </tr>
@@ -107,7 +114,7 @@
                         <tr>
                             <td> Mother's Name</td>
                             <td colspan="1">
-                                <span id="lblFatherName">@Model.MotherName</span>
+                                <span id="lblFatherName" style="text-transform:uppercase">@Model.MotherName</span>
                             </td>
                         </tr>
                         <tr>
@@ -120,7 +127,7 @@
                         </tr>
                         <tr>
 
-                            <td> EmailId</td>
+                            <td> Email Id</td>
                             <td colspan="1">
                                 <span id="lblMotherName">@Model.Email</span>
 
@@ -142,7 +149,7 @@
 
                             <td> Gender</td>
                             <td>
-                                <span id="lblGender">
+                                <span id="lblGender" style="text-transform:uppercase">
                                     @Model.Gender
                                 </span>
                             </td>
@@ -151,7 +158,7 @@
                         </tr>
                         <tr>
 
-                            <td>Alt Mobile</td>
+                            <td>Alternate Mobile</td>
                             <td colspan="1">
                                 <span id="lblcaste" style="text-transform: uppercase">@Model.AltMobile</span>
                             </td>
@@ -159,7 +166,7 @@
 
 
                         <tr>
-                            <td style="width: 28%">AdharCard </td>
+                            <td style="width: 28%">Aadhar Card </td>
                             <td>
 
                                 <span id="lblMarital">@Model.Aadhar</span>
@@ -170,11 +177,11 @@
                             <td style="width: 28%"> Category </td>
                             <td>
 
-                                <span id="lblMarital">@Model.Category</span>
+                                <span id="lblMarital" style="text-transform:uppercase">@Model.Category</span>
                             </td>
 
                         </tr>
-                        <tr>
+                       @* <tr>
                             <td style="width: 28%"> Ews </td>
                             <td>
 
@@ -194,7 +201,7 @@
 
                             </td>
 
-                        </tr>
+                        </tr>*@
                     </table>
                     <br />
                     <table style=" width: 100%;" class="table table-bordered">
@@ -202,7 +209,7 @@
                         <tr>
                             <td>
                                 <p>Communication Address:-</p>
-                                <div id="lblCAddress">@Model.CurrentAddress</div>
+                                <div id="lblCAddress" style="text-transform:uppercase">@Model.CurrentAddress</div>
                                 <div id="lblCState"> State:- @Model.CState</div>
                                 <div id="lblCDistrict"> City:- @Model.CDistrict</div>
                                 <div id="lblCPinCode">PinCode:-  @Model.CPin</div>
@@ -213,7 +220,7 @@
 
                             <td>
                                 <p>Permanent Address</p>
-                                <div id="lblCAddress">@Model.ParmanentAddress</div>
+                                <div id="lblCAddress" style="text-transform:uppercase">@Model.ParmanentAddress</div>
                                 <div id="lblCState"> State:- @Model.PState</div>
                                 <div id="lblCDistrict"> City:- @Model.PDistrict</div>
                                 <div id="lblCPinCode">PinCode:-  @Model.PPin</div>
@@ -269,11 +276,11 @@
                                     <th>S.No.</th>
                                     <th>Qualification Type</th>
                                     <th>Board/University</th>
-                                    @*<th>Passing Year</th>*@
+                                    <th>Roll No.</th>
                                     <th>Evaluation Type	</th>
                                     <th>Total Marks</th>
                                     <th>Mark Obt</th>
-                                    @*<th>IsAppearing</th>*@
+                                    <th>Passing Year</th>
                                     <th>Obtained %</th>
                                 </tr>
                             </thead>
@@ -300,6 +307,10 @@
 
                                                 </td>
                                                 <td>
+                                                    @item.PreRollNo
+
+                                                </td>
+                                                <td>
                                                     @if (item.IsCGPA == true)
                                                     {
                                                         <span>CGPA</span>
@@ -314,12 +325,14 @@
                                                     @item.TotalMarks
 
                                                 </td>
+
                                                 <td>
                                                     @item.MarkObt
                                                 </td>
-                                                @* <td>
-                                    @item.ExamStatus
-                                    </td>*@
+                                                <td>
+                                                    @item.PassingYear
+
+                                                </td>
                                                 <td>
                                                     <span> @item.Percentage %</span>
                                                 </td>
