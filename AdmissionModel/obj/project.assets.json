@@ -1576,11 +1576,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\vrs\\Admissiondbrau\\AdmissionModel\\AdmissionModel.csproj",
+      "projectUniqueName": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionModel\\AdmissionModel.csproj",
       "projectName": "AdmissionModel",
-      "projectPath": "D:\\vrs\\Admissiondbrau\\AdmissionModel\\AdmissionModel.csproj",
+      "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionModel\\AdmissionModel.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "D:\\vrs\\Admissiondbrau\\AdmissionModel\\obj\\",
+      "outputPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionModel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1597,8 +1597,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj": {
-              "projectPath": "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj"
+            "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj": {
+              "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj"
             }
           }
         }

@@ -1595,11 +1595,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\vrs\\Admissiondbrau\\AdmissionRepo\\AdmissionRepo.csproj",
+      "projectUniqueName": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionRepo\\AdmissionRepo.csproj",
       "projectName": "AdmissionRepo",
-      "projectPath": "D:\\vrs\\Admissiondbrau\\AdmissionRepo\\AdmissionRepo.csproj",
+      "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionRepo\\AdmissionRepo.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "D:\\vrs\\Admissiondbrau\\AdmissionRepo\\obj\\",
+      "outputPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionRepo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1616,11 +1616,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj": {
-              "projectPath": "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj"
+            "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj": {
+              "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj"
             },
-            "D:\\vrs\\Admissiondbrau\\AdmissionModel\\AdmissionModel.csproj": {
-              "projectPath": "D:\\vrs\\Admissiondbrau\\AdmissionModel\\AdmissionModel.csproj"
+            "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionModel\\AdmissionModel.csproj": {
+              "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionModel\\AdmissionModel.csproj"
             }
           }
         }

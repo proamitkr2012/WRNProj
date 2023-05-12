@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj": {}
+    "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj": {}
   },
   "projects": {
-    "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj": {
+    "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj",
+        "projectUniqueName": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj",
         "projectName": "AdmissionData",
-        "projectPath": "D:\\vrs\\Admissiondbrau\\AdmissionData\\AdmissionData.csproj",
+        "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\vrs\\Admissiondbrau\\AdmissionData\\obj\\",
+        "outputPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",

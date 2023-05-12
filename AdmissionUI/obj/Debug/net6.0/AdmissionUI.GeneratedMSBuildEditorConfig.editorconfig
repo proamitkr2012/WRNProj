@@ -9,9 +9,93 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AdmissionUI
 build_property.RootNamespace = AdmissionUI
-build_property.ProjectDir = D:\vrs\Admissiondbrau\AdmissionUI\
+build_property.ProjectDir = D:\vrs\Admissiondbrau\WRNProj\AdmissionUI\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\vrs\Admissiondbrau\AdmissionUI
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = D:\vrs\Admissiondbrau\WRNProj\AdmissionUI
 build_property._RazorSourceGeneratorDebug = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Download.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX0Rvd25sb2FkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXAxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXAyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step3.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXAzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step4.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXA0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step5.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXA1LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/DownloadForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEb3dubG9hZEZvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Registration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3RyYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_CDistrictList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DRGlzdHJpY3RMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9mb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9oZWFkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_PDistrictList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QRGlzdHJpY3RMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-wbtj7z7lmy
+
+[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_Public.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QdWJsaWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-rtm4i7aoem
