@@ -1,0 +1,443 @@
+﻿@model StudentMastersDTO
+@{
+    ViewData["Title"] = "AdmissionForm";
+    Layout = "_Public";
+}
+<html>
+<body>
+
+    @if (Model != null)
+    {
+        <div id="DivPrint" style=" background-color: #fff; color: #000; font-family: Arial; font-size: 14px">
+
+
+            <div style="text-align: justify; vertical-align: top;">
+
+                <div style="float: left; width: 20%;">
+
+                    <img src="~/logo_header.png" alt="" style="width: 130px; padding-left: 20px;" />
+                </div>
+                <div style="float: left; text-align: center; width: 70%; font-size: 15px">
+                    <br />
+                    <span style="font-size: 25px">
+                        DR. BHIMRAO AMBEDKAR UNIVERSITY, AGRA,<br />
+                        डॉ० भीमराव आंबेडकर विश्वविद्यालय, आगरा<br />
+                        (Called At The Place Of Agra University, Agra)<br />
+                    </span>
+                </div>
+                <br />
+                <div style="clear: both;"></div>
+                <div>
+                    <div style="float: left">
+                        <span> Application No. </span><span id="lblName" style="font-weight:bold;font-size:110%"> @Model.ApplicationNo</span>
+                    </div>
+                    <div style="float: right">
+                        <span> Appl. Date: </span><span id="lblName" style="font-weight:bold;font-size:110%"> @Model.PaymentDate</span>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+
+
+
+            <div style="font-family:'Times New Roman', Times, serif;font-size:20px;font-weight:700; text-align: center; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+                Admission Web Registration  Form 2023
+            </div>
+            <div>&nbsp;</div>
+
+
+            <table style=" width: 100%; " class="table table-bordered">
+
+
+                <tr>
+
+                    <td width="40%"> WRN No.</td>
+                    <td width="40%">
+                        <span id="lblName" style="font-weight: bold;font-size:20px; text-transform:uppercase">@Model.WRN</span>
+                    </td>
+
+                    <td style="vertical-align: top; " rowspan="9" width="150">
+                        @{
+                            var img = WebConfigSetting.ImgCloudPath + ViewBag.Photo;
+                        }
+                        <img id="Image1" src="@img" alt="Photograph" style="width:150px;" /><br />
+
+                        @if (ViewBag.Signature != null)
+                        {
+                            var sgn = WebConfigSetting.ImgCloudPath + ViewBag.Signature;
+                            <img id="Image2" src="@sgn" alt="Signature" style="height:50px;width:150px;" />
+                        }
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td width="40%"> Name of Student</td>
+
+                    <td width="40%">
+                        <span id="lblName" style="font-weight: bold; text-transform:uppercase">@Model.Name</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Registration No</td>
+                    <td colspan="1">
+                        <span id="lblFatherName">@Model.Roll</span>
+                    </td>
+                    @*<td style="border:none"></td>*@
+                </tr>
+                <tr>
+                    <td> Alloted College</td>
+                    <td colspan="1">
+                        <span id="lblFatherName" style="text-transform:uppercase">[@Model.CollegeCode]-@Model.CollegeName</span>
+                    </td>
+                    @*<td style="border:none"></td>*@
+                </tr>
+                <tr>
+                    <td> Father's Name</td>
+                    <td colspan="1">
+                        <span id="lblFatherName" style="text-transform:uppercase">@Model.FatherName</span>
+                    </td>
+                    @*<td style="border:none"></td>*@
+                </tr>
+
+                <tr>
+                    <td> Mother's Name</td>
+                    <td colspan="1">
+                        <span id="lblFatherName" style="text-transform:uppercase">@Model.MotherName</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td> Mobile</td>
+                    <td colspan="1">
+                        <span id="lblMobileName">@Model.Mobile</span>
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <td> Email Id</td>
+                    <td colspan="1">
+                        <span id="lblMotherName">@Model.Email</span>
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td> Date of Birth</td>
+                    <td colspan="1">
+                        <span id="lblDOB" style="font-weight: bold; text-transform: uppercase">@Model.DOB.Value.ToString("dd/MM/yyy")</span>
+                    </td>
+                </tr>
+                
+            </table>
+            <br />
+            <table style=" width: 100%;" class="table table-bordered">
+                <tr>
+
+                    <td> Gender</td>
+                    <td>
+                        <span id="lblGender" style="text-transform:uppercase">
+                            @Model.Gender
+                        </span>
+                    </td>
+
+
+                </tr>
+                <tr>
+
+                    <td>Alternate Mobile</td>
+                    <td colspan="1">
+                        <span id="lblcaste" style="text-transform: uppercase">@Model.AltMobile</span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="width: 28%">Aadhar Card </td>
+                    <td>
+
+                        <span id="lblMarital">@Model.Aadhar</span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="width: 28%"> Category </td>
+                    <td>
+
+                        <span id="lblMarital" style="text-transform:uppercase">@Model.Category</span>
+                    </td>
+
+                </tr>
+               @* <tr>
+                    <td style="width: 28%"> Ews </td>
+                    <td>
+
+                        @if (Model.Ews == true)
+                        {
+                            <span id="lblMarital">
+                                Yes
+                            </span>
+                        }
+                        else
+                        {
+                            <span id="lblMarital">
+                                No
+                            </span>
+                        }
+
+
+                    </td>
+
+                </tr>*@
+            </table>
+            <br />
+            <table style=" width: 100%;" class="table table-bordered">
+
+                <tr>
+                    <td>
+                        <p>Communication Address:-</p>
+                        <div id="lblCAddress" style="text-transform:uppercase">@Model.CurrentAddress</div>
+                        <div id="lblCState"> State:- @Model.CState</div>
+                        <div id="lblCDistrict"> City:- @Model.CDistrict</div>
+                        <div id="lblCPinCode">PinCode:-  @Model.CPin</div>
+                    </td>
+
+
+
+
+                    <td>
+                        <p>Permanent Address</p>
+                        <div id="lblCAddress" style="text-transform:uppercase">@Model.ParmanentAddress</div>
+                        <div id="lblCState"> State:- @Model.PState</div>
+                        <div id="lblCDistrict"> City:- @Model.PDistrict</div>
+                        <div id="lblCPinCode">PinCode:-  @Model.PPin</div>
+                    </td>
+                </tr>
+
+            </table>
+            <br />
+
+
+            <br />
+
+            <hr style="page-break-before: always; visibility: hidden;" />
+            <div style="padding: 10px">
+                <div style="text-align: justify; vertical-align: top;">
+
+                    <div style="float: left; width: 20%;">
+
+                        <img src="~/logo_header.png" alt="" style="width: 130px; padding-left: 20px;" />
+                    </div>
+                    <div style="float: left; text-align: center; width: 70%; font-size: 15px">
+                        <br />
+                        <span style="font-size: 25px">
+                            DR. BHIMRAO AMBEDKAR UNIVERSITY, AGRA,<br />
+                            डॉ० भीमराव आंबेडकर विश्वविद्यालय, आगरा<br />
+                            (Called At The Place Of Agra University, Agra)<br />
+                        </span>
+                    </div>
+                    <br />
+                    <div style="clear: both;"></div>
+                    <div>
+                        <div style="float: left">
+                            <span> Application No. </span><span id="lblName" style="font-weight:bold;font-size:110%"> @Model.ApplicationNo</span>
+                        </div>
+                        <div style="float: right">
+                            <span> Appl. Date: </span><span id="lblName" style="font-weight:bold;font-size:110%"> @Model.PaymentDate</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+
+
+
+                <div style="font-family:'Times New Roman', Times, serif;font-size:20px;font-weight:700; text-align: center; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+                    Admission Web Registration  Form 2023
+                </div>
+                <div>&nbsp;</div>
+
+                Qualification Detail
+
+                <table style="width:100%;font-size:80%" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Qualification Type</th>
+                            <th>Board/University</th>
+                            <th>Roll No.</th>
+                            <th>Evaluation Type	</th>
+                            <th>Total Marks</th>
+                            <th>Mark Obt</th>
+                            <th>Passing Year</th>
+                            <th>Obtained %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int j = 0;
+                        }
+                        @if (Model != null)
+                        {
+                            if (Model.QualifationList != null)
+                            {
+                                foreach (var item in Model.QualifationList)
+                                {
+                                    j++;
+                                    <tr id="">
+                                        <td>
+                                            @j
+                                        </td>
+                                        <td>
+                                            @item.DocDisplayName
+                                        </td>
+                                        <td>
+                                            @item.Board_Universty_Name
+
+                                        </td>
+                                        <td>
+                                            @item.PreRollNo
+
+                                        </td>
+                                        <td>
+                                            @if (item.IsCGPA == true)
+                                            {
+                                                <span>CGPA</span>
+
+                                            }
+                                            else
+                                            {
+                                                <span>Percentage</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.TotalMarks
+
+                                        </td>
+
+                                        <td>
+                                            @item.MarkObt
+                                        </td>
+                                        <td>
+                                            @item.PassingYear
+
+                                        </td>
+                                        <td>
+                                            <span> @item.Percentage %</span>
+                                        </td>
+
+                                    </tr>
+
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <br />
+                Payment Details (<strong>
+                    @{
+                        var status = Model.IsPaid == true ? "Paid" : "UnPaid";
+                    }@status
+                </strong>)
+
+
+                <table style="width:100%;font-size:80%;text-align:left" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Transaction No.
+                            </th>
+                            <th>PaymentReferenceNo</th>
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if (Model.IsPaid == true)
+                        {
+                            <tr>
+                                <td> @Model.TransactionId </td>
+
+                                <td> @Model.PaymentReferenceNo   </td>
+                                <td> @Model.Amount/-   </td>
+                                <td> @Model.PaymentDate  </td>
+                            </tr>
+                        }
+
+
+
+
+                    </tbody>
+                </table>
+
+                <br />
+                Related document uploaded
+
+                <table style="width:100%;font-size:80%;text-align:left " class="table table-bordered">
+
+                    <tr>
+                        <th>
+                            S.No.
+                        </th>
+                        <th>
+                            Uploaded Document
+                        </th>
+
+                        <th>Uploaded Date</th>
+                        @*<th>Action</th>*@
+                    </tr>
+
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var item in Model.GetDocUoloadList.Where(x => x.CreateDate != null))
+                    {
+                        i++;
+                        <tr>
+                            <td> @i  </td>
+                            <td> @item.DocDisplayName </td>
+                            <td> @item.CreateDate.Value.ToString("dd/MMM/yyyy")   </td>
+
+                        </tr>
+                    }
+
+                </table>
+
+
+                <div style="display:inline-block;width:100%">
+                    <div style="float: left;">
+                        @if (ViewBag.Signature != null)
+                        {
+                            var sgn = WebConfigSetting.ImgCloudPath + ViewBag.Signature;
+                            <img id="Image2" src="@sgn" alt="Signature" style="height:50px;width:150px;border-width:0px;" />
+                        }
+                        <p>
+                            Signature of Candidate<br />
+                            Date:-@DateTime.Now.ToString("dd/MM/yyyy")
+                        </p>
+                    </div>
+                    <div style="float: right;">
+                        <img src="@String.Format("data:image/png;base64,{0}",
+                                Convert.ToBase64String(Model.qcore))" height="150" width="150" />
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    }
+    else
+    {
+
+    }
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .fontgap {
+        letter-spacing: 1px;
+    }
+
+    @@media (max-width: 990px) {
+
+        .fontgap .btn {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+</style>
+<div class="">
+    <div class="col-md-12 alert-danger">
+        <marquee behavior="scroll" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+            @* Admission form submission last date is 30 NOVEMBER, 2021 (प्रवेश फॉर्म जमा करने की अंतिम तिथि 30 नवम्बर 2021)*@
+        </marquee>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+</div>
+<div class="container" style="min-height:500px">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header p-3 mb-2 bg-primary text-white">
+                    Information
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-8">  <a href="#" class="btn btn-outline-success"><i class="fas  fa-bullhorn" aria-hidden="true"></i>  Guidelines And Instructions For Applicants</a></div>
+                        <div class="col-sm-4">  <a href="#" class="btn btn-outline-danger"><i class="fas  fa-file  " aria-hidden="true"></i> Brochure</a></div>
+                     
+                       
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="card mt-4">
+                <div class="card-header  bg-success text-white">
+                    Web Registration
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4">  <a asp-action="Registration" asp-controller="Home" class="btn btn-success p-3"><i class="fa-regular fa-clipboard"></i> B.Ed New Registration</a></div>
+                        <div class="col-sm-4">  <a asp-action="Login" asp-controller="Home" class="btn btn-primary p-3"><i class="fas fa-sign-in" aria-hidden="true"></i> Registered Candidate Login</a></div>
+                     
+                        <div class="col-sm-4">  <a asp-action="Login" asp-controller="Home" class="btn btn-danger p-3 disabled text-white"> Registration For Other Courses</a></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 22rem;">
+                <h3 class="card-header primary-color white-text"><strong><i class="fas  fa-bullhorn" aria-hidden="true"></i> Notice / सूचना</strong></h3>
+                <div class="card-body">
+                    <div style="height: 282px; overflow-x: visible; overflow-y: auto;">
+                        <ul class="list-group">
+
+                            <li class="list-group-item"><a href="JavaScript:void(0)"  style="text-decoration: none;" class="glow">Admission Notice</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .glow {
+        animation: example 2s linear infinite;
+    }
+
+    @@keyframes example {
+        from {
+            color: red;
+        }
+
+        to {
+            color: #337ab7;
+        }
+    }
+</style>

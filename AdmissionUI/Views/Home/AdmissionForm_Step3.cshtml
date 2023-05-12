@@ -1,0 +1,291 @@
+﻿@model StudentMastersDTO
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<div class="container p-3">
+    <ul class="steps">
+        <li class="step  step-success">
+            <div class="step-content">
+                <span class="step-circle">1</span>
+                <span class="step-text">Admission Form</span>
+            </div>
+
+        </li>
+        <li class="step step-success">
+            <div class="step-content">
+                <span class="step-circle">2</span>
+                <span class="step-text">Profile</span>
+            </div>
+
+        </li>
+        <li class="step step-active">
+            <div class="step-content">
+                <span class="step-circle">3</span>
+                <span class="step-text">Qualification</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">4</span>
+                <span class="step-text">Documents</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">5</span>
+                <span class="step-text">Preview</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">6</span>
+                <span class="step-text">Payment</span>
+            </div>
+
+        </li>
+    </ul>
+    <div class="text-center mt-5">
+        <h2>Admission Web Registration  Form - (2023)</h2>
+
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Registration For B.Ed
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Candidate's Qualification
+            </h5>
+            <hr />
+            <div class="row">
+                @Html.HiddenFor(x=>x.EncrptedRoll)
+                <div class="col-sm-12 text-center border  p-2">
+                    <table class="table" id="qual">
+                        <thead>
+                            <tr>
+                                <td>Exam</td>
+                                <td>Course</td>
+                                <td>Board/University</td>
+                                <td>Roll No.</td>
+                                <td>Passing Year</td>
+                                <td>Marks Obtained</td>
+                                <td>Marks Total</td>
+                                <td>Percentage/CGPA</td>
+                                <td>Percentage</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.QualifationList)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <input type="hidden" class="form-control" id="@(item.EntryID+"_EntryID")" name="@(item.EntryID + "_EntryID")">
+                                        <input type="text" class="form-control" value="@item.DocName" readonly />
+                                    </td>
+
+                                    <td>
+                                        @if (item.DocName == "Graduation")
+                                        {
+                                            <input type="text" class="form-control" value="@item.Subject" id="@(item.EntryID+"_Subject")" name="@(item.EntryID + "_Subject")" />
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.DocName == "Graduation")
+                                        {
+                                            <select name="Univ" id="Univ" data-id="@(item.EntryID + "_Board")" onchange="UnivOnclick(@item.EntryID)" class="form-select">
+                                                @if (!string.IsNullOrEmpty(item.Board_Universty_Name))
+                                                {
+
+                                                    <option value="agra">DBARU(Agra)</option>
+                                                    <option value="Others" selected>Others</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="agra">DBARU(Agra)</option>
+                                                    <option value="Others" selected>Others</option>
+
+                                                }
+                                            </select>
+                                        }
+                                        <input type="text" class="form-control board" value="@item.Board_Universty_Name" id="@(item.EntryID+"_Board")" name="@(item.EntryID + "_Board")" />
+                                    </td>
+                                    <td><input type="text" class="form-control" value="@item.PreRollNo" id="@(item.EntryID+"_PreRollNo")" name="@(item.EntryID + "_PreRollNo")" />  </td>
+                                    <td>
+
+
+                                        <select id="@(item.EntryID+"_PassingYear")" name="@(item.EntryID + "_PassingYear")" class="form-control">
+                                            @if (item.DocName == "10th")
+                                            {
+                                                for (int i = 1980; i < 2021; i++)
+                                                {
+                                                    if (!string.IsNullOrEmpty(item.PassingYear))
+                                                    {
+                                                        if (i.ToString() == item.PassingYear)
+                                                        {
+                                                            <option value="@i" selected>@i</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@i">@i</option>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@i">@i</option>
+                                                    }
+
+
+                                                }
+
+                                            }
+                                            else if (item.DocName == "12th")
+                                            {
+                                                for (int i = 1990; i < 2022; i++)
+                                                {
+                                                    if (!string.IsNullOrEmpty(item.PassingYear))
+                                                    {
+                                                        if (i.ToString() == item.PassingYear)
+                                                        {
+                                                            <option value="@i" selected>@i</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@i">@i</option>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@i">@i</option>
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                for (int i = 1992; i < 2024; i++)
+                                                {
+                                                    if (!string.IsNullOrEmpty(item.PassingYear))
+                                                    {
+                                                        if (i.ToString() == item.PassingYear)
+                                                        {
+                                                            <option value="@i" selected>@i</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@i">@i</option>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@i">@i</option>
+                                                    }
+                                                }
+
+                                            }
+                                        </select>
+
+
+                                    </td>
+                                    <td><input type="number" placeholder="0" value="@item.MarkObt" class="form-control" id="@(item.EntryID+"_Obt")" name="@(item.EntryID + "_Obt")" />  </td>
+                                    <td><input type="number" placeholder="0" value="@item.TotalMarks" class="form-control" id="@(item.EntryID+"_Total")" name="@(item.EntryID + "_Total")" />  </td>
+                                    <td>
+                                        <select class="form-select"  aria-label="Default select example" id="@(item.EntryID+"_CGPA")" name="@(item.EntryID + "_CGPA")">
+                                            @if (item.IsCGPA == false)
+                                            {
+                                                <option selected value="False">Percentage</option>
+                                                <option value="True">CGPA</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="False">Percentage</option>
+                                                <option selected value="True">CGPA</option>
+                                            }
+
+
+                                        </select>
+                                    </td>
+                                    <td><input type="text" placeholder="0" value="@item.Percentage" class="form-control" id="@(item.EntryID+"_Percentage")" name="@(item.EntryID + "_Percentage")" />  </td>
+                                    <td>
+                                        @if (Model.IsPaid == false)
+                                        {
+                                            if (item.Percentage > 0 && item.TotalMarks > 0 && item.MarkObt > 0)
+                                            {
+                                                <input type="button" onclick="SaveButtonOnclick(@item.EntryID,@item.DocID)" id="@(item.EntryID+"btnl")" class="btn btn-success btn-block " value="Update" />
+                                            }
+                                            else
+                                            {
+                                                <input type="button" onclick="SaveButtonOnclick(@item.EntryID,@item.DocID)" id="@(item.EntryID+"btnl")" class="btn btn-primary btn-block btnsave" value="Save" />
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                            <input type="button" id="@(item.EntryID+"btnl")" class="btn btn-secondary btn-block" value="Save" />
+                                        }
+                                        <a class="btn btn-primary btn-block text-white" id="@(item.EntryID + "btnlwait")" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i>  Wait...</a>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <div class="col-md-2   offset-md-3 mt-4">
+                    <a asp-action="admissionform_step2" asp-controller="home" asp-route-id="@Model.EncrptedRoll" class="btn btn-danger btn-block text-white">Back</a>
+
+
+                </div>
+                <div class="col-md-4 mt-4">
+                    <a onclick="SubmitButtonCheckOnclick()" class="btn btn-primary btn-block text-white">Save & Next</a>
+                    @*<input type="button" onclick="SubmitButtonOnclick()" id="btnl" class="btn btn-primary btn-block" value="Save & Next" />*@
+                    <a class="btn btn-primary btn-block text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/js/step3.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    
+
+    function UnivOnclick(id) {
+       if($('#Univ option:selected').val()!="Others")
+            $("#" + id + "_Board").val("Dr. Bhimrao Ambedkar University, Agra");
+    };
+
+    function SubmitButtonCheckOnclick() {
+        var stat = true;
+        $("#qual .btnsave").each(function () {
+            var self = $(this);
+            if (self.val() == "Save") {
+                stat = false;
+            }
+        });
+        // alert(stat)
+        if (stat) {
+            window.location.href = "/admission-form-step4/" + '@Model.EncrptedRoll';
+        } else {
+
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Please save your 10th, 12th and Graduation Details!',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+    }
+</script>

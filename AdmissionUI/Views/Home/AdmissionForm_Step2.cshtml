@@ -1,0 +1,382 @@
+﻿@model StudentMastersDTO
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<div class="container p-3">
+    <ul class="steps">
+        <li class="step step-success">
+            <div class="step-content">
+                <span class="step-circle">1</span>
+                <span class="step-text">Admission Form</span>
+            </div>
+
+        </li>
+        <li class="step step-active">
+            <div class="step-content">
+                <span class="step-circle">2</span>
+                <span class="step-text">Profile</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">3</span>
+                <span class="step-text">Qualification</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">4</span>
+                <span class="step-text">Documents</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">5</span>
+                <span class="step-text">Preview</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">6</span>
+                <span class="step-text">Payment</span>
+            </div>
+
+        </li>
+    </ul>
+    <div class="text-center mt-5">
+        <h2>Admission Web Registration  Form - (2023)</h2>
+
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Registration For B.Ed
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Candidate's Profile (अभ्यर्थी का विवरण)
+            </h5>
+            <hr />
+            @Html.HiddenFor(x=>x.EncrptedRoll)
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Candidate's Name (अभ्यर्थी का नाम) :</label>
+                        <input asp-for="Name" type="text" placeholder="Candidate's Name (अभ्यर्थी का नाम)" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन):</label>
+                        <input type="text" asp-for="Roll" placeholder="Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन)" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            College Code(कॉलेज का कोड):
+                        </label>
+                        <input type="text" asp-for="CollegeCode" readonly placeholder="College Code(कॉलेज का कोड)" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            College Name(कॉलेज का नाम):
+                        </label>
+                        <input type="text" asp-for="CollegeName" readonly placeholder="College Name(कॉलेज का नाम)" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Father's Name (पिता का नाम) :</label>
+                        <input asp-for="FatherName" type="text" readonly placeholder="Father's Name (पिता का नाम) " class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mother's Name.(माता का नाम):</label>
+                        <input type="text" asp-for="MotherName" readonly placeholder="Mother's Name.(माता का नाम)" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Category
+                        </label>
+                        <select class="form-select" aria-label="Default select example" disabled asp-for="Category">
+                            <option selected value="">Select Category</option>
+                            <option value="GENERAL">GENERAL</option>
+                            <option value="OBC">OBC</option>
+                            <option value="SC">SC</option>
+                            <option value="ST">ST</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Gender
+                        </label>
+                        <select class="form-select" aria-label="Default select example" asp-for="Gender" disabled>
+                            <option selected value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Date of Birth :</label>
+
+                        <input type="text"
+                               class="form-control date-picker"
+                               placeholder="Date of birth" asp-for="DOB" readonly disabled value="@Model.DOB.Value.ToString("dd MMM yyyy")" />
+
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Email Id:
+                        </label>
+                        <input type="text" asp-for="Email" placeholder="" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Mobile Number:
+                        </label>
+                        <input type="text" placeholder="" asp-for="Mobile" class="form-control" maxlength="10" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Alternate Mobile Number:
+                        </label>
+                        <input type="text" placeholder="" class="form-control" asp-for="AltMobile" maxlength="10" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Aadhar Card Number:
+                        </label>
+                        <input type="text" asp-for="Aadhar" placeholder="" class="form-control" maxlength="12" />
+                    </div>
+                </div>
+                
+                @*<div class="col-md-6">
+                    <div class="form-group" id="EwsDiv">
+                        <label>
+                            EWS
+                        </label>
+                        <select class="form-select" aria-label="Default select example" asp-for="Ews">
+                            <option selected value="0">Select EWS</option>
+                            <option value="true" disabled>Applicable</option>
+                            <option value="false">Not Applicable</option>
+                        </select>
+                    </div>
+                </div>
+*@
+                <div class="row">
+                    <hr /> <p>Correspondance Address / पत्र व्यवहार का पता</p>
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label>
+                                Address:
+                            </label>
+                            <textarea type="" placeholder="" class="form-control" asp-for="CurrentAddress"></textarea>
+                        </div>
+                    </div> <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                State
+                            </label>
+                            <select class="form-select" aria-label="Default select example" asp-for="CState">
+                                <option selected value="">Select State</option>
+                                @foreach (var item in ViewBag.StateList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>  <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                District
+                            </label>
+                            <div id="CDistrictDiv"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                Pin:
+                            </label>
+                            <input type="text" placeholder="" class="form-control" asp-for="CPin" maxlength="6" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <hr />
+                    <div class="container">
+                    <div class="row">
+                            <div class="col-md-3"><p>Permanent Address / स्थायी पता</p></div>
+                            <div class="col-md-8"><label  class="d-block" style="font-size:18px ;font-weight:600"><input type="checkbox" style="height:18px;width:18px" onclick="CheckAddress()" id="CheckAddressSame" /> Same as Correspondence Address </label></div>
+                        </div>
+                    </div>
+                   
+
+
+                  
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>
+                                Address:
+                            </label>
+                            <textarea type="" placeholder="" class="form-control" asp-for="ParmanentAddress"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                State
+                            </label>
+                            <select class="form-select" aria-label="Default select example" asp-for="PState">
+                                <option selected value="">Select State</option>
+                                @foreach (var item in ViewBag.StateList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>  <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                District
+                            </label>
+                            <div id="PDistrictDiv"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                Pin:
+                            </label>
+                            <input type="text" placeholder="" class="form-control" asp-for="PPin" maxlength="6" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2   offset-md-3 mt-4">
+                    <a asp-action="admissionform_step1" asp-controller="home" asp-route-id="@Model.EncrptedRoll" class="btn btn-danger btn-block text-white">Back</a>
+
+
+                </div>
+                <div class="col-md-4 mt-4">
+                    @if (Model.IsPaid == true)
+                    {
+                        <input type="button" id="btnl" class="btn btn-secondary btn-block " style="cursor:not-allowed" value="Save & Next" />
+                    }
+                    else
+                    {
+                        <input type="button" onclick="SubmitButtonOnclick()" id="btnl" class="btn btn-primary btn-block" value="Save & Next" />
+                    }
+                    <a class="btn btn-primary text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="~/js/step2.js"></script>
+<script>
+    function validEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    //$(document.body).on('change', "#Category", function (e) {
+    //    //doStuff
+    //    var optVal = $("#Category option:selected").val();
+    //    if (optVal == "GENERAL") {
+    //        $("#EwsDiv").show();
+    //        $("select option:contains('Applicable')").attr("disabled", false);
+    //        $("select option:contains('Not Applicable')").attr("disabled", false);
+
+    //    } else {
+    //        $("#EwsDiv").hide();
+    //        $("select option:contains('Applicable')").attr("disabled", true);
+    //        $("select option:contains('Not Applicable')").attr("disabled", false);
+    //    }
+    //});
+
+    function CheckAddress() {
+        var checkBox = document.getElementById("CheckAddressSame");
+        if (checkBox.checked == true) {
+
+            $("#ParmanentAddress").val($("#CurrentAddress").val());
+            $("#PState").val($("#CState").val());
+
+            $("#PPin").val($("#CPin").val());
+            var divpdis = '@WebConfigSetting.BaseURL' + "/Home/GetPDistrictList?id=";
+            $("#PDistrictDiv").load(divpdis + $('#PState option:selected').val(), function () { $("#PDistrict").val($("#CDistrict").val()); });
+
+            $("#PDistrict").val($("#CDistrict").val());
+
+        } else {
+            $("#ParmanentAddress").val("");
+            $("#PState").val("");
+            $("#PDistrict").val("");
+            $("#PPin").val("");
+        }
+    }
+
+    $(function () {
+        //$("#EwsDiv").hide();
+
+        var divpdis = '@WebConfigSetting.BaseURL' + "/Home/GetPDistrictList?id=";
+        $("#PDistrictDiv").load(divpdis + $('#PState option:selected').val(), function () { $("#PDistrict").val("@Model.PDistrict"); });
+
+        var divpdis = '@WebConfigSetting.BaseURL' + "/Home/GetCDistrictList?id=";
+        $("#CDistrictDiv").load(divpdis + $('#CState option:selected').val(), function () { $("#CDistrict").val("@Model.CDistrict"); });
+
+        $('#PState').change(function () {
+            // alert("s")
+            var divpdis = '@WebConfigSetting.BaseURL' + "/Home/GetPDistrictList?ID=";
+            $("#PDistrictDiv").load(divpdis + $('#PState option:selected').val());
+        });
+        $('#CState').change(function () {
+            // alert("s")
+            var divpdis = '@WebConfigSetting.BaseURL' + "/Home/GetCDistrictList?ID=";
+            $("#CDistrictDiv").load(divpdis + $('#CState option:selected').val());
+        });
+
+        //$('#PState option:selected').text('@Model.PState');
+        //$('#CState option:selected').text('@Model.CState');
+
+        $('#PState option').map(function () {
+            if ($(this).text() == '@Model.PState') return this;
+        }).attr('selected', 'selected');
+        $('#CState option').map(function () {
+            if ($(this).text() == '@Model.CState') return this;
+        }).attr('selected', 'selected');
+    });
+
+</script>
