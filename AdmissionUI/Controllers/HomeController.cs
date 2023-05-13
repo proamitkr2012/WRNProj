@@ -139,7 +139,8 @@ namespace AdmissionUI.Controllers
                     {
                         if (model.IsPaid == true)
                         {
-                            return RedirectToAction("AdmissionForm_Download", new { id = model.ApplicationNo });
+                            model.EncrptedRoll = AESEncription.Base64Encode(model.Roll);
+                            return RedirectToAction("AdmissionForm_Download", new { id = model.EncrptedRoll });
                         }
                     }
 
@@ -353,17 +354,17 @@ where Roll='" + Enrollment.Trim() + "'";
                 if (!string.IsNullOrEmpty(id))
                 {
 
-
+                    var Enrollment = AESEncription.Base64Decode(id);
                     StudentMastersDTO model = new StudentMastersDTO();
                     string sqlComand = @"select * ,Cname as CollegeName from StudentMasters 
 JOIN CollegeMasters ON StudentMasters.CollegeCode=CollegeMasters.InstCode
-where ApplicationNo='" + id + "'";
+where  Roll='" + Enrollment.Trim() + "'";
 
                     model = _dapperContext.QueryHelper.QueryFirstOrDefaultAsync<StudentMastersDTO>(sqlComand).Result;
 
                     if (model != null)
                     {
-                        var Enrollment = model.Roll;
+                        Enrollment = model.Roll;
 
                         model.EncrptedRoll = id;
                         model.GetDocUoloadList = UOF.IAdmin.GetDocUoloadList(Enrollment);
@@ -397,17 +398,18 @@ where ApplicationNo='" + id + "'";
                 if (!string.IsNullOrEmpty(id))
                 {
 
+                    var Enrollment = AESEncription.Base64Decode(id);
 
                     StudentMastersDTO model = new StudentMastersDTO();
                     string sqlComand = @"select * ,Cname as CollegeName from StudentMasters 
 JOIN CollegeMasters ON StudentMasters.CollegeCode=CollegeMasters.InstCode
-where ApplicationNo='" + id + "'";
+where  Roll='" + Enrollment.Trim() + "'";
 
                     model = _dapperContext.QueryHelper.QueryFirstOrDefaultAsync<StudentMastersDTO>(sqlComand).Result;
 
                     if (model != null)
                     {
-                        var Enrollment = model.Roll;
+                         Enrollment = model.Roll;
 
                         model.EncrptedRoll = id;
                         model.GetDocUoloadList = UOF.IAdmin.GetDocUoloadList(Enrollment);
