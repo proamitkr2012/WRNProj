@@ -43,7 +43,7 @@ namespace AdmissionUI.Areas.Admin.Controllers
         public IActionResult Index()
         {
            
-           Viewbag.CollegeList= UOF.IAdmin.GetCollegeList();
+           ViewBag.CollegeList= UOF.IAdmin.GetCollegeList();
 
             return View();
         }

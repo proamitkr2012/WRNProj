@@ -594,6 +594,13 @@ namespace AdmissionRepo
             try
             {
                 List<CollegeMasters> CollegeList = _dbContext.CollegeMasters.Where(x => x.IsActive == true && !string.IsNullOrEmpty(x.InstCode)).ToList();
+                if (CollegeList.Count > 0)
+                {
+                    foreach (var item in CollegeList)
+                    {
+                        item.CfullName = item.InstCode + "-" + item.Cname;
+                    }
+                }
                 return CollegeList;
             }
             catch (Exception e)
