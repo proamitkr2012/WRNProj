@@ -193,7 +193,7 @@ namespace AdmissionRepo
                     var c = _dbContext.CollegeMasters.Where(x => x.InstCode.ToLower().Trim() == stud.CollegeCode.ToLower().Trim()).Select(x => x).FirstOrDefault();
                     stud.CollegeName = c.Cname;
                     stud.CollegeCode = c.InstCode;
-                   // stud.CollegeName = _dbContext.CollegeMasters.Where(x => x.InstCode.ToLower().Trim() == stud.CollegeCode.ToLower().Trim()).Select(x => x.Cname).FirstOrDefault();
+                    // stud.CollegeName = _dbContext.CollegeMasters.Where(x => x.InstCode.ToLower().Trim() == stud.CollegeCode.ToLower().Trim()).Select(x => x.Cname).FirstOrDefault();
                     return stud;
 
                 }
@@ -544,15 +544,16 @@ namespace AdmissionRepo
                     {
                         q.Percentage = model.Percentage;
                     }
-                    else { 
-                    q.Percentage = (int)Math.Round((double)(100 * (int)model.MarkObt) / (int)model.TotalMarks);
+                    else
+                    {
+                        q.Percentage = (int)Math.Round((double)(100 * (int)model.MarkObt) / (int)model.TotalMarks);
                     }
                     q.IsCGPA = model.IsCGPA;
                     q.Subject = model.Subject;
 
                     q.PreRollNo = model.PreRollNo;
                     q.PassingYear = model.PassingYear;
-                    
+
                     _dbContext.SaveChanges();
                     return true;
 
@@ -587,6 +588,19 @@ namespace AdmissionRepo
 
             }
             return false;
+        }
+        public List<CollegeMasters> GetCollegeList()
+        {
+            try
+            {
+                List<CollegeMasters> CollegeList = _dbContext.CollegeMasters.Where(x => x.IsActive == true && !string.IsNullOrEmpty(x.InstCode)).ToList();
+                return CollegeList;
+            }
+            catch (Exception e)
+            {
+
+            }
+            return null;
         }
     }
 }

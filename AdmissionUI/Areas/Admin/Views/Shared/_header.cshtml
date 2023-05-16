@@ -1,0 +1,95 @@
+﻿<div class="header">
+    <div class="header-left">
+        <div class="menu-icon bi bi-list"></div>
+        <div class="search-toggle-icon bi bi-search"
+             data-toggle="header_search"></div>
+
+    </div>
+    <div class="header-right">
+
+
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a class="dropdown-toggle"
+                   href="#"
+                   role="button"
+                   data-toggle="dropdown">
+                    <span class="user-icon">
+                        <img src="/Themes/vendors/images/photo1.jpg" alt="" />
+                    </span>
+                    <span class="user-name"> </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    @*<a class="dropdown-item" href=""><i class="dw dw-user1"></i> Profile</a>*@
+                    <a class="dropdown-item" href="@Url.Action("SignOut", "Home", new { area = "" }, null)"><i class="dw dw-logout"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="right-sidebar">
+    <div class="sidebar-title">
+        <h3 class="weight-600 font-16 text-blue">
+            Layout Settings
+            <span class="btn-block font-weight-400 font-12">User Interface Settings</span>
+        </h3>
+        <div class="close-sidebar" data-toggle="right-sidebar-close">
+            <i class="icon-copy ion-close-round"></i>
+        </div>
+    </div>
+    <div class="right-sidebar-body customscroll">
+        <div class="right-sidebar-body-content">
+          
+            <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);"
+                   class="btn btn-outline-primary sidebar-light">White</a>
+              
+            </div>
+
+           
+        </div>
+    </div>
+</div>
+
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="" class="text-black">
+            DBRAU-PORTAL
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+
+                <li>
+                    <a asp-action="Index" asp-controller="Dashboard" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-diagram-3"></span><span class="mtext">New Apply(B.Ed)</span>
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="#" class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-receipt-cutoff"></span><span class="mtext">Status</span>
+                    </a>
+                </li>*@
+                <li>
+                    <div class="dropdown-divider"></div>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("SignOut", "Home", new { area = "" }, null)"  class="dropdown-toggle no-arrow">
+                        <span class="micon bi bi-lock"></span><span class="mtext">Logout</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>

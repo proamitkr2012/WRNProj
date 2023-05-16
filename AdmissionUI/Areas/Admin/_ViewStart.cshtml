@@ -1,0 +1,14 @@
+﻿@{
+    if (CurrentUser != null)
+    {
+        if (CurrentUser.Roles.Contains("Admin"))
+        {
+            Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+        }
+     
+    }
+    else
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+}
