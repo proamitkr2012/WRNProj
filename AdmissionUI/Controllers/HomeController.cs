@@ -14,6 +14,8 @@ using System.Drawing;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Rotativa.AspNetCore.Options;
 using Rotativa.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace AdmissionUI.Controllers
 {
