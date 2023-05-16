@@ -43,19 +43,30 @@ builder.Services.AddDataProtection()
     .SetApplicationName("adm")
     .SetDefaultKeyLifetime(TimeSpan.FromDays(30)); //default is 90 days
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+    builder.Services.Configure<CookiePolicyOptions>(options =>
     {
-        options.Cookie.Name = "AdmApp";
-        options.LoginPath = new PathString("/account/login");
-        options.SlidingExpiration = true;
-        options.AccessDeniedPath = new PathString("/account/unauthorize");
-
-        //https://bit.ly/2JU6CNH
-        options.Cookie.HttpOnly = true;
-        options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
-        options.Cookie.SameSite = SameSiteMode.Lax;
+        // This lambda determines whether user consent for non-essential cookies is needed for a given request.  
+        options.CheckConsentNeeded = context => true;
+        options.MinimumSameSitePolicy = SameSiteMode.None;
     });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
+
+
+
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options =>
+//    {
+//        options.Cookie.Name = "AdmApp";
+//        options.LoginPath = new PathString("/account/login");
+//        options.SlidingExpiration = true;
+//        options.AccessDeniedPath = new PathString("/account/unauthorize");
+
+//        //https://bit.ly/2JU6CNH
+//        options.Cookie.HttpOnly = true;
+//        options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
+//        options.Cookie.SameSite = SameSiteMode.Lax;
+//    });
 builder.Services.AddSession();
 builder.Services.AddDbContext<DataContext>(options =>
 {
