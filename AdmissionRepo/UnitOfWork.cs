@@ -8,11 +8,13 @@ namespace AdmissionRepo
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext db;
-         private IMailClient _mailClient; IDapperContext _dapperContext;
-        public UnitOfWork(DataContext _db, IDapperContext dapperContext, IMailClient mailClient)
+        private IMailClient _mailClient; IDapperContext _dapperContext;
+        private readonly IstudentPreRepo _istudentPreRepo;
+        public UnitOfWork(DataContext _db, IDapperContext dapperContext, IMailClient mailClient, IstudentPreRepo istudentPreRepo)
         {
             db = _db;
             _dapperContext = dapperContext;
+            _istudentPreRepo = istudentPreRepo;
         }
 
         private AdminRepository _IAdmin;
@@ -25,6 +27,14 @@ namespace AdmissionRepo
                     this._IAdmin = new AdminRepository(db, _dapperContext);
                 }
                 return this._IAdmin;
+            }
+        }
+
+        public IstudentPreRepo studentPreRepo
+        {
+            get
+            {
+                return this._istudentPreRepo;
             }
         }
 

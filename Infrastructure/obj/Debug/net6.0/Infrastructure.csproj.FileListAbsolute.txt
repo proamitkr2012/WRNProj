@@ -1,0 +1,12 @@
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.AssemblyReference.cache
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfoInputs.cache
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.AssemblyInfo.cs
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\bin\Debug\net6.0\Infrastructure.deps.json
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\bin\Debug\net6.0\Infrastructure.dll
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\bin\Debug\net6.0\Infrastructure.pdb
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.dll
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\refint\Infrastructure.dll
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\Infrastructure.pdb
+D:\vrs\Admissiondbrau\WRNProj\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll

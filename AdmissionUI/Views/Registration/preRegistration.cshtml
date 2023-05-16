@@ -1,0 +1,260 @@
+﻿@model StudentPreRegModel
+
+@{
+    ViewData["Title"] = "Registration Form";
+  }
+<style>
+    .fontgap {
+        letter-spacing: 1px;
+    }
+
+    @@media (max-width: 990px) {
+
+        .fontgap .btn {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div class="">
+    <div class="col-md-12 alert-danger">
+        <marquee behavior="scroll" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+            @* Admission form submission last date is 30 NOVEMBER, 2021 (प्रवेश फॉर्म जमा करने की अंतिम तिथि 30 नवम्बर 2021)*@
+        </marquee>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+</div>
+<div class="container" style="min-height:500px">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header p-3 mb-2 bg-primary text-white">
+                    Student Registration 
+                </div>
+                <div class="text-center mt-5">
+                    <h2>Admission Pre Registration  Form - (2023)</h2>
+
+                </div>
+                <div class="card">
+                   <!-- <div class="card-header bg-primary text-white">
+                        Registration For B.Ed
+                     </div>-->
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Candidate's Profile (अभ्यर्थी का विवरण)
+                        </h5>
+                        <hr />
+                        <form asp-action="preRegistration" method="post" onsubmit="return validateOTP();">
+
+                           @if(Model.Status<0)
+                           {
+                            <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                             </div>
+                            </div>
+                            </div>
+                           }
+                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Candidate's Name (अभ्यर्थी का नाम) :</label>
+                                    <input asp-for="StudentName" type="text" maxlength="500" placeholder="Candidate's Name (अभ्यर्थी का नाम)" class="form-control" />
+                                        <span class="text-danger" asp-validation-for="StudentName"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Father's Name (पिता का नाम) :</label>
+                                    <input type="text" asp-for="FatherName" maxlength="500" placeholder="Father's Name (पिता का नाम) " class="form-control" />
+                                        <span class="text-danger" asp-validation-for="FatherName"></span>
+                                
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        Mobile No.:
+                                    </label>
+                                        <input type="text" asp-for="MobileNo"   maxlength="10" placeholder="Mobile No." class="form-control" onkeypress="return isNumberKey(event);" />
+                                        <span class="text-danger" asp-validation-for="MobileNo"></span>
+                                        <p id="mobresult"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                       EmailId:
+                                    </label>
+                                        <input type="text" asp-for="EmailID" maxlength="200" placeholder="EmailId" class="form-control" oninput="Emailvalidation();" />
+                                        <span class="text-danger" asp-validation-for="EmailID"></span>
+                                        <p id="result"></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                    <div class="mb-0">
+                                       <input type="submit" class="btn btn-success btn-block text-white"
+                                           id="btnl" value="Submit" /> 
+                                     </div>
+                                    </div>
+                                    <!--<div class="col-sm-4 text-center">
+                                    <div class="input-group mb-0">
+                                        <a class="btn btn-danger glow w-100 mt-2 text-white"
+                                           asp-action="Registration" asp-controller="Home">Click for New Registration</a>
+                                    </div>
+                                   </div>-->
+                                    <div class="col-sm-4 text-center">
+                                    <div class="input-group mb-0">
+                                        <a class="btn btn-primary w-100 mt-2 text-white"
+                                           asp-action="Index" asp-controller="Home">Home</a>
+                                    </div>
+                                    </div>
+                                </div>
+                               
+                           
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 22rem;">
+                <h3 class="card-header primary-color white-text"><strong><i class="fas  fa-bullhorn" aria-hidden="true"></i> Notice / सूचना</strong></h3>
+                <div class="card-body">
+                    <div style="height: 282px; overflow-x: visible; overflow-y: auto;">
+                        <ul class="list-group">
+
+                            <li class="list-group-item"><a href="JavaScript:void(0)" style="text-decoration: none;" class="glow">Admission Notice</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+
+    function validateOTP() {
+
+        const $mobresult = $('#mobresult');
+        const otp = $('#MobileNo').val();
+        
+        $mobresult.text('');
+        if (otp == '') {
+            $mobresult.text('Mobile No is Invalid.');
+            $mobresult.css('color', 'red');
+            return false;
+        }
+        if (otp.length <10) {
+            $mobresult.text('Mobile No is Invalid.');
+            $mobresult.css('color', 'red');
+            return false;
+        }
+        return true;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    function validateEmail(email){
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    }
+
+
+    function Emailvalidation() 
+    {
+        const $result = $('#result');
+        const email = $('#EmailID').val();
+        $result.text('');
+        if (validateEmail(email)) {
+            $result.text(email + ' is valid.');
+            $result.css('color', 'green');
+        } 
+        else {
+            $result.text(email + ' is invalid.');
+            $result.css('color', 'red');
+        }
+        return false;
+    
+    }
+
+   
+
+
+</script>
+
+
+<script language="javascript">
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function isFloatKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+            return false;
+
+        return true;
+
+    }
+
+    function noEnterKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+
+        return false;
+    }
+</script>
+
+
+<style>
+    .glow {
+        animation: example 2s linear infinite;
+    }
+
+    @@keyframes example {
+        from {
+            color: red;
+        }
+
+        to {
+            color: #337ab7;
+        }
+    }
+</style>
+

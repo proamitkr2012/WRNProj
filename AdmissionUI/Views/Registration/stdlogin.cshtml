@@ -1,0 +1,208 @@
+﻿@model  LoginModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="~/js/jquery-captcha.js"></script>
+
+<div class="container mt-3 mb-2">
+    <div class="row">
+        <div class="col-sm-8">
+            <img src="~/dbru.jpeg" class="img-fluid" />
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header p-3 mb-2 bg-danger text-white text-center">
+                    <strong> Registered Candidate Login</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+                        <form class="m-2">
+
+                            @if (Model.Status < 0)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="row">
+
+                                <div class="form-group">
+                                    <label>Enter  Registration Number:</label>
+                                    <input asp-for="UserName" type="text" value="" placeholder="Registration No." class="form-control" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password:</label>
+                                    <input asp-for="PWd" type="password" class="form-control" />
+                                </div>
+
+                            </div>
+                            <div class="row pb-2">
+                                
+                                <div class="captcha-box" style="text-align:center">
+                                    <canvas id="canvas" height=80 style='height:80px'></canvas>
+                                    <input name="code" autocomplete="off" class="form-control" placeholder="Captcha Code" id="captcha">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div class="mb-0">
+
+                                        <a class="btn btn-success btn-block text-white"
+                                           id="btnl" onclick="SubmitLoginForm()"><i class="fa fa-fingerprint" aria-hidden="true"></i> Login</a>
+
+
+                                        <a class="btn btn-primary btn-lg btn-block text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Login...</a>
+
+                                    </div>
+                                    <div class="font-16 weight-600 pt-10 pb-10 text-center"
+                                         data-color="#707373">
+                                        OR
+                                    </div>
+                                    <div class="input-group mb-0">
+                                        <a class="btn btn-danger glow w-100 mt-2 text-white"
+                                           asp-action="Registration" asp-controller="Home">Click for New Registration</a>
+                                    </div>
+                                    <div class="input-group mb-0">
+                                        <a class="btn btn-primary w-100 mt-2 text-white"
+                                           asp-action="Index" asp-controller="Home">Home</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .glow {
+        animation: example 1s linear infinite;
+    }
+
+    @@keyframes example {
+        from {
+            color: red;
+        }
+
+        to {
+            color: white;
+        }
+    }
+</style>
+
+
+
+<script>
+    document.getElementById("captcha").addEventListener("keydown", function (e) {
+        if (!e) { var e = window.event; }
+        // e.preventDefault(); // sometimes useful
+
+        // Enter is pressed
+        if (e.keyCode == 13) { SubmitLoginForm(); }
+    }, false);
+
+    // step-1
+    const captcha = new Captcha($('#canvas'), {
+        length: 4
+    });
+    // api
+
+
+    $('#btnlwait').hide();
+    $('#btnl').show();
+    function SubmitLoginForm() {
+        flag = true;
+        if ($.trim($("#Enrollment").val()) == "") {
+            $("#Enrollment").addClass("input-validation-error");
+            flag = false;
+        }
+        else {
+            $("#Enrollment").removeClass("input-validation-error");
+        }
+        if ($.trim($("#Dob").val()) == "") {
+            $("#Dob").addClass("input-validation-error");
+            flag = false;
+        }
+        else {
+            $("#Dob").removeClass("input-validation-error");
+        }
+
+
+        const ans = captcha.valid($('input[name="code"]').val());
+        if (ans == false) {
+            flag = false;
+            $("#captcha").addClass("input-validation-error");
+        } else {
+            $("#captcha").removeClass("input-validation-error");
+        }
+
+        if (flag) {
+            var obj = {
+                Enrollment: $("#Enrollment").val(),
+                Dob: $("#Dob").val(),
+            };
+            //alert(JSON.stringify(obj))
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("Login", "Home")',
+                data: JSON.stringify(obj),
+                dataType: "json",
+                beforeSend: function () {
+                    // setting a timeout
+                    $('#btnlwait').show();
+                    $('#btnl').hide();
+                },
+                success: function (response) {
+
+                    if (response.res == "success") {
+                        var d = JSON.stringify(response.data);
+                        var d = response.data;
+                        var name = "";
+                        var EncrptedRoll = "";
+                        $.each(d, function (index, d) {
+                            name = response.data.Name;
+                            EncrptedRoll = response.data.EncrptedRoll;
+                            window.location.href = "/admission-form-step1/" + EncrptedRoll;
+
+                        });
+
+                        $("#Enrollment").val("");
+
+                    }
+                    else {
+
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Invalid Login Details!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                    }
+                },
+                error: function (result) {
+                    alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        $('#btnlwait').hide();
+                        $('#btnl').show();
+                    }, 1000);
+                },
+            });
+        }
+    }
+
+</script>

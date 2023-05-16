@@ -6,5 +6,6 @@ namespace AdmissionRepo
     {
         AdminRepository IAdmin { get; }
         int SaveChanges();
+        public IstudentPreRepo studentPreRepo { get; }
     }
 }

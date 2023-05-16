@@ -57,4 +57,12 @@
     <Folder Include="wwwroot\UserDoc\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Registration\createpassword.cshtml" />
+    <None Include="Views\Registration\Index.cshtml" />
+    <None Include="Views\Registration\preRegistration.cshtml" />
+    <None Include="Views\Registration\preVaildateOTP.cshtml" />
+    <None Include="Views\Registration\stdlogin.cshtml" />
+  </ItemGroup>
+
 </Project>

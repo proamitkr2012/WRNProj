@@ -58,5 +58,9 @@ namespace AdmissionModel.DTO
         public string? Session { get; set; }
         public string? CourseName { get; set; }
         public string? WRN { get; set; }
+        //raj 15/05/2023
+        public string? PWD { get; set; }
+        public int IsNewadm { get; set; }
+
     }
 }

@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmissionUI", "AdmissionUI.csproj", "{52B2EE98-9895-4A9A-A44C-47F1329BFA10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionUI", "AdmissionUI.csproj", "{52B2EE98-9895-4A9A-A44C-47F1329BFA10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmissionData", "..\AdmissionData\AdmissionData.csproj", "{2EAAE9C7-19BB-4AA2-A9CD-4A524260DE1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionData", "..\AdmissionData\AdmissionData.csproj", "{2EAAE9C7-19BB-4AA2-A9CD-4A524260DE1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmissionModel", "..\AdmissionModel\AdmissionModel.csproj", "{C5FE8F38-DC33-4623-A96D-609132F253C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionModel", "..\AdmissionModel\AdmissionModel.csproj", "{C5FE8F38-DC33-4623-A96D-609132F253C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmissionRepo", "..\AdmissionRepo\AdmissionRepo.csproj", "{69E3FDF5-5201-424F-A4DD-F982B6CE6DD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionRepo", "..\AdmissionRepo\AdmissionRepo.csproj", "{69E3FDF5-5201-424F-A4DD-F982B6CE6DD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{54860700-981C-4F15-86CC-A6D8536B6EB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "extentionMethod", "..\extentionMethod\extentionMethod.csproj", "{0E802495-54D6-4E4F-9CA9-208BA41B2B60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{69E3FDF5-5201-424F-A4DD-F982B6CE6DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69E3FDF5-5201-424F-A4DD-F982B6CE6DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69E3FDF5-5201-424F-A4DD-F982B6CE6DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54860700-981C-4F15-86CC-A6D8536B6EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54860700-981C-4F15-86CC-A6D8536B6EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54860700-981C-4F15-86CC-A6D8536B6EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54860700-981C-4F15-86CC-A6D8536B6EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E802495-54D6-4E4F-9CA9-208BA41B2B60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E802495-54D6-4E4F-9CA9-208BA41B2B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E802495-54D6-4E4F-9CA9-208BA41B2B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E802495-54D6-4E4F-9CA9-208BA41B2B60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
