@@ -51,6 +51,7 @@
     <ProjectReference Include="..\AdmissionData\AdmissionData.csproj" />
     <ProjectReference Include="..\AdmissionModel\AdmissionModel.csproj" />
     <ProjectReference Include="..\AdmissionRepo\AdmissionRepo.csproj" />
+    <ProjectReference Include="..\extentionMethod\extentionMethod.csproj" />
   </ItemGroup>
 
   <ItemGroup>

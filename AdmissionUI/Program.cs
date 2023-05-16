@@ -3,7 +3,7 @@ using AdmissionData;
 using AdmissionModel;
 using AdmissionRepo.Utilities;
 using AdmissionRepo;
-
+using ServiceRegistration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -23,7 +23,7 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IMailClient, MailClient>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession();
-
+builder.Services.AddInfrastructure();
 
 builder.Services.AddCors(options =>
 {
