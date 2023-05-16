@@ -11,10 +11,10 @@ namespace AdmissionData
 
         }
 
-        public DbSet<Role> Roles_AM { get; set; }
-        public DbSet<AdminMaster> AdminMasters_AM { get; set; }
+        public DbSet<Role> Roles{ get; set; }
+        public DbSet<AdminMaster> AdminMasters { get; set; }
         public DbSet<StudentPreData> StudentPreData { get; set; }
-        public DbSet<AdminMasterRoles> AdminMasterRoles_AM { get; set; }
+        public DbSet<AdminMasterRoles> AdminMasterRoles { get; set; }
         public DbSet<tblState> tblState { get; set; }
         public DbSet<tblDistrict> tblDistrict { get; set; }
         public DbSet<StudentMasters> StudentMasters { get; set; }

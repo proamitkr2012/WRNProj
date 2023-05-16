@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Globalization;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
@@ -47,8 +48,27 @@ namespace AdmissionUI.Areas.Admin.Controllers
 
             return View();
         }
-       
-       
+
+        [HttpPost]
+        public async Task<IActionResult> PreEntry([FromBody] StudentMastersDTO model)
+        {
+            try
+            {
+                //StudentMastersDTO model = new StudentMastersDTO();
+                var datet = Convert.ToDateTime(model.DOBStr, CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                model.DOB = datet;
+                model.DegreeID = 1;
+                int appid = await UOF.IAdmin.AddPreRegistration(model);
+                return Json(appid);
+
+            }
+            catch (Exception e)
+            {
+
+            }
+            return Json(null);
+
+        }
 
     }
 }

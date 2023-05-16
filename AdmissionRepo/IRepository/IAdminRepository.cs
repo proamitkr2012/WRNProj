@@ -10,7 +10,7 @@ namespace AdmissionRepo
 {
     public interface IAdminRepository : IRepository<USR_INF>
     {
-        // AdminMasterDTO AuthenticateAdmin(string userName, string password);
+         AdminMasterDTO AuthenticateAdmin(string userName, string password);
         StudentMastersDTO CheckStudentPreData(LoginDTO data);
         List<tblState> GetStateList();
         List<tblDistrict> GetDistrictList(int Id);
@@ -23,5 +23,6 @@ namespace AdmissionRepo
         StudentMastersDTO GetStudentMasterData(string Enrollment);
 
         List<CollegeMasters> GetCollegeList();
+        Task<int> AddPreRegistration(StudentMastersDTO model);
     }
 }

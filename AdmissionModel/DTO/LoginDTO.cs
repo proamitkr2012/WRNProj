@@ -29,5 +29,24 @@ namespace AdmissionModel.DTO
 
 
     }
-   
+    public class AdminLoginDTO
+    {
+        [Required(ErrorMessage = "Please Enter Email")]
+        [Display(Name = "Email")]
+        public string? Email { get; set; }
+        public string? Name { get; set; }
+        public string? Mobile { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Password")]
+        public string? Password { get; set; }
+
+
+        [Display(Name = "Remember me")]
+        public bool IsRemember { get; set; }
+        public string? Enrollment { get; set; }
+        public string? OTP { get; set; }
+        public string? RollNo { get; set; }
+
+
+    }
 }

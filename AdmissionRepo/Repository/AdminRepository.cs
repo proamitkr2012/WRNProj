@@ -275,7 +275,7 @@ namespace AdmissionRepo
                 if (c == null)
                 {
 
-                    return 3;
+                    return 4;
                 }
                 if (stud == null)
                 {
@@ -609,5 +609,79 @@ namespace AdmissionRepo
             }
             return null;
         }
+
+        public async Task<int> AddPreRegistration(StudentMastersDTO model)
+        {
+            try
+            {
+
+
+                var stud = await _dbContext.StudentPreData.Where(x => x.Roll.ToLower().Trim() == model.Roll.ToLower().Trim()).FirstOrDefaultAsync();
+
+                if (stud != null)
+                {
+                    return 1;
+                }
+
+                if (stud == null)
+                {
+                    StudentPreData pn = new StudentPreData();
+                    pn.Roll = model.Roll;
+                    pn.Name = model.Name;
+                    pn.FatherName = model.FatherName;
+                    pn.MotherName = model.MotherName;
+                    pn.Email = model.Email;
+                    pn.Mobile = model.Mobile;
+
+                    pn.Gender = model.Gender;
+                    pn.DOB = model.DOB;
+
+                    pn.Category = model.Category;
+                    pn.CollegeCode = model.CollegeCode;
+                    pn.IsActive = true;
+                    _dbContext.StudentPreData.Add(pn);
+                    await _dbContext.SaveChangesAsync();
+
+                    return 3;
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return 0;
+        }
+        public AdminMasterDTO AuthenticateAdmin(string userName, string password)
+        {
+            try
+            {
+                AdminMasterDTO model = new AdminMasterDTO();
+                AdminMaster? admin = _dbContext.AdminMasters.Where(x => x.Email.ToLower().Trim() == userName.ToLower().Trim() || x.Name.ToLower().Trim() == userName.ToLower().Trim() || x.MobileNo.ToLower().Trim() == userName.ToLower().Trim()).FirstOrDefault();
+                if (admin != null)
+                {
+                    string _pass = AESEncription.Base64Decode(admin.Password);
+                    if (password.Trim() == _pass)
+                    {
+                        model.AdminId = admin.AdminId;
+                        model.Name = admin.Name;
+                        model.Email = admin.Email;
+                        model.MobileNo = admin.MobileNo;
+                        model.Roles = (from r in _dbContext.Roles
+                                       join mr in _dbContext.AdminMasterRoles
+                                       on r.RoleId equals mr.RoleId
+                                       where mr.AdminId == admin.AdminId
+                                       select r.RoleName).ToArray();
+                        model.ProfilePic = admin.ProfilePic;
+                        model.IsVerified = admin.IsVerified;
+                        model.IsActive = admin.IsActive;
+                        return model;
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            return null;
+        }
+
     }
 }
