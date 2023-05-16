@@ -23,7 +23,8 @@ namespace AdmissionData.Entities
         public string? CollegeCode { get; set; }
        
         public bool IsActive { get; set; }
-
-        
+        public int EntryBy { get; set; }
+        public DateTime? Entrydate { get; set; }
+        public string? SystemIP { get; set; }
     }
 }

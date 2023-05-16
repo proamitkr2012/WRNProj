@@ -23,6 +23,6 @@ namespace AdmissionRepo
         StudentMastersDTO GetStudentMasterData(string Enrollment);
 
         List<CollegeMasters> GetCollegeList();
-        Task<int> AddPreRegistration(StudentMastersDTO model);
+        Task<int> AddPreRegistration(StudentMastersDTO model ,int UserId=0,string ip="");
     }
 }

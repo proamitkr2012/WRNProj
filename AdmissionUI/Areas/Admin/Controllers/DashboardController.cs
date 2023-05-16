@@ -22,7 +22,7 @@ using System.Globalization;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
-    //[Area("Admin")]
+    [Area("Admin")]
     public class DashboardController : BaseController
     {
         int pageSize;
@@ -58,7 +58,7 @@ namespace AdmissionUI.Areas.Admin.Controllers
                 var datet = Convert.ToDateTime(model.DOBStr, CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
                 model.DOB = datet;
                 model.DegreeID = 1;
-                int appid = await UOF.IAdmin.AddPreRegistration(model);
+                int appid = await UOF.IAdmin.AddPreRegistration(model,CurrentUser.UserId, GetClientIp());
                 return Json(appid);
 
             }
@@ -69,6 +69,13 @@ namespace AdmissionUI.Areas.Admin.Controllers
             return Json(null);
 
         }
+        public string GetClientIp()
+        {
+            string _ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+            if (_ipAddress.Contains("::1"))
+                _ipAddress = "127.0.0.1";
 
+            return _ipAddress;
+        }
     }
 }

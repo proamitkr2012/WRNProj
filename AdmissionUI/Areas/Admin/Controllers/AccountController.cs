@@ -19,7 +19,7 @@ using System.Data.SqlClient;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
-    //[Area("Student")]
+    [Area("Admin")]
     public class AccountController : Controller
     {
         protected readonly IHttpContextAccessor httpContextAccessor;

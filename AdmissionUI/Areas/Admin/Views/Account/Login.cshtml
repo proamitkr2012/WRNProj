@@ -1,0 +1,184 @@
+﻿@model AdminLoginDTO
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_PublicLayout";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="~/js/jquery-captcha.js"></script>
+
+<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-7">
+                <img src="~/dbru.jpeg" alt="" />
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <div class="login-box bg-white box-shadow border-radius-10">
+                    <div class="login-title">
+                        <h2 class="text-center text-primary">Admin Login-Protal</h2>
+                    </div>
+                    <form>
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input asp-for="Email" type="text" value="" placeholder="Email" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password:</label>
+                                <input asp-for="Password" type="text"
+                                       class="form-control"
+                                        />
+                            </div>
+
+                        </div>
+                        <div class="row pb-30">
+                            @*<div class="col-6">
+                            <div class="custom-control custom-checkbox">
+                            <input type="checkbox"
+                            class="custom-control-input"
+                            id="customCheck1" />
+                            <label class="custom-control-label" for="customCheck1">Remember</label>
+                            </div>
+                            </div>*@
+                            @*<div class="col-6">
+                            <div class="forgot-password">
+                            <a href="forgot-password.html">Forgot Password</a>
+                            </div>
+                            </div>*@
+                            <div class="captcha-box" style="text-align:center">
+                                <canvas id="canvas" height=80 style='height:80px'></canvas>
+                                <input name="code" autocomplete="off" class="form-control" placeholder="Captcha Code" id="captcha">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-group mb-0">
+                                    <!--
+                                        use code for form submit
+                                        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
+                                    -->
+                                    <a class="btn btn-primary btn-lg btn-block text-white"
+                                       id="btnl" onclick="SubmitLoginForm()">Sign In</a>
+
+
+                                    <a class="btn btn-primary btn-lg btn-block text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Sign In...</a>
+
+                                </div>
+                                @*<div class="font-16 weight-600 pt-10 pb-10 text-center"
+                                data-color="#707373">
+                                OR
+                                </div>
+                                <div class="input-group mb-0">
+                                <a class="btn btn-outline-primary btn-lg btn-block"
+                                href="register.html">Register To Create Account</a>
+                                </div>*@
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // step-1
+    const captcha = new Captcha($('#canvas'), {
+        length: 4
+    });
+    // api
+
+
+    $('#btnlwait').hide();
+    $('#btnl').show();
+    function SubmitLoginForm() {
+        flag = true;
+        if ($.trim($("#Email").val()) == "") {
+            $("#Email").addClass("input-validation-error");
+            flag = false;
+        }
+        else {
+            $("#Email").removeClass("input-validation-error");
+        }
+        if ($.trim($("#Password").val()) == "") {
+            $("#Password").addClass("input-validation-error");
+            flag = false;
+        }
+        else {
+            $("#Password").removeClass("input-validation-error");
+        }
+
+
+        const ans = captcha.valid($('input[name="code"]').val());
+        if (ans == false) {
+            flag = false;
+            $("#captcha").addClass("input-validation-error");
+        } else {
+            $("#captcha").removeClass("input-validation-error");
+        }
+
+        if (flag) {
+            var obj = {
+                Email: $("#Email").val(),
+                Password: $("#Password").val(),
+            };
+            //alert(JSON.stringify(obj))
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("Login", "Account",new{area = "Admin"})',
+                data: JSON.stringify(obj),
+                dataType: "json",
+                beforeSend: function () {
+                    // setting a timeout
+                    $('#btnlwait').show();
+                    $('#btnl').hide();
+                },
+                success: function (data) {
+                    //$('#emailerror').html("");
+                    //$('#moberror').html("");
+
+                    if (data == "1") {
+                        $('#emailerror').html("This Email is already Exits");
+                        $('#ResEmail').css("margin-bottom", "0px");
+                    }
+
+
+                    if (data == "success") {
+                        //$("#alertModel").modal('show');
+                        //$('.modal-body > p > span').html('');
+                        //$('.modal-body > p > span').html('Thanks for sharing your details with us. We will get back to you soon!');
+                        //$("#Name").val("");
+                        window.location.href = "@Url.Action("index", "dashboard",new {area="Admin"})";
+                        $("#Enrollment").val("");
+
+                    }
+                    else {
+
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Invalid Login Details!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                    }
+                },
+                error: function (result) {
+                    alert('Service call failed: ' + result.status + ' Type :' + result.statusText);
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        $('#btnlwait').hide();
+                        $('#btnl').show();
+                    }, 0);
+                },
+            });
+        }
+    }
+
+</script>

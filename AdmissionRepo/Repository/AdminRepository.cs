@@ -27,6 +27,7 @@ using System.Security.Policy;
 using System.Numerics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
 
 namespace AdmissionRepo
 {
@@ -610,7 +611,7 @@ namespace AdmissionRepo
             return null;
         }
 
-        public async Task<int> AddPreRegistration(StudentMastersDTO model)
+        public async Task<int> AddPreRegistration(StudentMastersDTO model,int UserId,string ip)
         {
             try
             {
@@ -639,6 +640,9 @@ namespace AdmissionRepo
                     pn.Category = model.Category;
                     pn.CollegeCode = model.CollegeCode;
                     pn.IsActive = true;
+                    pn.EntryBy = UserId;
+                    pn.Entrydate = DateTime.Now;
+                    pn.SystemIP = ip;
                     _dbContext.StudentPreData.Add(pn);
                     await _dbContext.SaveChangesAsync();
 
@@ -652,6 +656,7 @@ namespace AdmissionRepo
             }
             return 0;
         }
+       
         public AdminMasterDTO AuthenticateAdmin(string userName, string password)
         {
             try
