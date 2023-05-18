@@ -32,32 +32,32 @@ function SubmitButtonOnclick() {
     else {
         $("#Roll").removeClass("input-validation-error");
     }
-    //if ($.trim($("#FatherName").val()) == "") {
+    if ($.trim($("#FatherName").val()) == "") {
 
-    //    $("#FatherName").addClass("input-validation-error");
-    //    flag = false;
-    //    //$("#FatherName").focus();
-    //}
-    //else {
-    //    $("#FatherName").removeClass("input-validation-error");
-    //}
+        $("#FatherName").addClass("input-validation-error");
+        flag = false;
+        //$("#FatherName").focus();
+    }
+    else {
+        $("#FatherName").removeClass("input-validation-error");
+    }
 
-    //if ($.trim($("#MotherName").val()) == "") {
-    //    $("#MotherName").addClass("input-validation-error");
-    //    flag = false;
-    //    //$("#MotherName").focus();
-    //}
-    //else {
-    //    $("#MotherName").removeClass("input-validation-error");
-    //}
+    if ($.trim($("#MotherName").val()) == "") {
+        $("#MotherName").addClass("input-validation-error");
+        flag = false;
+        //$("#MotherName").focus();
+    }
+    else {
+        $("#MotherName").removeClass("input-validation-error");
+    }
    
-    //if ($.trim($("#Gender").val()) == "") {
-    //    $("#Gender").addClass("input-validation-error");
-    //    flag = false; //$("#Gender").focus();
-    //}
-    //else {
-    //    $("#Gender").removeClass("input-validation-error");
-    //}
+    if ($.trim($("#Gender").val()) == "") {
+        $("#Gender").addClass("input-validation-error");
+        flag = false; //$("#Gender").focus();
+    }
+    else {
+        $("#Gender").removeClass("input-validation-error");
+    }
 
     if ($.trim($("#DOB").val()) == "") {
         $("#DOB").addClass("input-validation-error");
@@ -105,13 +105,13 @@ function SubmitButtonOnclick() {
     //}
     
 
-    //if ($.trim($("#Category").val()) == "") {
-    //    $("#Category").addClass("input-validation-error");
-    //    flag = false; //$("#Category").focus();
-    //}
-    //else {
-    //    $("#Category").removeClass("input-validation-error");
-    //}
+    if ($.trim($("#Category").val()) == "") {
+        $("#Category").addClass("input-validation-error");
+        flag = false; //$("#Category").focus();
+    }
+    else {
+        $("#Category").removeClass("input-validation-error");
+    }
 
 
     //alert($("#PState option:selected").text())
