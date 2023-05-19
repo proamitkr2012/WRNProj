@@ -19,7 +19,8 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <form class="m-2">
+
+                        <form asp-action="stdlogin" method="post">
 
                             @if (Model.Status < 0)
                             {
@@ -53,30 +54,28 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12 text-center">
+                                <div class="col-sm-4 text-center">
                                     <div class="mb-0">
-
-                                        <a class="btn btn-success btn-block text-white"
-                                           id="btnl" onclick="SubmitLoginForm()"><i class="fa fa-fingerprint" aria-hidden="true"></i> Login</a>
-
-
-                                        <a class="btn btn-primary btn-lg btn-block text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Login...</a>
-
+                                        <input type="submit" class="btn btn-success btn-block text-white"
+                                               id="btnl" value="Submit" />
                                     </div>
-                                    <div class="font-16 weight-600 pt-10 pb-10 text-center"
-                                         data-color="#707373">
-                                        OR
-                                    </div>
-                                    <div class="input-group mb-0">
-                                        <a class="btn btn-danger glow w-100 mt-2 text-white"
-                                           asp-action="Registration" asp-controller="Home">Click for New Registration</a>
-                                    </div>
+                                </div>
+                                <!--<div class="col-sm-4 text-center">
+                                 <div class="input-group mb-0">
+                                     <a class="btn btn-danger glow w-100 mt-2 text-white"
+                                        asp-action="Registration" asp-controller="Home">Click for New Registration</a>
+                                 </div>
+                                </div>-->
+                                <div class="col-sm-4 text-center">
                                     <div class="input-group mb-0">
                                         <a class="btn btn-primary w-100 mt-2 text-white"
                                            asp-action="Index" asp-controller="Home">Home</a>
                                     </div>
                                 </div>
                             </div>
+
+
+                                
                         </form>
                     </div>
                 </div>

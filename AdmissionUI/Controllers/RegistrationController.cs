@@ -294,28 +294,23 @@ namespace AdmissionUI.Controllers
                     new Claim(ClaimTypes.Sid,stddata.ApplicationNo )
                     ,new Claim(ClaimTypes.Role,"0" )
                     ,new Claim(ClaimTypes.Name,stddata.Name )
-                }, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-                var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                return RedirectToAction("dashboard", "Student");
-                        //return RedirectToAction("ACTION", "CONTROLLER", new
-                        //{
-                        //    id = 99,
-                        //    otherParam = "Something",
-                        //    anotherParam = "OtherStuff"
-                        //});
+                    }, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+                    var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    return RedirectToAction("dashboard", "Student");
+                      
                     }
                     else
                     {
                         login.Status = -1;
-                        login.Msg = "In valid Username or password ";
+                        login.Msg = "You are inactive user, please contact with admin";
                     }
 
                 }
                 else
                 {
                     login.Status = -1;
-                    login.Msg = "In valid Username or password ";
+                    login.Msg = "Invalid Username or password";
                 }
 
 
@@ -344,3 +339,9 @@ namespace AdmissionUI.Controllers
 
     }
 }
+//return RedirectToAction("ACTION", "CONTROLLER", new
+//{
+//    id = 99,
+//    otherParam = "Something",
+//    anotherParam = "OtherStuff"
+//});

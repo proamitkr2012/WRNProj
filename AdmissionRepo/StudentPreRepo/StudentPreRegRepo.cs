@@ -192,7 +192,7 @@ namespace AdmissionRepo
                     var query = "ChangePassword";
                     var param = new DynamicParameters();
                     param.Add("@ApplicationNo", studentMasters.ApplicationNo);
-                    param.Add("@PWD", studentMasters.Mobile);
+                    param.Add("@PWD", studentMasters.PWD);
                     result = await SqlMapper.ExecuteAsync(connection, query, param, commandType: CommandType.StoredProcedure);
                     connection.Close();
                     return result;

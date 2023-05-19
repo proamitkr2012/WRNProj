@@ -9,145 +9,145 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AdmissionUI
 build_property.RootNamespace = AdmissionUI
-build_property.ProjectDir = D:\vrs\Admissiondbrau\WRNProj\AdmissionUI\
+build_property.ProjectDir = E:\VRS\Agra\Project\WRNProj-main\proamitkr2012\WRNProj\AdmissionUI\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
-build_property.MSBuildProjectDirectory = D:\vrs\Admissiondbrau\WRNProj\AdmissionUI
+build_property.MSBuildProjectDirectory = E:\VRS\Agra\Project\WRNProj-main\proamitkr2012\WRNProj\AdmissionUI
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/Views/Account/Login.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/Views/Dashboard/Index.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_footer.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9mb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_header.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9oZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_Layout.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_PublicLayout.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/Views/Shared/_PublicLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9QdWJsaWNMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/_ViewImports.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Areas/Admin/_ViewStart.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Areas/Admin/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Download.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Download.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX0Rvd25sb2FkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step1.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXAxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step2.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXAyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step3.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step3.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXAzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step4.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step4.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXA0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step5.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/AdmissionForm_Step5.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pc3Npb25Gb3JtX1N0ZXA1LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/DownloadForm.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/DownloadForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEb3dubG9hZEZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Index.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Login.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Privacy.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Home/Registration.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Home/Registration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3RyYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Registration/createpassword.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Registration/createpassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXGNyZWF0ZXBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Registration/Index.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Registration/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Registration/preRegistration.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Registration/preRegistration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXHByZVJlZ2lzdHJhdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Registration/preVaildateOTP.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Registration/preVaildateOTP.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXHByZVZhaWxkYXRlT1RQLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Registration/stdlogin.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Registration/stdlogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmF0aW9uXHN0ZGxvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/Error.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_CDistrictList.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_CDistrictList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9DRGlzdHJpY3RMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_footer.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9mb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_header.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9oZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_PDistrictList.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_PDistrictList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QRGlzdHJpY3RMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/_ViewImports.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/_ViewStart.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_Layout.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wbtj7z7lmy
 
-[D:/vrs/Admissiondbrau/WRNProj/AdmissionUI/Views/Shared/_Public.cshtml]
+[E:/VRS/Agra/Project/WRNProj-main/proamitkr2012/WRNProj/AdmissionUI/Views/Shared/_Public.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QdWJsaWMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-rtm4i7aoem
