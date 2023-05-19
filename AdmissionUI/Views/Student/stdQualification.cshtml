@@ -1,0 +1,296 @@
+﻿@model EligibiltyModel
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+
+<form asp-action="stdQualification" method="post">
+
+    <div class="container p-3">
+        <ul class="steps">
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Profile</span>
+                </div>
+
+            </li>
+
+            <li class="step step-active">
+                <div class="step-content">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Qualification</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">4</span>
+                    <span class="step-text">Weightage</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Photo</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Choose College</span>
+                </div>
+
+            </li>
+        </ul>
+        
+        
+        
+        
+        
+        <div class="text-center mt-5">
+            <h2>Admission Web Registration  Form - (2023)</h2>
+
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Registration
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Candidate's Qualification 
+                </h5>
+                <hr />
+                @Html.HiddenFor(x=>x.EncrptedData)
+
+                @if (Model.Status < 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+                <div class="row">
+                    @Html.HiddenFor(x=>x.EncrptedData)
+                    @Html.HiddenFor(x=>x.ApplicationNo)
+                    <div class="col-sm-12 text-center border  p-2">
+                        <table class="table" id="qual">
+                            <thead>
+                                <tr>
+                                    <td>Exam</td>
+                                    <td>Course</td>
+                                    <td>Board/University</td>
+                                    <td>Roll No.</td>
+                                    <td>Passing Year</td>
+                                    <td>Division</td>
+                                    <td>Marks Obtained</td>
+                                    <td>Marks Total</td>
+                                    <td>Percentage/CGPA</td>
+                                    <td>Percentage</td>
+                                     
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var idx = 0;
+                                }
+                                @foreach (var item in Model.QualifationList)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            <input type="hidden" class="form-control" asp-for="@Model.QualifationList[idx].DocID" />
+                                            <input type="hidden" class="form-control" asp-for="@Model.QualifationList[idx].EntryID" />
+                                            <input type="hidden" class="form-control" asp-for="@Model.QualifationList[idx].DocName" />
+                                            <input type="text" class="form-control" value="@item.DocName" readonly />
+                                        </td>
+
+                                        <td>
+                                            <input type="text" class="form-control" value="@item.Subject" asp-for="@Model.QualifationList[idx].Subject" />
+                                            
+                                        </td>
+                                        <td>
+
+                                            @if (item.DocName == "Graduation")
+                                            {
+                                                <select asp-for="@Model.QualifationList[idx].Board_Universty_Name" onchange="setOther(this,@item.EntryID)" asp-items="@(new SelectList(ViewBag.University,"University","University"))" class="form-select">
+                                                </select>
+                                            }
+                                            else
+                                            {
+                                                <select asp-for="@Model.QualifationList[idx].Board_Universty_Name" onchange="setOther(this,@item.EntryID)" asp-items="@(new SelectList(ViewBag.Boards,"Board","Board"))" class="form-select">
+                                                </select>
+                                            }
+
+
+
+                                            <div id="@(item.EntryID+"_div")" style="display:none">
+                                            <input type="text" class="form-control board" asp-for="@Model.QualifationList[idx].Board_Other" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" asp-for="@Model.QualifationList[idx].PreRollNo" />  </td>
+                                        <td>
+
+
+                                            <select asp-for="@Model.QualifationList[idx].PassingYear" class=" form-control">
+                                                @if (item.DocName == "10th")
+                                                {
+                                                    for (int i = 1980; i < 2021; i++)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(item.PassingYear))
+                                                        {
+                                                            if (i.ToString() == item.PassingYear)
+                                                            {
+                                                                <option value="@i" selected>@i</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@i">@i</option>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@i">@i</option>
+                                                        }
+
+
+                                                    }
+
+                                                }
+                                                else if (item.DocName == "12th")
+                                                {
+                                                    for (int i = 1990; i < 2022; i++)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(item.PassingYear))
+                                                        {
+                                                            if (i.ToString() == item.PassingYear)
+                                                            {
+                                                                <option value="@i" selected>@i</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@i">@i</option>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@i">@i</option>
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int i = 1992; i < 2024; i++)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(item.PassingYear))
+                                                        {
+                                                            if (i.ToString() == item.PassingYear)
+                                                            {
+                                                                <option value="@i" selected>@i</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@i">@i</option>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@i">@i</option>
+                                                        }
+                                                    }
+
+                                                }
+                                            </select>
+
+
+                                        </td>
+                                        
+                                        <td>
+                                            <select asp-for="@Model.QualifationList[idx].ExamStatus" onchange="setOther(this,@item.EntryID)"  class="form-select">
+                                                <option value="Passed" selected>Passed</option>
+                                                <option value="Appearing" >Appearing</option>
+                                            
+                                            </select>
+
+                                        </td>
+                                        
+                                        <td>
+                                            <input type="number" placeholder="0"   class="form-control"   asp-for="@Model.QualifationList[idx].MarkObt" /> 
+                                        </td>
+                                        <td>
+                                            <input type="number" placeholder="0" class="form-control" asp-for="@Model.QualifationList[idx].TotalMarks" />  </td>
+                                        <td>
+                                            <select class="form-select" aria-label="Default select example" asp-for="@Model.QualifationList[idx].IsCGPA" >
+                                                @if (item.IsCGPA == false)
+                                                {
+                                                    <option selected value="False">Percentage</option>
+                                                    <option value="True">CGPA</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="False">Percentage</option>
+                                                    <option selected value="True">CGPA</option>
+                                                }
+                                            </select>
+                                        </td>
+                                        <td><input type="number" placeholder="0" value="@item.Percentage" class="form-control" asp-for="@Model.QualifationList[idx].Percentage" />  </td>
+                                         
+                                    </tr>
+                                    idx = idx + 1;
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div class="col-md-2   offset-md-3 mt-4">
+                        <a asp-action="stdprofile" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+
+                     </div>
+                    <div class="col-md-4 mt-4">
+                        <input type="submit" class="btn btn-success btn-block text-white"
+                               id="btnl" value="Save&Next" />
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="Newdata" />
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="~/js/step2.js"></script>
+
+<script type="text/javascript">
+    function setOther(obj,enterid)
+    {
+        
+        const txt = document.getElementById(obj.id).value;
+        if (txt == 'Other') {
+
+            $("#" + enterid + "_div").show();
+            
+        }
+        else
+        {
+            $("#" + enterid + "_div").hide();
+            $("#QualifationList_" + enterid +"__Board_Other").val('');
+        }
+    }
+
+
+</script>

@@ -1,0 +1,119 @@
+﻿@model StudentApplyCourseModel
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+
+<form asp-action="" method="post">
+
+    <div class="container p-3">
+        <ul class="steps">
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Profile</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Qualification</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">4</span>
+                    <span class="step-text">Weightage</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Photo</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content  step-active">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Add Course</span>
+                </div>
+
+            </li>
+        </ul>
+
+
+        <div class="text-center mt-5">
+            <h2>Admission Web Registration  Form - (2023)</h2>
+
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Registration
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Apply for Course
+                </h5>
+                <hr />
+              
+
+                @if (Model.Status < 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="row">
+                    @Html.HiddenFor(x=>x.EncrptedData)
+                    @Html.HiddenFor(x=>x.ApplicationNo)
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Course: <span class="text-danger">*</span></label>
+                            <select class="form-select" aria-label="Default select example" asp-for="CourseID" asp-items="@(new SelectList(ViewBag.Courses,"CourseId","CourseName"))">
+                            </select>
+                            <span class="text-danger" asp-validation-for="CourseID"></span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-sm-12 text-center border  p-2">
+                       
+                    </div>
+
+
+
+                    <div class="col-md-2   offset-md-3 mt-4">
+                        <a asp-action="ChooseCourse_College" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+
+                    </div>
+                    <div class="col-md-4 mt-4">
+                        <input type="submit" class="btn btn-success btn-block text-white"
+                               id="btnl" value="Save&Next" />
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    
+    
+    </div>
+    
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+ 
+

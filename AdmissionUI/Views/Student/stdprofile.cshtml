@@ -1,0 +1,552 @@
+﻿@model StudentRegModel
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<form asp-action="stdprofile" method="post">
+
+<div class="container p-3">
+    <ul class="steps">
+        <li class="step step-active">
+            <div class="step-content">
+                <span class="step-circle">1</span>
+                <span class="step-text">Profile</span>
+            </div>
+
+        </li>
+       
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">2</span>
+                <span class="step-text">Qualification</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">4</span>
+                <span class="step-text">Weightage</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">5</span>
+                <span class="step-text">Photo</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">6</span>
+                <span class="step-text">Choose College</span>
+            </div>
+
+        </li>
+    </ul>
+   
+    
+    
+    <div class="text-center mt-5">
+        <h2>Admission Web Registration  Form - (2023)</h2>
+
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Registration 
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Candidate's Profile (अभ्यर्थी का विवरण)
+            </h5>
+            <hr />
+            @Html.HiddenFor(x=>x.EncrptedData)
+
+                @if (Model.Status < 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन): <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="ApplicationNo" placeholder="Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन)" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Candidate's Name (अभ्यर्थी का नाम) : <span class="text-danger">*</span></label>
+                        <input asp-for="Name" type="text" placeholder="Candidate's Name (अभ्यर्थी का नाम)" readonly class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Father's Name (पिता का नाम) : <span class="text-danger">*</span></label>
+                        <input asp-for="FatherName" type="text" readonly placeholder="Father's Name (पिता का नाम) " class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                Email Id: <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" asp-for="Email" placeholder="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                Mobile Number: <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" placeholder="" asp-for="Mobile" class="form-control" maxlength="10" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Mother's Name.(माता का नाम): <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="MotherName"  placeholder="Mother's Name.(माता का नाम)" class="form-control" />
+                            <span class="text-danger" asp-validation-for="MotherName"></span>
+                    
+                    
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                Category: <span class="text-danger">*</span>
+                        </label>
+                            <select class="form-select" aria-label="Default select example" asp-for="Category" asp-items="@(new SelectList(ViewBag.Category,"Category","Category"))">
+                         </select>
+                            <span class="text-danger" asp-validation-for="Category"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                SubCategory: <span class="text-danger">*</span>
+                        </label>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.Subcategory,"SubCategory","SubCategory"))" asp-for="SubCategory">
+                        </select>
+                            <span class="text-danger" asp-validation-for="SubCategory"></span>
+                    </div>
+                </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                EWS: <span class="text-danger">*</span>
+                            </label>
+                            <input type="checkbox" asp-for="Ews" />
+
+                        </div>
+                    </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                Gender: <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select" aria-label="Default select example" asp-for="Gender" >
+                            <option selected value="0">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                            <span class="text-danger" asp-validation-for="Gender"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Date of Birth : <span class="text-danger">*</span></label>
+
+                        <input type="text"
+                               class="form-control date-picker"
+                               placeholder="Date of birth" asp-for="DOB" readonly  value="@Model.DOB" />
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                Aadhar Card Number: <span class="text-danger">*</span>
+                        </label>
+                            <input type="text" asp-for="Aadhar" placeholder="Please enter 12 digit Aadhar No." class="form-control" maxlength="12" onkeypress="return isNumberKey(event)" onblur="return checkAdhar();" />
+                            <span class="text-danger" asp-validation-for="Aadhar"></span>
+                    
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Alternate Mobile Number:
+                        </label>
+                            <input type="text" placeholder="" class="form-control" asp-for="AltMobile" maxlength="10" onkeypress="return isNumberKey(event)" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                                Domicile : <span class="text-danger">*</span>
+                        </label>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.States,"Name","Name"))" asp-for="Domicile">
+                         </select>
+                            <span class="text-danger" asp-validation-for="Domicile"></span>
+                    </div>
+                </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Nationalty: <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" aria-label="Default select example"  asp-for="Nationalty">
+                                <option selected value="0">Select Nationalty</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Foreigner">Foreigner</option>
+                            
+                            </select>
+                            <span class="text-danger" asp-validation-for="Nationalty"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                Religion: <span class="text-danger">*</span>
+                            </label>
+                             
+                            <select class="form-select" aria-label="Default select example" asp-for="Religion">
+                                <option selected value="0">Select Religion</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Muslim">Muslim</option>
+                                <option value="Sikh">Sikh</option>
+                                <option value="Buddhism">Buddhism</option>
+                                <option value="Jainism">Jainism</option>
+                                
+                            </select>
+                            
+                            
+                            
+                            <span class="text-danger" asp-validation-for="Religion"></span>
+                        </div>
+                    </div>
+
+                    
+                
+                <div class="row">
+                    <hr /> <p>Correspondance Address / पत्र व्यवहार का पता</p>
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label>
+                                    Address: <span class="text-danger">*</span>
+                            </label>
+                            <textarea   placeholder="" class="form-control" asp-for="CurrentAddress"></textarea>
+                                <span class="text-danger" asp-validation-for="CurrentAddress"></span>
+                        </div>
+                    </div> <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                    State: <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.States,"Id","Name"))" asp-for="CState">
+                            </select>
+                                <span class="text-danger" asp-validation-for="CState"></span>
+                        </div>
+                    </div>  <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                    District: <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.CCities,"Id","Name"))" asp-for="CDistrict">
+                            </select>
+                                <span class="text-danger" asp-validation-for="CDistrict"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                    Pin: <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" placeholder="" class="form-control" asp-for="CPin" maxlength="6" />
+                                <span class="text-danger" asp-validation-for="CPin"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <hr />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3"><p>Permanent Address / स्थायी पता</p></div>
+                            <div class="col-md-8"><label class="d-block" style="font-size:18px ;font-weight:600"><input type="checkbox" style="height:18px;width:18px" onclick="CheckAddress()" id="CheckAddressSame" /> Same as Correspondence Address </label></div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>
+                                    Address: <span class="text-danger">*</span>
+                            </label>
+                            <textarea   placeholder="" class="form-control" asp-for="ParmanentAddress"></textarea>
+                                <span class="text-danger" asp-validation-for="ParmanentAddress"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                    State: <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.States,"Id","Name"))" asp-for="PState">
+                            </select>
+                                <span class="text-danger" asp-validation-for="PState"></span>
+                        </div>
+                    </div>  
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                    District: <span class="text-danger">*</span>
+                            </label>
+                                <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.PCities,"Id","Name"))" asp-for="PDistrict">
+                            </select>
+                                <span class="text-danger" asp-validation-for="PDistrict"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                    Pin: <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" placeholder="" class="form-control" asp-for="PPin" maxlength="6" />
+                                <span class="text-danger" asp-validation-for="PPin"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-md-4">
+                        <input type="submit" class="btn btn-success btn-block text-white"
+                               id="btnl" value="Submit" />
+                       
+               </div>
+                        <div class="col-md-4">
+                            @if (Model.Newdata == 0)
+                            {
+                                <a asp-action="stdQualification" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Next</a>
+                            }
+                        </div>
+                </div>
+
+                 
+            </div>
+        </div>
+    </div>
+</div>
+ <input type="hidden" asp-for="Newdata" />
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="~/js/step2.js"></script>
+<script>
+    
+   
+
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        $("#CState").change(function (e) {
+            var models = {};
+            models.StateId = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/master/getCities")',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                processData: false,
+                data: JSON.stringify(models),
+                //headers: { "Authorization": localStorage.getItem('token') },
+                success: function (result) {
+                    $('#CDistrict')
+                        .empty() 
+                        .append('<option selected="selected" value="0">Select District</option>');
+                     
+                    if (result != null && result.length > 0) {
+                        var rw = 0;
+                     
+                        var customers = result ;
+
+                        var rows = '';
+                        for (var i = 0; i < result.length; i++) {
+                           
+                            var opt = new Option(customers[i].Name, customers[i].Id);
+                            document.getElementById("CDistrict").options.add(opt);
+
+                        }
+                    }
+
+                }, error: function () {
+                    alert("There was error !");
+                }
+            });
+        });
+
+
+
+
+        $("#PState").change(function (e) {
+            var models = {};
+            models.StateId = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/master/getCities")',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                processData: false,
+                data: JSON.stringify(models),
+                //headers: { "Authorization": localStorage.getItem('token') },
+                success: function (result) {
+                    $('#PDistrict')
+                        .empty()
+                        .append('<option selected="selected" value="0">Select District</option>');
+
+                    if (result != null && result.length > 0) {
+                        var rw = 0;
+
+                        var customers = result;
+
+                        var rows = '';
+                        for (var i = 0; i < result.length; i++) {
+
+                            var opt = new Option(customers[i].Name, customers[i].Id);
+                            document.getElementById("PDistrict").options.add(opt);
+
+                        }
+                    }
+
+                }, error: function () {
+                    alert("There was error !");
+                }
+            });
+        });
+/*---------------------------------State Selection End-------------------------*/
+
+
+
+
+
+
+
+  });
+
+      
+  function CheckAddress() {
+        var checkBox = document.getElementById("CheckAddressSame");
+        if (checkBox.checked == true) {
+
+            $("#ParmanentAddress").val($("#CurrentAddress").val());
+            $("#PState").val($("#CState").val());
+            $("#PPin").val($("#CPin").val());
+            fillCdistrict();
+
+          
+
+        } else {
+            $("#ParmanentAddress").val("");
+            $("#PState").val("");
+            $("#PDistrict").val("");
+            $("#PPin").val("");
+        }
+    }
+
+
+    function fillCdistrict()
+    {
+        $('#PDistrict').empty();
+        var $options = $("#CDistrict > option").clone();
+        $('#PDistrict').append($options);
+        $("#PDistrict").val($("#CDistrict").val());
+
+    }
+
+    function checkAdhar() {
+        const newdata = $("#Newdata").val();
+        const adhar = $("#Aadhar").val();
+        var models = {};
+        models.Aadhar = adhar;
+        if (adhar != null && adhar != '' && newdata=="1") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Content("~/Student/checkAadhar")',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    processData: false,
+                    data: JSON.stringify(models),
+                    //headers: { "Authorization": localStorage.getItem('token') },
+                    success: function (result) 
+                        {
+                         if(result==1)
+                         {
+                            alert('Aadhar exists !');
+                            $("#Aadhar").val('');
+                             $("#Aadhar").focus();
+                         }
+                        
+                      }, error: function () {
+                        alert("There was error !");
+                    }
+                });
+        }
+    
+    }
+
+</script>
+<script language="javascript">
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function isFloatKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+            return false;
+
+        return true;
+
+    }
+
+    function noEnterKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+
+        return false;
+    }
+</script>

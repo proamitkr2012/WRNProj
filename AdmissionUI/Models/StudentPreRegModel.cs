@@ -30,7 +30,9 @@ namespace AdmissionUI.Models
         public string EmailID { get; set; }
         public int? IsOTPVerified { get; set; } = 0;
 
-        
+        [InitialValue(ErrorMessage ="Please select Course Type")]
+        public int CourseTypeID { get; set; }
+
 
     }
 }

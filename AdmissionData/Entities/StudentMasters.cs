@@ -21,7 +21,7 @@ namespace AdmissionData.Entities
         public string? Gender { get; set; }
         public DateTime? DOB { get; set; }
         public string? AltMobile { get; set; }
-       
+
         public string? Category { get; set; }
         public string? CollegeCode { get; set; }
         public decimal Amount { get; set; }
@@ -49,7 +49,20 @@ namespace AdmissionData.Entities
 
         //raj 15/05/2023
         public string? PWD { get; set; }
-        public int IsNewadm { get; set; }
+        public int IsNewadm { get; set; } = 0;
+
+        [NotMapped]
+        public string? SubCategory { get; set; }
+        [NotMapped]
+        public string? Domicile { get; set; }
+        [NotMapped]
+        public string? Religion { get; set; }
+        [NotMapped]
+        public string? Nationalty { get; set; }
+        [NotMapped]
+        public int CourseTypeID { get; set; } = 0;
+        [NotMapped]
+        public string? Std_PHOTO { get; set; }
 
 
     }

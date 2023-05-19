@@ -1,0 +1,341 @@
+﻿@model StdDocUploadModel
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<div class="container p-3">
+    <ul class="steps">
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">1</span>
+                <span class="step-text">Profile</span>
+            </div>
+
+        </li>
+
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">2</span>
+                <span class="step-text">Qualification</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">4</span>
+                <span class="step-text">Weightage</span>
+            </div>
+
+        </li>
+        <li class="step step-active">
+            <div class="step-content">
+                <span class="step-circle">5</span>
+                <span class="step-text">Photo</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">6</span>
+                <span class="step-text">Choose College</span>
+            </div>
+
+        </li>
+    </ul>
+
+
+
+
+
+    <div class="text-center mt-5">
+        <h2>Admission Web Registration  Form - (2023)</h2>
+
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Registration For B.Ed
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Candidate's Documents
+            </h5>
+            <hr />
+            <div class="row">
+                @Html.HiddenFor(x=>x.ApplicationNo)
+                <div class="col-sm-12 text-center border  p-2">
+                    <div class="bg-white p-4">
+
+                          <p align="center" valign="middle" width="50%">
+                            Photo should be in dimension of<br /> <strong>[200 x 240] pixels</strong> scanned at <strong>100 dpi</strong> resolution
+                            <br />
+                            and size of file must be less than <strong class="text-danger fw-bold">100 KB</strong>
+                        </p>
+                         
+                      
+                        <img src="@Model.Std_Photo" width="150" height="150" id="imgpreview1">
+                         
+                        <input type="file" asp-for="ImageFile" onchange="showfile('ImageFile','Photo',this)" accept=".png,.PNG,.bmp,.BMP,.jpeg,.JPEG,.jpg,.JPG">
+                       
+
+                    </div>
+                </div>
+
+
+                
+
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-sm-3 offset-3">
+                        <a asp-action="stdWeightage" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Save & Next</a>
+                       @* <input type="button" onclick="SubmitUploadOnclick()" id="btnl" class="btn btn-primary btn-block" value="Save & Next" />
+                        <a class="btn btn-primary btn-block text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...</a>*@
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+    
+
+
+
+
+
+    <script>
+        function showfile(id, type,input) {
+
+          
+            var fuData = document.getElementById(input.id);
+            var FileUploadPath = fuData.value;
+
+
+            if (FileUploadPath == '') {
+                alert("Please upload an image");
+
+            } else {
+                
+                 var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+
+
+                if (Extension == "gif" || Extension == "png" || Extension == "bmp"
+                    || Extension == "jpeg" || Extension == "jpg" || Extension == "PNG" || Extension == "BMP" || Extension == "JPEG" || Extension == "JPG") {
+
+                    var file = document.getElementById(input.id).files[0];
+                    var reader = new FileReader();
+
+
+                    if (typeof (fuData.files) != "undefined") {
+                        switch (type) {
+                            case "Photo":
+                                var size = parseFloat(fuData.files[0].size / 1024).toFixed(2);
+                                if (size > 100) {
+
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'Image size should not more than 100kb. !',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                    //  alert("Image size should not more than 50kb. ");
+                                    document.getElementById(input.id).value = null;
+                                }
+                                else {
+
+                                    var data = new FormData();
+                                    var files = $("#" + input.id).get(0).files;
+                                    if (files.length > 0) {
+                                        data.append("Photo", files[0]);
+                                        data.append("EntryID", @Model.ApplicationNo);
+                                    }
+                                     
+                                        $.ajax({
+                                            url: '@Url.Action("UploadFile", "Student")',
+                                            type: "POST",
+                                            processData: false,
+                                            contentType: false,
+                                            data: data,
+                                            success: function (response) {
+                                            
+                                                if(response>0)
+                                                {
+                                                    if (input.files && input.files[0]) {
+                                                        var reader = new FileReader();
+                                                        reader.onload = function (e) {
+                                                            $('#imgpreview1').css('visibility', 'visible');
+                                                            $('#imgpreview1').attr('src', e.target.result);
+                                                        }
+                                                        reader.readAsDataURL(input.files[0]);
+                                                    }
+                                                }
+                                                else
+                                                 {
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'error',
+                                                    title: 'OOPs Photo has not been saved,try again !',
+                                                    showConfirmButton: false,
+                                                    timer: 3000
+                                                })
+                                                 }
+
+                                            
+                                            
+                                             },
+                                            error: function (er) {
+                                                alert(er);
+                                            }
+                                        });
+
+                                   
+
+                                   
+
+                                }
+                                break;
+                            case "Signature":
+                                var size = parseFloat(fuData.files[0].size / 1024).toFixed(2);
+                                if (size > 50) {
+
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'Image size should not more than 50kb. !',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                    //  alert("Image size should not more than 50kb. ");
+                                    document.getElementById(id).value = null;
+                                }
+                                else {
+                                    reader.addEventListener('load', function () {
+                                        var res = reader.result;
+                                        // alert(res);
+                                        var data = new FormData();
+                                        var files = $("#" + id).get(0).files;
+                                        if (files.length > 0) {
+                                            data.append("Signature", files[0]);
+                                            data.append("EntryID", id);
+                                        }
+                                        $.ajax({
+                                            url: '@Url.Action("UploadFile", "Home")',
+                                            type: "POST",
+                                            processData: false,
+                                            contentType: false,
+                                            data: data,
+                                            success: function (response) {
+
+                                                $('#' + id + 'fileshow').attr('src', res); location.reload();
+                                            },
+                                            error: function (er) {
+                                                alert(er);
+                                            }
+                                        });
+
+                                    });
+
+
+                                    reader.readAsDataURL(file);
+                                }
+                                break;
+                            default:
+                                var size = parseFloat(fuData.files[0].size / 1024).toFixed(2);
+                                if (size < 100) {
+
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'error',
+                                        title: 'Image size should be more than 100kb. !',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                    //  alert("Image size should not more than 50kb. ");
+                                    document.getElementById(id).value = null;
+                                }
+                                else {
+                                    reader.addEventListener('load', function () {
+                                        var res = reader.result;
+                                        var res = reader.result;
+                                        // alert(res);
+                                        var data = new FormData();
+                                        var files = $("#" + id).get(0).files;
+                                        if (files.length > 0) {
+                                            data.append("Doc", files[0]);
+                                            data.append("EntryID", id);
+                                        }
+                                        $.ajax({
+                                            url: '@Url.Action("UploadFile", "Home")',
+                                            type: "POST",
+                                            processData: false,
+                                            contentType: false,
+                                            data: data,
+                                            success: function (response) {
+
+                                                $('#' + id + 'fileshow').attr('src', res);
+                                                location.reload();
+                                            },
+                                            error: function (er) {
+                                                alert(er);
+                                            }
+                                        });
+
+                                    });
+
+                                    //reader.readAsDataURL(file);
+                                }
+                                break;
+
+                        }
+                    } else {
+                        alert("This browser does not support HTML5.");
+                    }
+
+
+                }
+
+
+                else {
+                    document.getElementById(id).value = null;
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Photo only allows file types of GIF, PNG, JPG, JPEG and BMP.!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    // alert("Photo only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        function SubmitUploadOnclick() {
+            var s = true;
+            $('input[type=checkbox]:not(:checked)').each(function () {
+                s = false;
+            });
+            if (s) {
+                //window.location.href = "/admission-form-step5/" + 'Model.EncrptedRoll';
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Please upload all documents',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+        }
+    </script>

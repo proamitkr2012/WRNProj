@@ -60,16 +60,26 @@
                             </div>
                            }
                             <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Course Type : <span class="text-danger">*</span></label>
+                                        <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.CourseType,"CourseTypeId","CourseTypeName"))" asp-for="CourseTypeID">
+                                        </select>
+                                        <span class="text-danger" asp-validation-for="CourseTypeID"></span>
+                                    </div>
+                                </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Candidate's Name (अभ्यर्थी का नाम) :</label>
+                                        <label>Candidate's Name (अभ्यर्थी का नाम) : <span class="text-danger">*</span></label>
                                     <input asp-for="StudentName" type="text" maxlength="500" placeholder="Candidate's Name (अभ्यर्थी का नाम)" class="form-control" />
                                         <span class="text-danger" asp-validation-for="StudentName"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Father's Name (पिता का नाम) :</label>
+                                        <label>Father's Name (पिता का नाम) : <span class="text-danger">*</span></label>
                                     <input type="text" asp-for="FatherName" maxlength="500" placeholder="Father's Name (पिता का नाम) " class="form-control" />
                                         <span class="text-danger" asp-validation-for="FatherName"></span>
                                 
@@ -78,7 +88,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>
-                                        Mobile No.:
+                                            Mobile No.: <span class="text-danger">*</span>
                                     </label>
                                         <input type="text" asp-for="MobileNo"   maxlength="10" placeholder="Mobile No." class="form-control" onkeypress="return isNumberKey(event);" />
                                         <span class="text-danger" asp-validation-for="MobileNo"></span>
@@ -88,7 +98,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>
-                                       EmailId:
+                                            EmailId: <span class="text-danger">*</span>
                                     </label>
                                         <input type="text" asp-for="EmailID" maxlength="200" placeholder="EmailId" class="form-control" oninput="Emailvalidation();" />
                                         <span class="text-danger" asp-validation-for="EmailID"></span>

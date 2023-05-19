@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using AdmissionModel;
 
 namespace AdmissionUI.Controllers
 {
@@ -12,10 +13,10 @@ namespace AdmissionUI.Controllers
     {
         
 
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<RegistrationController> _logger;
         private readonly IUnitOfWork _iuow;
 
-        public RegistrationController(ILogger<HomeController> logger, IUnitOfWork iuow)
+        public RegistrationController(ILogger<RegistrationController> logger, IUnitOfWork iuow)
         {
             _logger = logger;
             _iuow = iuow;
@@ -28,8 +29,11 @@ namespace AdmissionUI.Controllers
         }
 
          
-        public IActionResult preRegistration()
+        public async Task<IActionResult> preRegistration()
         {
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
             StudentPreRegModel studentPreReg = new StudentPreRegModel();
             return View(studentPreReg);
         }
@@ -48,6 +52,7 @@ namespace AdmissionUI.Controllers
                     studentMasters.FatherName = studentPreReg.FatherName;
                     studentMasters.Mobile = studentPreReg.MobileNo;
                     studentMasters.Email = studentPreReg.EmailID;
+                    studentMasters.CourseTypeID= studentPreReg.CourseTypeID;
                     if (studentMasters.Mobile.Length == 10)
                     {
                         int ismobexists = await _iuow.studentPreRepo.IsMobileExistsAsync(studentPreReg.MobileNo);
@@ -179,6 +184,7 @@ namespace AdmissionUI.Controllers
                     studentMasters.FatherName= std.FatherName;
                     studentMasters.Mobile = std.MobileNo;
                     studentMasters.Email = std.EmailID;
+                    studentMasters.CourseTypeID = std.CourseTypeID;
                     studentMasters.IsNewadm = 1;
                     var response= await _iuow.studentPreRepo.VerifyOTP_InsertStudentData(studentMasters);
                     if (response.ResponseCode > 0)
@@ -208,9 +214,7 @@ namespace AdmissionUI.Controllers
             string strReq = "";
             strReq = id.Replace("%2F", "/");
             id = strReq;
-            id = strReq;
-           
-
+            
             if (!strReq.Equals(""))
             {
                 strReq = DecryptQueryString(strReq);
@@ -295,9 +299,10 @@ namespace AdmissionUI.Controllers
                     ,new Claim(ClaimTypes.Role,"0" )
                     ,new Claim(ClaimTypes.Name,stddata.Name )
                     }, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var principal = new ClaimsPrincipal(identity);
-                    var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                    return RedirectToAction("dashboard", "Student");
+                     var principal = new ClaimsPrincipal(identity);
+                     var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                     string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, 1));
+                     return RedirectToAction("stdprofile", "Student", new { id = str });
                       
                     }
                     else

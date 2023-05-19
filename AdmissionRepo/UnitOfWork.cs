@@ -10,11 +10,20 @@ namespace AdmissionRepo
         private readonly DataContext db;
         private IMailClient _mailClient; IDapperContext _dapperContext;
         private readonly IstudentPreRepo _istudentPreRepo;
-        public UnitOfWork(DataContext _db, IDapperContext dapperContext, IMailClient mailClient, IstudentPreRepo istudentPreRepo)
+        private readonly IMasterRepo _imasterRepo;
+        private readonly IStudentQualificationRepo _iqulificationRepo;
+        private readonly IStdWeightageRep _iStdWeightageRep;
+        private readonly IStudentApplyCourseRepo _istudentApplyCourse;
+        public UnitOfWork(DataContext _db, IDapperContext dapperContext, IMailClient mailClient, IstudentPreRepo istudentPreRepo, IMasterRepo imasterRepo, IStudentQualificationRepo iqulificationRepo
+            , IStdWeightageRep iStdWeightageRep, IStudentApplyCourseRepo istudentApplyCourse)
         {
             db = _db;
             _dapperContext = dapperContext;
             _istudentPreRepo = istudentPreRepo;
+            _imasterRepo = imasterRepo;
+            _iqulificationRepo = iqulificationRepo;
+            _iStdWeightageRep = iStdWeightageRep;
+            _istudentApplyCourse = istudentApplyCourse;
         }
 
         private AdminRepository _IAdmin;
@@ -36,6 +45,38 @@ namespace AdmissionRepo
             {
                 return this._istudentPreRepo;
             }
+        }
+
+
+
+
+        public IMasterRepo masterRepo
+        {
+            get
+            {
+                return _imasterRepo;
+            }
+
+        }
+
+        public IStudentQualificationRepo qulificationRepo
+        {
+            get
+            {
+               return _iqulificationRepo;
+            }
+        }
+
+        public IStdWeightageRep StdWeightageRep
+        {
+            get { return _iStdWeightageRep; }
+
+        }
+
+        public IStudentApplyCourseRepo studentApplyCourse
+        {
+            get { return _istudentApplyCourse; }
+
         }
 
 

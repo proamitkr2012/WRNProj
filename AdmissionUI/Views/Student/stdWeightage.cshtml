@@ -1,0 +1,139 @@
+﻿@model StdWeightageEligbilty
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+
+<form asp-action="stdWeightage" method="post">
+
+    <div class="container p-3">
+        <ul class="steps">
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Profile</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Qualification</span>
+                </div>
+
+            </li>
+            <li class="step  step-active">
+                <div class="step-content">
+                    <span class="step-circle">4</span>
+                    <span class="step-text">Weightage</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Photo</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Choose College</span>
+                </div>
+
+            </li>
+        </ul>
+        
+        
+        <div class="text-center mt-5">
+            <h2>Admission Web Registration  Form - (2023)</h2>
+
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Registration
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                   Choose  Weightage
+                </h5>
+                <hr />
+                @Html.HiddenFor(x=>x.EncrptedData)
+
+                @if (Model.Status < 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="row">
+                    @Html.HiddenFor(x=>x.EncrptedData)
+                    @Html.HiddenFor(x=>x.ApplicationNo)
+                    <div class="col-sm-12 text-center border  p-2">
+                        <table class="table" id="qual">
+                            <thead>
+                                <tr>
+                                    <td>SrNo.</td>
+                                    <td>Weightage</td>
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var idx = 0;
+                                }
+                                @foreach (var item in Model.stdweightageList)
+                                {
+                                    <tr>
+                                          <td>
+                                            <span>@(idx+1)</span>
+                                         </td>
+
+                                        <td>
+                                            <input type="checkbox"  asp-for="@Model.stdweightageList[idx].ctrlWeightage" checked="@(item.StdWeightID==0?false:true)" />
+                                            <label for="@Model.stdweightageList[idx].ctrlWeightage"> @item.Name </label>
+                                            <input type="hidden" class="form-control"   asp-for="@Model.stdweightageList[idx].ID" />
+                                            <input type="hidden" class="form-control" asp-for="@Model.stdweightageList[idx].StdWeightID" />
+                                        </td>
+                                    </tr>
+                                    idx = idx + 1;
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div class="col-md-2   offset-md-3 mt-4">
+                        <a asp-action="stdQualification" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+
+                    </div>
+                    <div class="col-md-4 mt-4">
+                        <input type="submit" class="btn btn-success btn-block text-white"
+                               id="btnl" value="Save&Next" />
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" asp-for="Newdata" />
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="~/js/step2.js"></script>
+
+ 
