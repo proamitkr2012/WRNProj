@@ -77,5 +77,13 @@ namespace AdmissionUI.Areas.Admin.Controllers
 
             return _ipAddress;
         }
+
+        public IActionResult StudentNewAdded()
+        {
+            List<StudentMastersDTO> studentlist = new List<StudentMastersDTO>();
+            studentlist = UOF.IAdmin.GETStudentNewAdded(CurrentUser.UserId);
+
+            return View(studentlist);
+        }
     }
 }

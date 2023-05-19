@@ -611,7 +611,7 @@ namespace AdmissionRepo
             return null;
         }
 
-        public async Task<int> AddPreRegistration(StudentMastersDTO model,int UserId,string ip)
+        public async Task<int> AddPreRegistration(StudentMastersDTO model, int UserId, string ip)
         {
             try
             {
@@ -656,7 +656,7 @@ namespace AdmissionRepo
             }
             return 0;
         }
-       
+
         public AdminMasterDTO AuthenticateAdmin(string userName, string password)
         {
             try
@@ -687,6 +687,44 @@ namespace AdmissionRepo
             catch (Exception ex) { }
             return null;
         }
+        public List<StudentMastersDTO> GETStudentNewAdded(int UserId)
+        {
+            try
+            {
+                List<StudentMastersDTO> slist = new List<StudentMastersDTO>();
+                var data = _dbContext.StudentPreData.Where(x => x.EntryBy > 0).ToList();
+                // var data = _dbContext.StudentPreData.Where(x => x.EntryBy == UserId).ToList();
 
+                if (data != null)
+                {
+                    foreach (var model in data)
+                    {
+                        StudentMastersDTO pn = new StudentMastersDTO();
+                        pn.Roll = model.Roll;
+                        pn.Name = model.Name;
+                        pn.FatherName = model.FatherName;
+                        pn.MotherName = model.MotherName;
+                        pn.Email = model.Email;
+                        pn.Mobile = model.Mobile;
+
+                        pn.Gender = model.Gender;
+                        pn.DOB = model.DOB;
+
+                        pn.Category = model.Category;
+                        pn.CollegeCode = _dbContext.CollegeMasters.Where(x => x.Code == model.CollegeCode).Select(x => x.InstCode).FirstOrDefault();
+                        pn.CreatedDate = model.Entrydate;
+                        slist.Add(pn);
+                    }
+
+                    return slist.OrderByDescending(x=>x.CreatedDate).ToList();
+                }
+
+            }
+            catch (Exception e)
+            {
+
+            }
+            return null;
+        }
     }
 }

@@ -24,5 +24,7 @@ namespace AdmissionRepo
 
         List<CollegeMasters> GetCollegeList();
         Task<int> AddPreRegistration(StudentMastersDTO model ,int UserId=0,string ip="");
+
+        List<StudentMastersDTO> GETStudentNewAdded(int UserId=0);
     }
 }

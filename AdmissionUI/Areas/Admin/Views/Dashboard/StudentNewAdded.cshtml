@@ -1,0 +1,62 @@
+﻿@model List<StudentMastersDTO>
+@{
+    ViewData["Title"] = "StudentNewAdded";
+}
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Students List</h4>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Simple Datatable start -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">B.Ed List</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+                <tr>
+                    <th class="table-plus datatable-nosort">Reg. No.</th>
+                    <th>Name</th>
+                    <th>Father Name</th>
+                    <th>Mother Name</th>
+                    <th>Gender</th>
+                    <th>DOB</th>
+                    <th>College Code</th>
+                    <th>Category</th>
+                    <th>Entry Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="table-plus">@item.Roll</td>
+                            <td>@item.Name</td>
+                            <td>@item.FatherName</td>
+                            <td>@item.MotherName</td>
+                            <td>@item.Gender</td>
+                            <td>@item.DOB.Value.ToString("dd MMM yyyy")</td>
+                            <td>@item.CollegeCode</td>
+                            <td>@item.Category</td>
+                            <td>@item.CreatedDate</td>
+                        </tr>
+                    }
+
+
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
