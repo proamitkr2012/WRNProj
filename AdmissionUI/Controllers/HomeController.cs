@@ -14,6 +14,8 @@ using System.Drawing;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Rotativa.AspNetCore.Options;
 using Rotativa.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace AdmissionUI.Controllers
 {
@@ -605,5 +607,33 @@ where  Roll='" + Enrollment.Trim() + "'";
             }
             return Json("fail");
         }
+        public async Task<ActionResult> SignOut()
+        {
+            if (CurrentUser != null)
+            {
+                if (CurrentUser.Roles.Contains("Student") == true)
+                {
+                    string[] Roles = CurrentUser != null ? CurrentUser.Roles : new string[] { "" };
+
+                    await httpContextAccessor.HttpContext.SignOutAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    string[] Roles = CurrentUser != null ? CurrentUser.Roles : new string[] { "" };
+
+                    await httpContextAccessor.HttpContext.SignOutAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    return RedirectToAction("Login", "Account", new { Area = "Admin" });
+
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }

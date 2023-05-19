@@ -259,6 +259,19 @@ function SubmitButtonOnclick() {
                     window.location.href = "/admission-form-step3/" + obj.EncrptedRoll; 
 
                 }
+                if (response == 4) {
+                    $('#btnlwait').hide();
+                    $('#btnl').show()
+                    $('#Mobile').focus();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Try Again Later',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+                
             },
             error: function (error) {
 

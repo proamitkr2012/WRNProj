@@ -10,7 +10,7 @@ namespace AdmissionData.Entities
         [Key]
         public long EntryID { get; set; }
         public string Roll { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? FatherName { get; set; }
         public string? MotherName { get; set; }
         public string? Email { get; set; }
@@ -23,7 +23,8 @@ namespace AdmissionData.Entities
         public string? CollegeCode { get; set; }
        
         public bool IsActive { get; set; }
-
-        
+        public int EntryBy { get; set; }
+        public DateTime? Entrydate { get; set; }
+        public string? SystemIP { get; set; }
     }
 }

@@ -55,10 +55,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\UserDoc\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_footer.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_header.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Views\Registration\createpassword.cshtml" />
     <None Include="Views\Registration\Index.cshtml" />
     <None Include="Views\Registration\preRegistration.cshtml" />
