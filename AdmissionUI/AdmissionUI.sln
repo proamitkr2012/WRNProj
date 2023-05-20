@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionModel", "..\Admiss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdmissionRepo", "..\AdmissionRepo\AdmissionRepo.csproj", "{69E3FDF5-5201-424F-A4DD-F982B6CE6DD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{54860700-981C-4F15-86CC-A6D8536B6EB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{54860700-981C-4F15-86CC-A6D8536B6EB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "extentionMethod", "..\extentionMethod\extentionMethod.csproj", "{0E802495-54D6-4E4F-9CA9-208BA41B2B60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "extentionMethod", "..\extentionMethod\extentionMethod.csproj", "{0E802495-54D6-4E4F-9CA9-208BA41B2B60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
