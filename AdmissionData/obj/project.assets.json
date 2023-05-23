@@ -1071,24 +1071,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lenovo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\VRS\\Agra\\Project\\WRNProj-main\\proamitkr2012\\WRNProj\\WRNProj\\AdmissionData\\AdmissionData.csproj",
+      "projectUniqueName": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj",
       "projectName": "AdmissionData",
-      "projectPath": "E:\\VRS\\Agra\\Project\\WRNProj-main\\proamitkr2012\\WRNProj\\WRNProj\\AdmissionData\\AdmissionData.csproj",
-      "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-      "outputPath": "E:\\VRS\\Agra\\Project\\WRNProj-main\\proamitkr2012\\WRNProj\\WRNProj\\AdmissionData\\obj\\",
+      "projectPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\AdmissionData.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "D:\\vrs\\Admissiondbrau\\WRNProj\\AdmissionData\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1143,7 +1138,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.300-preview.23179.2\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

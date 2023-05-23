@@ -17,7 +17,7 @@ namespace ServiceRegistration
             services.AddScoped<IStudentQualificationRepo, StudentQualificationRepo>();
             services.AddScoped<IStdWeightageRep, StdWeightageRep>();
             services.AddScoped<IStudentApplyCourseRepo, StudentApplyCourseRepo>();
-            services.AddScoped<IstudentApplyCollegeRepo, studentApplyCollegeRepo > ();
+            services.AddScoped<IstudentApplyCollegeRepo, studentApplyCollegeRepo> ();
          
 
 
