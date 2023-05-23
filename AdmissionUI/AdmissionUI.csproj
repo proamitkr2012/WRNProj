@@ -71,6 +71,12 @@
     <None Include="Views\Registration\preRegistration.cshtml" />
     <None Include="Views\Registration\preVaildateOTP.cshtml" />
     <None Include="Views\Registration\stdlogin.cshtml" />
+    <None Include="Views\StudentCourse\addCourse.cshtml" />
+    <None Include="Views\Student\ChooseCourse_College.cshtml" />
+    <None Include="Views\Student\stdprofile.cshtml" />
+    <None Include="Views\Student\stdQualification.cshtml" />
+    <None Include="Views\Student\stduploadDocs.cshtml" />
+    <None Include="Views\Student\stdWeightage.cshtml" />
   </ItemGroup>
 
 </Project>

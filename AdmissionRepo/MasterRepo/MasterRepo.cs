@@ -259,5 +259,89 @@ namespace AdmissionRepo
             }
             return null;
         }
+
+       
+        public async Task<IEnumerable<Subjects>> GetAllCollegeCOSubjects(string cCode, int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "selectAllCosubject";
+                    var param = new DynamicParameters();
+                    param.Add("@Ccode", cCode);
+                    param.Add("@CourseId", courseId);
+                    var list = await SqlMapper.QueryAsync<Subjects>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return null;
+        }
+
+        public async  Task<IEnumerable<Subjects>> GetAllCollegeSkillSubjects(string cCode, int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "selectAllSkillsubject";
+                    var param = new DynamicParameters();
+                    param.Add("@Ccode", cCode);
+                    param.Add("@CourseId", courseId);
+                    var list = await SqlMapper.QueryAsync<Subjects>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<Subjects>> GetAllCollegeMajorSubjects(string cCode, int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "selectAllMainsubject";
+                    var param = new DynamicParameters();
+                    param.Add("@Ccode", cCode);
+                    param.Add("@CourseId", courseId);
+                    var list = await SqlMapper.QueryAsync<Subjects>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return null;
+        }
+
+         
     }
 }

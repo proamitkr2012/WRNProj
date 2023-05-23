@@ -84,11 +84,11 @@
                             <thead>
                                 <tr>
                                     <td>Exam</td>
-                                    <td>Course</td>
+                                    <td>Stream</td>
                                     <td>Board/University</td>
                                     <td>Roll No.</td>
                                     <td>Passing Year</td>
-                                    <td>Division</td>
+                                    <td>Status</td>
                                     <td>Marks Obtained</td>
                                     <td>Marks Total</td>
                                     <td>Percentage/CGPA</td>
@@ -215,19 +215,23 @@
                                         <td>
                                             <select asp-for="@Model.QualifationList[idx].ExamStatus" onchange="setOther(this,@item.EntryID)"  class="form-select">
                                                 <option value="Passed" selected>Passed</option>
-                                                <option value="Appearing" >Appearing</option>
-                                            
+                                                @if (item.DocName != "10th")
+                                                {
+                                                    <option value="Appearing" >Appearing</option>
+                                                }
+
                                             </select>
 
                                         </td>
                                         
                                         <td>
-                                            <input type="number" placeholder="0"   class="form-control"   asp-for="@Model.QualifationList[idx].MarkObt" /> 
+                                            <input type="number" placeholder="0" class="form-control" asp-for="@Model.QualifationList[idx].MarkObt" onblur="return calpercent(this,@idx);" />
                                         </td>
                                         <td>
-                                            <input type="number" placeholder="0" class="form-control" asp-for="@Model.QualifationList[idx].TotalMarks" />  </td>
+                                            <input type="number" placeholder="0" class="form-control" asp-for="@Model.QualifationList[idx].TotalMarks" onblur="return calpercent(this,@idx);" />
+                                        </td>
                                         <td>
-                                            <select class="form-select" aria-label="Default select example" asp-for="@Model.QualifationList[idx].IsCGPA" >
+                                            <select class="form-select" aria-label="Default select example" asp-for="@Model.QualifationList[idx].IsCGPA" onchange="return calpercent(this,@idx);">
                                                 @if (item.IsCGPA == false)
                                                 {
                                                     <option selected value="False">Percentage</option>
@@ -290,6 +294,30 @@
             $("#" + enterid + "_div").hide();
             $("#QualifationList_" + enterid +"__Board_Other").val('');
         }
+    }
+
+    function calpercent(obj, enterid) 
+    {
+        var marobt=  $("#QualifationList_" + enterid + "__MarkObt").val();
+        var martot = $("#QualifationList_" + enterid + "__TotalMarks").val();
+        var  isper = $("#QualifationList_" + enterid + "__IsCGPA").val();
+        if (isper == "False" ) 
+        {
+            if  ( (marobt != null && marobt != '') && (martot != null && martot != ''))
+            {
+                var per = parseFloat((parseInt(marobt) * 100 / martot)).toFixed(2);
+                $("#QualifationList_" + enterid + "__Percentage").val(per);
+            }
+            
+        }
+        else
+        {
+            $("#QualifationList_" + enterid + "__Percentage").val('');
+        }
+
+
+        
+        return false;
     }
 
 

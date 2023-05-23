@@ -9,7 +9,9 @@ namespace AdmissionData.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }   
+        public string Name { get; set; }
 
+        // add by raj
+        public int SortOrder { get; set; }
     }
 }

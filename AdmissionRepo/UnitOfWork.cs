@@ -14,8 +14,9 @@ namespace AdmissionRepo
         private readonly IStudentQualificationRepo _iqulificationRepo;
         private readonly IStdWeightageRep _iStdWeightageRep;
         private readonly IStudentApplyCourseRepo _istudentApplyCourse;
+        private readonly IstudentApplyCollegeRepo _istudentApplyCollege;
         public UnitOfWork(DataContext _db, IDapperContext dapperContext, IMailClient mailClient, IstudentPreRepo istudentPreRepo, IMasterRepo imasterRepo, IStudentQualificationRepo iqulificationRepo
-            , IStdWeightageRep iStdWeightageRep, IStudentApplyCourseRepo istudentApplyCourse)
+            , IStdWeightageRep iStdWeightageRep, IStudentApplyCourseRepo istudentApplyCourse, IstudentApplyCollegeRepo istudentApplyCollege)
         {
             db = _db;
             _dapperContext = dapperContext;
@@ -24,6 +25,7 @@ namespace AdmissionRepo
             _iqulificationRepo = iqulificationRepo;
             _iStdWeightageRep = iStdWeightageRep;
             _istudentApplyCourse = istudentApplyCourse;
+            _istudentApplyCollege = istudentApplyCollege;   
         }
 
         private AdminRepository _IAdmin;
@@ -79,6 +81,10 @@ namespace AdmissionRepo
 
         }
 
+        public IstudentApplyCollegeRepo studentApplyCollege
+        {
+            get { return _istudentApplyCollege; }
+        }
 
         public int SaveChanges()
         {

@@ -4,7 +4,7 @@
 }
 
 
-<form asp-action="addCourse" asp-controller="StudentCourse" method="post">
+<form asp-action="courseFessPay1" asp-controller="StudentCourse" method="post">
 
     <div class="container p-3">
         <ul class="steps">
@@ -73,32 +73,13 @@
                     </div>
                 }
 
+                
                 <div class="row">
-                    @Html.HiddenFor(x=>x.EncrptedData)
-                    @Html.HiddenFor(x=>x.ApplicationNo)
 
-                    
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Course: <span class="text-danger">*</span></label>
-                            <select class="form-select" aria-label="Default select example" asp-for="CourseID" asp-items="@(new SelectList(ViewBag.Courses,"CourseId","CourseName"))">
-                            </select>
-                            <span class="text-danger" asp-validation-for="CourseID"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label> &nbsp;</label>
-                            <input type="submit" class="btn btn-primary btn-block text-white"
-                                   id="btnadd" name="commandName" value="Add" />
-                        </div>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <div class="row">
-                    
+
                     <div class="col-sm-12 text-center border  p-2">
+                        @Html.HiddenFor(x=>x.EncrptedData)
+                        @Html.HiddenFor(x=>x.ApplicationNo)
 
                         <table class="data-table table table-bordered stripe hover nowrap">
                             <thead>
@@ -108,68 +89,61 @@
                                     <th>Fees</th>
                                     <th>TransactionNo</th>
                                     <th>PaidDate</th>
-                                    <th>CRN</th>
                                     <th colspan="2">Action</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @{
                                     var srno = 0;
+                                    var total = 0;
                                 }
-                                @if (Model.studentapplyList!=null && Model.studentapplyList.Count > 0)
+                                @if (Model.studentapplyList != null && Model.studentapplyList.Count > 0)
                                 {
-                                    
+
                                     foreach (var item in Model.studentapplyList)
                                     {
                                         <tr>
-                                            <td class="table-plus">@(srno+1)</td>
+                                            <td class="table-plus">@(srno + 1)</td>
                                             <td>@item.CourseName</td>
                                             <td>@item.Fees</td>
                                             <td>@item.TransactionID</td>
                                             <td>@item.PaidON</td>
-                                            <td style="font-weight:bold" class="text-decoration-underline" >@item.CRN</td>
                                             <td>
-                                                @if (item.IsPaid==0)
-                                                {
-                                                    <input type="checkbox" asp-for="@Model.studentapplyList[srno].IsFor_Paid" checked="@item.IsFor_Paid" style= "@(item.Status ? "display:none" : "" )"  />
-                                                    <div style="@((item.Status && item.IsPaid==0) ? "display:block" : "display:none" )">Payment Under Process</div>
-                                                
-                                                }
-                                                else
-                                                {
-                                                    <a asp-action="stdCollegeSelection" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData"   asp-route-cid="@item.CourseId" class="btn btn-danger btn-block text-white">Select Colleges</a>
-                                                }
-                                                
+                                                <input type="checkbox" asp-for="@Model.studentapplyList[srno].IsFor_Paid" checked="@item.IsFor_Paid" disabled />
                                                 <input type="hidden" asp-for="@Model.studentapplyList[srno].STD_COUSEID" />
                                                 <input type="hidden" asp-for="@Model.studentapplyList[srno].Fees" />
                                                 <input type="hidden" asp-for="@Model.studentapplyList[srno].CourseId" />
                                             </td>
-                                            <td>
-                                                <a href="javascript:void(0)" onclick="return deleteCourse(@item.CourseId,'@Model.ApplicationNo',this)" class="btn btn-danger  text-white" style="@((item.IsPaid>0 || item.Status==true)?"display:none":"display:block")" >
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
+                                             
                                         </tr>
                                         srno = srno + 1;
+                                        @if (item.IsFor_Paid && item.IsPaid==0)
+                                        {
+                                            total = total + (int)item.Fees;
+                                        }
                                     }
                                 }
-
+                                <tr>
+                                    <td colspan="2" style="text-align:right;font-size:16px;font-weight:bold">Total Fees</td>
+                                    <td style="text-align:left;font-size:16px;font-weight:bold"> @total </td>
+                                     
+                                </tr>
                             </tbody>
                         </table>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                     </div>
                     <div class="col-md-2   offset-md-3 mt-4">
-                        <a asp-action="stduploadDocs" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
                     <div class="col-md-4 mt-4">
                         <input type="submit" class="btn btn-success btn-block text-white"
-                               id="btnl" name="commandName" value="Save&Next" />
+                               id="btnl" name="commandName" value="Pay&Next" />
 
                     </div>
                 </div>
@@ -185,16 +159,14 @@
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
-   
-    function deleteCourse( varcourseID,varappo,obj)
-    {
-       
-        if( confirm("Are you sure !"))
-        {
+
+    function deleteCourse(varcourseID, varappo, obj) {
+
+        if (confirm("Are you sure !")) {
             var models = {};
-            models.CourseId =Number(varcourseID);
-            models.AppNo = varappo ;
-        
+            models.CourseId = Number(varcourseID);
+            models.AppNo = varappo;
+
             if (varappo != null && varappo != '') {
                 $.ajax({
                     type: "POST",
@@ -215,7 +187,7 @@
                 });
             }
         }
-       return false;
+        return false;
     }
 
 

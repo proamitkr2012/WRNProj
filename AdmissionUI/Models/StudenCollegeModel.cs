@@ -2,13 +2,13 @@
 
 namespace AdmissionUI.Models
 {
-    public class StudentApplyCourseModel:ResponseModel
+    public class StudenCollegeModel:ResponseModel
     {
-        [InitialValue(ErrorMessage = "Please select Course")]
+        
         public int CourseID { get; set; }
         public string ApplicationNo { get; set; }
         public string? EncrptedData { get; set; }
-      
-        public List<StudentAppliedCourse>studentapplyList { get; set; }
+        public int IsNewData { get; set; } = 1;
+        public List<StudentAppliedColleges> studentapplycollegeList { get; set; }
     }
 }

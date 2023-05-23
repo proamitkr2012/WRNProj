@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                            <label>Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन): <span class="text-danger">*</span></label>
+                            <label>Candidate's WRN.(अभ्यर्थी का रजिस्ट्रेशन): <span class="text-danger">*</span></label>
                         <input type="text" asp-for="ApplicationNo" placeholder="Candidate's Registration No.(अभ्यर्थी का रजिस्ट्रेशन)" readonly class="form-control" />
                     </div>
                 </div>
@@ -125,8 +125,8 @@
                         <label>
                                 Category: <span class="text-danger">*</span>
                         </label>
-                            <select class="form-select" aria-label="Default select example" asp-for="Category" asp-items="@(new SelectList(ViewBag.Category,"Category","Category"))">
-                         </select>
+                            <select class="form-select" aria-label="Default select example" onchange="return setEWS(this)" asp-for="Category" asp-items="@(new SelectList(ViewBag.Category,"Category","Category"))">
+                            </select>
                             <span class="text-danger" asp-validation-for="Category"></span>
                     </div>
                 </div>
@@ -549,4 +549,20 @@
 
         return false;
     }
+    function setEWS(obj) {
+
+        varval = obj.value;
+        if (varval == "GENERAL")
+        {
+            $("#Ews").show();
+        }
+        else{
+            document.getElementById("Ews").checked=false;
+            $("#Ews").hide();
+        }
+
+        return false;
+    }
+
+    
 </script>

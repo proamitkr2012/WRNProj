@@ -81,8 +81,8 @@
                             <thead>
                                 <tr>
                                     <td>SrNo.</td>
+                                    <td>Name</td>
                                     <td>Weightage</td>
-                                    
 
                                 </tr>
                             </thead>
@@ -102,6 +102,9 @@
                                             <label for="@Model.stdweightageList[idx].ctrlWeightage"> @item.Name </label>
                                             <input type="hidden" class="form-control"   asp-for="@Model.stdweightageList[idx].ID" />
                                             <input type="hidden" class="form-control" asp-for="@Model.stdweightageList[idx].StdWeightID" />
+                                        </td>
+                                        <td>
+                                            @item.Weight
                                         </td>
                                     </tr>
                                     idx = idx + 1;

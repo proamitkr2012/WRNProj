@@ -13,5 +13,7 @@ namespace AdmissionRepo
         public IStdWeightageRep  StdWeightageRep { get; }
 
         public  IStudentApplyCourseRepo studentApplyCourse { get; }
+        public IstudentApplyCollegeRepo studentApplyCollege { get; }
+        
     }
 }

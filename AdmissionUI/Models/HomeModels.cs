@@ -9,6 +9,8 @@ namespace AdmissionUI.Models
         public int  CatId { get; set; }
 		public int ServiceId { get; set; }
         public string Aadhar { get; set; }
-
+		public int  CourseId  { get; set; }
+        public string AppNo { get; set; }
+        public string Ccode { get; set; }
     }
 }

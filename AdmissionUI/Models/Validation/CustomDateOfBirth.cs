@@ -15,7 +15,7 @@ namespace AdmissionUI.Models
 
                 var age = DateTime.Today.Year - Convert.ToDateTime(value).Year;
 
-                return (age >= 18) ? ValidationResult.Success : new ValidationResult("Student should be at least 18 years old.");
+                return (age >= 12) ? ValidationResult.Success : new ValidationResult("Student should be at least 12 years old.");
             }
             catch (Exception ex)
             {

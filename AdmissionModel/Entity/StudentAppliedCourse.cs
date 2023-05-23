@@ -11,12 +11,14 @@ namespace AdmissionModel
 
      public long STD_COUSEID { get;set; }
      public string ApllicationNo { get;set; }
-     public string WRN { get;set; }
+     public string CRN { get;set; }
      public int IsPaid { get;set; }
      public string PaidON { get;set; }
      public string TransactionID { get;set; }
      public string CCODE { get;set; }
-
+     public double Fees { get; set; }
+     public bool IsFor_Paid { get;set; }
+     public bool Status { get; set; }
 
     }
 }

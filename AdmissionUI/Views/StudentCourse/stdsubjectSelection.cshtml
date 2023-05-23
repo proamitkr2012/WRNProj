@@ -1,0 +1,210 @@
+﻿@model StudenCollegeModel
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+
+<form asp-action="stdsubjectSelection" asp-controller="StudentCourse" method="post">
+
+    <div class="container p-3">
+        <ul class="steps">
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Profile</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Qualification</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">4</span>
+                    <span class="step-text">Weightage</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Photo</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Add Course</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content  step-active">
+                    <span class="step-circle">7</span>
+                    <span class="step-text">College Selection</span>
+                </div>
+
+            </li>
+        </ul>
+
+
+        <div class="text-center mt-5">
+            <h2>Admission Web Registration  Form - (2023)</h2>
+
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Registration
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Subject Selection
+                </h5>
+                <hr />
+
+
+                @if (Model.Status < 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                <div class="row">
+
+
+                    <div class="col-sm-12 text-center border  p-2">
+                        @Html.HiddenFor(x=>x.EncrptedData)
+                        @Html.HiddenFor(x=>x.ApplicationNo)
+
+                        <table class="data-table table table-bordered stripe hover nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="table-plus datatable-nosort">Sr.No.</th>
+                                    <th>Code</th>
+                                    <th>College</th>
+                                    <th>Course</th>
+                                     
+                                    <th colspan="2">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var srno = 0;
+                                    var total = 0;
+                                }
+                                @if (Model.studentapplycollegeList != null && Model.studentapplycollegeList.Count > 0)
+                                {
+
+                                    foreach (var item in Model.studentapplycollegeList)
+                                    {
+                                        <tr>
+                                            <td class="table-plus">@(srno + 1)</td>
+                                            <td>@item.CollegeCode</td>
+                                            <td style="text-align:left"><p style="text-align:justify-all;font-weight:bold">@item.CollegeName</p></td>
+                                            <td> @item.CourseName</td>
+
+                                            <td>
+                                                <a asp-action="stdSubjects" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" asp-route-cid="@item.CourseId" asp-route-ccid="@item.CollegeCode" class="btn btn-danger btn-block text-white">Select Subject</a>
+                                                <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].ApplicationNo" />
+                                                <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].CourseId" />
+                                            </td>
+
+                                        </tr>
+                                        srno = srno + 1;
+                                        @if (item.IsSelect)
+                                        {
+
+                                            total++;
+                                        }
+                                    }
+                                }
+                                <tr>
+                                    <td colspan="2" style="text-align:right;font-size:16px;font-weight:bold">Total</td>
+                                    <td style="text-align:left;font-size:16px;font-weight:bold"><span id="total">@total</span>  </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+
+                    </div>
+                    <div class="col-md-2   offset-md-3 mt-4">
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+
+                    </div>
+                    <div class="col-md-4 mt-4">
+
+                        <a asp-action="stdchoosenSubjects" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-success text-white">Save&Next</a>
+                        @* <input type="submit" class="btn btn-success btn-block text-white"
+                        id="btnl" name="commandName" value="Save&Next" />*@
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function setCollege(varcourseID, varappo, varccode, obj) {
+
+
+        var models = {};
+        models.CourseId = Number(varcourseID);
+        models.AppNo = varappo;
+        models.Ccode = varccode;
+        models.CatId = obj.checked ? 1 : 0;
+        if (varappo != null && varappo != '') {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Content("~/StudentCourse/ChooseCollege")',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                processData: false,
+                data: JSON.stringify(models),
+                //headers: { "Authorization": localStorage.getItem('token') },
+                success: function (result) {
+                    if (result == 1) {
+                        obj.checked = models.CatId == 1 ? true : false;
+                    }
+                    else {
+                        obj.checked = false;
+                    }
+
+
+                }, error: function () {
+                    alert("There was error !");
+                }
+            });
+        }
+
+        return false;
+    }
+
+
+</script>
+

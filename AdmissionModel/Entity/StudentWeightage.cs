@@ -7,5 +7,6 @@
         public int  ID { get; set; }
         public int  StdWeightID { get; set; }
         public bool ctrlWeightage { get; set; }
+        public int Weight { get; set; }
     }
 }
