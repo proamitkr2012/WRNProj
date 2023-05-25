@@ -25,22 +25,54 @@
             </li>
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">4</span>
+                    <span class="step-circle">3</span>
                     <span class="step-text">Weightage</span>
                 </div>
 
             </li>
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">5</span>
+                    <span class="step-circle">4</span>
                     <span class="step-text">Photo</span>
                 </div>
 
             </li>
-            <li class="step">
-                <div class="step-content  step-active">
-                    <span class="step-circle">6</span>
+            <li class="step step-active">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
                     <span class="step-text">Add Course</span>
+                </div>
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Add College</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">7</span>
+                    <span class="step-text">Add Subject</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">8</span>
+                    <span class="step-text">View Form</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle" style="font-size:12px;color:crimson;font-weight:bold">Log Out</span>
+                    <span class="step-text">
+                        <a asp-action="stdlogout" asp-controller="Registration" style="font-size:12px;color:crimson;font-weight:bold;font-style:normal">Click Here !</a>
+
+                    </span>
                 </div>
 
             </li>
@@ -138,12 +170,15 @@
 
                     </div>
                     <div class="col-md-2   offset-md-3 mt-4">
-                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
                     <div class="col-md-4 mt-4">
+                         @if (Model.studentapplyList != null && Model.studentapplyList.Count > 0)
+                                {
                         <input type="submit" class="btn btn-success btn-block text-white"
                                id="btnl" name="commandName" value="Pay&Next" />
+                                }
 
                     </div>
                 </div>

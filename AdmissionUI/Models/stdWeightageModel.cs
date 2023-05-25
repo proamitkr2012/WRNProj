@@ -8,5 +8,6 @@
         public int StdWeightID { get; set; }
         public bool ctrlWeightage { get; set; }
         public int Weight { get; set; }
+        public int ParentId { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AdmissionModel
+﻿using System.Security.Policy;
+
+namespace AdmissionModel
 {
     public  class StudentWeightage
     {
@@ -8,5 +10,7 @@
         public int  StdWeightID { get; set; }
         public bool ctrlWeightage { get; set; }
         public int Weight { get; set; }
+
+       public int  ParentId { get; set; }
     }
 }

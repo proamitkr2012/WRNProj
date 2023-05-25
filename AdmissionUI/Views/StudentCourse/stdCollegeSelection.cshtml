@@ -8,50 +8,75 @@
 
     <div class="container p-3">
         <ul class="steps">
-            <li class="step">
-                <div class="step-content">
-                    <span class="step-circle">1</span>
-                    <span class="step-text">Profile</span>
-                </div>
+             
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle">1</span>
+                        <span class="step-text">Profile</span>
+                    </div>
 
-            </li>
+                </li>
 
-            <li class="step">
-                <div class="step-content">
-                    <span class="step-circle">2</span>
-                    <span class="step-text">Qualification</span>
-                </div>
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle">2</span>
+                        <span class="step-text">Qualification</span>
+                    </div>
 
-            </li>
-            <li class="step">
-                <div class="step-content">
-                    <span class="step-circle">4</span>
-                    <span class="step-text">Weightage</span>
-                </div>
+                </li>
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle">3</span>
+                        <span class="step-text">Weightage</span>
+                    </div>
 
-            </li>
-            <li class="step">
-                <div class="step-content">
-                    <span class="step-circle">5</span>
-                    <span class="step-text">Photo</span>
-                </div>
+                </li>
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle">4</span>
+                        <span class="step-text">Photo</span>
+                    </div>
 
-            </li>
-            <li class="step">
-                <div class="step-content">
-                    <span class="step-circle">6</span>
-                    <span class="step-text">Add Course</span>
-                </div>
+                </li>
+                <li class="step ">
+                    <div class="step-content">
+                        <span class="step-circle">5</span>
+                        <span class="step-text">Add Course</span>
+                    </div>
+                </li>
 
-            </li>
+                <li class="step step-active" >
+                    <div class="step-content">
+                        <span class="step-circle">6</span>
+                        <span class="step-text">Add College</span>
+                    </div>
 
-            <li class="step">
-                <div class="step-content  step-active">
-                    <span class="step-circle">7</span>
-                    <span class="step-text">College Selection</span>
-                </div>
+                </li>
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle">7</span>
+                        <span class="step-text">Add Subject</span>
+                    </div>
 
-            </li>
+                </li>
+
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle">8</span>
+                        <span class="step-text">View Form</span>
+                    </div>
+
+                </li>
+
+                <li class="step">
+                    <div class="step-content">
+                        <span class="step-circle" style="font-size:12px;color:crimson;font-weight:bold">Log Out</span>
+                        <span class="step-text">
+                            <a asp-action="stdlogout" asp-controller="Registration" style="font-size:12px;color:crimson;font-weight:bold;font-style:normal">Click Here !</a>
+                        </span>
+                    </div>
+
+                </li>
         </ul>
 
 
@@ -153,12 +178,12 @@
 
                     </div>
                     <div class="col-md-2   offset-md-3 mt-4">
-                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
                     <div class="col-md-4 mt-4">
                         <div id="sn">
-                         <a asp-action="stdsubjectSelection" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-success text-white">Save&Next</a>
+                            <a asp-action="stdsubjectSelection" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Save&Next</a>
                         </div>
                         
                         @* <input type="submit" class="btn btn-success btn-block text-white"
@@ -182,11 +207,15 @@
     function setCollege(varcourseID, varappo,varccode, obj) {
 
             var checkcount=0;
-            $("input:checkbox[name=type]:checked").each(function () {
-             checkcount=checkcount+1;
-            });
+        $('input[type=checkbox]').each(function () 
+        {
+              if ($(this)[0].checked) 
+              {
+                 checkcount=checkcount+1;
+              }
+        });
 
-             
+        console.log(checkcount);
 
         if (checkcount<=10)
         {

@@ -25,22 +25,54 @@
             </li>
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">4</span>
+                    <span class="step-circle">3</span>
                     <span class="step-text">Weightage</span>
                 </div>
 
             </li>
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">5</span>
+                    <span class="step-circle">4</span>
                     <span class="step-text">Photo</span>
                 </div>
 
             </li>
-            <li class="step">
-                <div class="step-content  step-active">
-                    <span class="step-circle">6</span>
+            <li class="step step-active">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
                     <span class="step-text">Add Course</span>
+                </div>
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Add College</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">7</span>
+                    <span class="step-text">Add Subject</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">8</span>
+                    <span class="step-text">View Form</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle" style="font-size:12px;color:crimson;font-weight:bold">Log Out</span>
+                    <span class="step-text">
+                        <a asp-action="stdlogout" asp-controller="Registration" style="font-size:12px;color:crimson;font-weight:bold;font-style:normal">Click Here !</a>
+
+                    </span>
                 </div>
 
             </li>
@@ -138,12 +170,14 @@
                                                 }
                                                 else
                                                 {
-                                                    <a asp-action="stdCollegeSelection" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData"   asp-route-cid="@item.CourseId" class="btn btn-danger btn-block text-white">Select Colleges</a>
+                                                    <a asp-action="stdCollegeSelection" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData"   asp-route-cid="@item.CourseId" class="btn btn-danger btn-block text-white">Select Colleges</a>
                                                 }
                                                 
                                                 <input type="hidden" asp-for="@Model.studentapplyList[srno].STD_COUSEID" />
                                                 <input type="hidden" asp-for="@Model.studentapplyList[srno].Fees" />
                                                 <input type="hidden" asp-for="@Model.studentapplyList[srno].CourseId" />
+                                                <input type="hidden" asp-for="@Model.studentapplyList[srno].IsPaid" />
+                                                <input type="hidden" asp-for="@Model.studentapplyList[srno].Status" />
                                             </td>
                                             <td>
                                                 <a href="javascript:void(0)" onclick="return deleteCourse(@item.CourseId,'@Model.ApplicationNo',this)" class="btn btn-danger  text-white" style="@((item.IsPaid>0 || item.Status==true)?"display:none":"display:block")" >
@@ -163,15 +197,28 @@
                     
                     
                     </div>
-                    <div class="col-md-2   offset-md-3 mt-4">
-                        <a asp-action="stduploadDocs" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                    <div class="col-md-2  ">
+                        <a asp-action="stduploadDocs" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
-                    <div class="col-md-4 mt-4">
-                        <input type="submit" class="btn btn-success btn-block text-white"
-                               id="btnl" name="commandName" value="Save&Next" />
+                      <div class="col-md-4">
 
+                               @if(Model.studentapplyList!=null && Model.studentapplyList.Count(x=>x.IsPaid==0) > 0)
+                                {
+                                 <input type="submit" class="btn btn-success btn-block text-white"
+                                  id="btnl" name="commandName" value="Save&Next" />
+                                }
+                        </div>
+
+                    <div class="col-md-4">
+
+                        @if (Model.studentapplyList != null && Model.studentapplyList.Count(x => x.IsPaid == 1) > 0)
+                        {
+                            <a asp-action="stdformprev" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block  text-white">Previw Form</a>
+                        }
                     </div>
+
+
                 </div>
 
 

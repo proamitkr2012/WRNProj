@@ -48,20 +48,15 @@ namespace AdmissionUI.Controllers
 
             return View();
         }
-
-        public async Task<IActionResult> stdprofile(string?id)
+         
+        public async Task<IActionResult> stdprofile(string? tid)
         {
-
+            string id = tid;
             if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
             {
                 return RedirectToAction("stdlogin", "Registration");
             }
-            //string strReq = "";
-            //if (id != null)
-            //{
-            //    strReq = id.Replace("%2F", "/");
-            //    id = strReq;
-            //}
+           
             try
             {
 
@@ -71,7 +66,9 @@ namespace AdmissionUI.Controllers
                 
                 var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno);
 
-                var lst = _iuow.IAdmin.GetStateList();
+               //var lst = _iuow.IAdmin.GetStateList();
+
+                var lst = _iuow.IAdmin.GetStateList().Where(x => x.Id > 0).OrderByDescending(x => x.SortOrder).ToList();
                 lst.Insert(0, new tblState { Id = 0, Name = "Select State" });
                 ViewBag.States = lst;
                 int icstate = !string.IsNullOrEmpty(stdmaster.CState) ? Convert.ToInt32(stdmaster.CState) : 0; 
@@ -141,7 +138,7 @@ namespace AdmissionUI.Controllers
                 var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
                 var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
-                var lst = _iuow.IAdmin.GetStateList();
+                var lst = _iuow.IAdmin.GetStateList().Where(x => x.Id > 0).OrderByDescending(x => x.SortOrder).ToList();
                 lst.Insert(0, new tblState { Id = 0, Name = "Select State" });
                 ViewBag.States = lst;
 
@@ -184,7 +181,7 @@ namespace AdmissionUI.Controllers
                     if (res > 0)
                     {
                         string enc = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
-                        return RedirectToAction("stdQualification", new { id = enc });
+                        return RedirectToAction("stdQualification", new { tid = enc });
 
                     }
                     else
@@ -207,8 +204,9 @@ namespace AdmissionUI.Controllers
             }
         }
 
-        public async Task<IActionResult> stdQualification(string? id)
+        public async Task<IActionResult> stdQualification(string? tid)
         {
+            string id = tid;
             if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
             {
                 return RedirectToAction("stdlogin", "Registration");
@@ -319,7 +317,7 @@ namespace AdmissionUI.Controllers
             }
             if(res>0)
             {
-                return RedirectToAction("stdWeightage", new { id = str });
+                return RedirectToAction("stdWeightage", new { tid = str });
 
             }
             
@@ -327,8 +325,9 @@ namespace AdmissionUI.Controllers
         }
 
 
-        public async Task<IActionResult> stdWeightage(string? id)
+        public async Task<IActionResult> stdWeightage(string? tid)
         {
+            string id = tid;
             if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
             {
                 return RedirectToAction("stdlogin", "Registration");
@@ -404,14 +403,15 @@ namespace AdmissionUI.Controllers
 
             }
 
-            return RedirectToAction("stduploadDocs", new { id = str });
+            return RedirectToAction("stduploadDocs", new { tid = str });
 
             
         }
 
 
-        public async Task<IActionResult> stduploadDocs(string? id)
+        public async Task<IActionResult> stduploadDocs(string? tid)
         {
+            string id = tid;
             if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
             {
                 return RedirectToAction("stdlogin", "Registration");

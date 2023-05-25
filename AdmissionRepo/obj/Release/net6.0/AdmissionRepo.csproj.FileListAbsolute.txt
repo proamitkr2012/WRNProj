@@ -34,3 +34,5 @@ D:\vrs\Admissiondbrau\WRNProj\AdmissionRepo\obj\Release\net6.0\AdmissionRepo.pdb
 D:\vrs\Admissiondbrau\WRNProj\AdmissionRepo\obj\Release\net6.0\ref\AdmissionRepo.dll
 D:\vrs\Admissiondbrau\WRNProj\AdmissionRepo\bin\Release\net6.0\Infrastructure.dll
 D:\vrs\Admissiondbrau\WRNProj\AdmissionRepo\bin\Release\net6.0\Infrastructure.pdb
+D:\vrs\Admissiondbrau\WRNProj\AdmissionRepo\bin\Release\net6.0\SMS_MAILAPP.dll
+D:\vrs\Admissiondbrau\WRNProj\AdmissionRepo\bin\Release\net6.0\SMS_MAILAPP.pdb

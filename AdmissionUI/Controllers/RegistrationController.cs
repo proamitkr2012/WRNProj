@@ -15,12 +15,12 @@ namespace AdmissionUI.Controllers
 
         private readonly ILogger<RegistrationController> _logger;
         private readonly IUnitOfWork _iuow;
-
-        public RegistrationController(ILogger<RegistrationController> logger, IUnitOfWork iuow)
+        private readonly IConfiguration _iconfig;
+        public RegistrationController(IConfiguration iconfig,ILogger<RegistrationController> logger, IUnitOfWork iuow)
         {
             _logger = logger;
             _iuow = iuow;
-
+            _iconfig = iconfig;
         }
 
         public IActionResult Index()
@@ -31,7 +31,7 @@ namespace AdmissionUI.Controllers
          
         public async Task<IActionResult> preRegistration()
         {
-            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList();
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList(); 
             listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
             ViewBag.CourseType = listcoursetype;
             StudentPreRegModel studentPreReg = new StudentPreRegModel();
@@ -62,20 +62,24 @@ namespace AdmissionUI.Controllers
                             string rnd = General.GenerateRandomOTP(4);
                             if (ismobexists == 1)//Mobile No exists but not verified
                             {
-
+                                string tempid=  _iconfig.GetSection("SMS:OTPTEMPID").Value;
+                                string msg= rnd+" is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
                                 //Integrate Sms gateway Here 
+                                var t=  await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
+                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, msg);
+                               
                                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.PreRegID_PK, rnd));
-                                return RedirectToAction("preVaildateOTP", new { id = str });
+                                return RedirectToAction("preVaildateOTP", new { tid = str });
                             }
                             else if (ismobexists == 2)//Mobile No exists and verified  but Password is Not Create
                             {
                                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, stddata.PreRegID_PK));
-                                return RedirectToAction("createpassword", new { id = str });
+                                return RedirectToAction("createpassword", new { tid = str });
                             }
                             else if (ismobexists == 3)
                             {
                                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, stddata.PreRegID_PK));
-                                return RedirectToAction("createpassword", new { id = str });
+                                return RedirectToAction("createpassword", new { tid = str });
                             }
                             else if (ismobexists == 4)
                             {
@@ -94,7 +98,14 @@ namespace AdmissionUI.Controllers
                                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", regid, rnd));
 
                                 //Integrate Sms gateway Here 
-                                return RedirectToAction("preVaildateOTP", new { id = str });
+                                string tempid = _iconfig.GetSection("SMS:OTPTEMPID").Value;
+                                string msg = rnd + " is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
+                                //Integrate Sms gateway Here 
+                                var t = await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
+                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, msg);
+
+
+                                return RedirectToAction("preVaildateOTP", new { tid = str });
 
                             }
                             else
@@ -128,12 +139,12 @@ namespace AdmissionUI.Controllers
         }
 
 
-        public async Task<IActionResult> preVaildateOTP(string? id)
+        public async Task<IActionResult> preVaildateOTP(string? tid)
         {
             ValidatePreOTPModel validatePreOTP=new ValidatePreOTPModel();
             string strReq = "";
-            strReq =id.Replace("%2F", "/");
-            id = strReq;
+            strReq = tid.Replace("%2F", "/");
+            tid = strReq;
             //strReq = strReq.Substring(strReq.IndexOf('?') + 1);
 
             if (!strReq.Equals(""))
@@ -149,11 +160,14 @@ namespace AdmissionUI.Controllers
                 var std=await  _iuow.studentPreRepo.GetByPreIdAsync(Memcode);
 
                 validatePreOTP.OTP = SMS;
-                validatePreOTP.EncriptData = id;
+                validatePreOTP.EncriptData = tid;
                 validatePreOTP.Mobile = std.MobileNo.Substring(0, 2) + "XXXX" + std.MobileNo.Substring(6, std.MobileNo.Length - 6);
 
+               
+
+
             }
-            
+
             return View(validatePreOTP);
         }
 
@@ -191,7 +205,7 @@ namespace AdmissionUI.Controllers
                     {
                         //Responsemessage Contain ApplicationNO
                         string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}",response.ResponseMessage, Memcode));
-                        return RedirectToAction("createpassword", new { id = str });
+                        return RedirectToAction("createpassword", new { tid = str });
                     }
                 }
                 else
@@ -208,8 +222,9 @@ namespace AdmissionUI.Controllers
         }
 
 
-        public async Task<IActionResult> createpassword(string? id)
+        public async Task<IActionResult> createpassword(string? tid)
         {
+            string id = tid;
             ValidatePreOTPModel validatePreOTP = new ValidatePreOTPModel();
             string strReq = "";
             strReq = id.Replace("%2F", "/");
@@ -302,7 +317,7 @@ namespace AdmissionUI.Controllers
                      var principal = new ClaimsPrincipal(identity);
                      var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                      string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, 1));
-                     return RedirectToAction("stdprofile", "Student", new { id = str });
+                     return RedirectToAction("stdprofile", "Student", new { tid = str });
                       
                     }
                     else
@@ -326,10 +341,15 @@ namespace AdmissionUI.Controllers
         }
 
 
+        public async Task<IActionResult> stdlogout()
+        {
+            
+            
+            return RedirectToAction("stdlogin");
+        
+        }
 
-
-
-        public string EncryptQueryString(string strQueryString)
+            public string EncryptQueryString(string strQueryString)
         {
             EncryptDecryptQueryString objEDQueryString = new EncryptDecryptQueryString();
             return objEDQueryString.Encrypt(strQueryString, "r0b1nr0y");

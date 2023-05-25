@@ -25,22 +25,56 @@
             </li>
             <li class="step  step-active">
                 <div class="step-content">
-                    <span class="step-circle">4</span>
+                    <span class="step-circle">3</span>
                     <span class="step-text">Weightage</span>
                 </div>
 
             </li>
+            
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">5</span>
+                    <span class="step-circle">4</span>
                     <span class="step-text">Photo</span>
                 </div>
 
             </li>
             <li class="step">
                 <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Add Course</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
                     <span class="step-circle">6</span>
-                    <span class="step-text">Choose College</span>
+                    <span class="step-text">Add College</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">7</span>
+                    <span class="step-text">Add Subject</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">8</span>
+                    <span class="step-text">View Form</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle" style="font-size:12px;color:crimson;font-weight:bold">Log Out</span>
+                    <span class="step-text">
+                        <a asp-action="stdlogout" asp-controller="Registration" style="font-size:12px;color:crimson;font-weight:bold;font-style:normal">Click Here !</a>
+
+                    </span>
                 </div>
 
             </li>
@@ -81,7 +115,7 @@
                             <thead>
                                 <tr>
                                     <td>SrNo.</td>
-                                    <td>Name</td>
+                                    <td style="text-align:left;">Name</td>
                                     <td>Weightage</td>
 
                                 </tr>
@@ -97,8 +131,8 @@
                                             <span>@(idx+1)</span>
                                          </td>
 
-                                        <td>
-                                            <input type="checkbox"  asp-for="@Model.stdweightageList[idx].ctrlWeightage" checked="@(item.StdWeightID==0?false:true)" />
+                                        <td style="text-align:left;">
+                                            <input type="checkbox" class="@item.ParentId" asp-for="@Model.stdweightageList[idx].ctrlWeightage" checked="@(item.StdWeightID==0?false:true)" onclick="setCheckbox(this);" />
                                             <label for="@Model.stdweightageList[idx].ctrlWeightage"> @item.Name </label>
                                             <input type="hidden" class="form-control"   asp-for="@Model.stdweightageList[idx].ID" />
                                             <input type="hidden" class="form-control" asp-for="@Model.stdweightageList[idx].StdWeightID" />
@@ -118,7 +152,7 @@
 
 
                     <div class="col-md-2   offset-md-3 mt-4">
-                        <a asp-action="stdQualification" asp-controller="Student" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                        <a asp-action="stdQualification" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
                     <div class="col-md-4 mt-4">
@@ -138,5 +172,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="~/js/step2.js"></script>
+
+<script type="text/javascript">
+function setCheckbox(obj)
+{  
+        if (obj.checked)
+        {
+       
+            var clname = obj.className;
+            var id = obj.id
+            $('input[type=checkbox]').each(function () {
+              
+                if ($(this)[0].className == clname && $(this)[0].checked) 
+                {
+                    if ($(this)[0] != obj.id)
+                    {
+                        $(this)[0].checked = false;
+                    }
+                }
+            });
+
+            obj.checked=true;
+        }
+    
+}
+
+
+</script>
+
 
  

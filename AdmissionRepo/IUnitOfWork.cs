@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMS_MAIL.GateWay;
+using System;
 
 namespace AdmissionRepo
 {
@@ -14,6 +15,6 @@ namespace AdmissionRepo
 
         public  IStudentApplyCourseRepo studentApplyCourse { get; }
         public IstudentApplyCollegeRepo studentApplyCollege { get; }
-        
+        public ISMS_MAIL  iSMS { get; }
     }
 }

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AdmissionRepo\AdmissionRepo.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\SMS_MAILAPP\SMS_MAILAPP.csproj" />
   </ItemGroup>
 
 </Project>

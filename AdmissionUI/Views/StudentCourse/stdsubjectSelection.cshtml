@@ -8,6 +8,7 @@
 
     <div class="container p-3">
         <ul class="steps">
+
             <li class="step">
                 <div class="step-content">
                     <span class="step-circle">1</span>
@@ -25,30 +26,55 @@
             </li>
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">4</span>
+                    <span class="step-circle">3</span>
                     <span class="step-text">Weightage</span>
                 </div>
 
             </li>
             <li class="step">
                 <div class="step-content">
-                    <span class="step-circle">5</span>
+                    <span class="step-circle">4</span>
                     <span class="step-text">Photo</span>
                 </div>
 
             </li>
-            <li class="step">
+            <li class="step ">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Add Course</span>
+                </div>
+            </li>
+
+            <li class="step ">
                 <div class="step-content">
                     <span class="step-circle">6</span>
-                    <span class="step-text">Add Course</span>
+                    <span class="step-text">Add College</span>
+                </div>
+
+            </li>
+            <li class="step step-active">
+                <div class="step-content">
+                    <span class="step-circle">7</span>
+                    <span class="step-text">Add Subject</span>
                 </div>
 
             </li>
 
             <li class="step">
-                <div class="step-content  step-active">
-                    <span class="step-circle">7</span>
-                    <span class="step-text">College Selection</span>
+                <div class="step-content">
+                    <span class="step-circle">8</span>
+                    <span class="step-text">View Form</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle" style="font-size:12px;color:crimson;font-weight:bold">Log Out</span>
+                    <span class="step-text">
+                        <a asp-action="stdlogout" asp-controller="Registration" style="font-size:12px;color:crimson;font-weight:bold;font-style:normal">Click Here !</a>
+
+                    </span>
                 </div>
 
             </li>
@@ -118,9 +144,14 @@
                                             <td> @item.CourseName</td>
 
                                             <td>
-                                                <a asp-action="stdSubjects" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" asp-route-cid="@item.CourseId" asp-route-ccid="@item.CollegeCode" class="btn btn-danger btn-block text-white">Select Subject</a>
+                                                @if (item.IsNEP == 1)
+                                                {
+                                                    <a asp-action="stdSubjects" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" asp-route-cid="@item.CourseId" asp-route-ccid="@item.CollegeCode" class="btn btn-danger btn-block text-white">Select Subject</a>
+                                                }
+
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].ApplicationNo" />
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].CourseId" />
+                                                <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].IsNEP" />
                                             </td>
 
                                         </tr>
@@ -146,12 +177,23 @@
 
                     </div>
                     <div class="col-md-2   offset-md-3 mt-4">
-                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
                     <div class="col-md-4 mt-4">
+                        @if (Model.studentapplycollegeList != null && Model.studentapplycollegeList.Count > 0 )
+                         {
+                            if (Model.studentapplycollegeList.Count(x => x.IsNEP == 1) > 0)
+                            {
+                                <a asp-action="stdchoosenSubjects" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block  text-white">Save&Next</a>
+                            }
+                            else
+                            {
+                                <a asp-action="stdformprev" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block  text-white">Previw Form</a>
+                            }
+                        }
 
-                        <a asp-action="stdchoosenSubjects" asp-controller="StudentCourse" asp-route-id="@Model.EncrptedData" class="btn btn-danger btn-success text-white">Save&Next</a>
+                        
                         @* <input type="submit" class="btn btn-success btn-block text-white"
                         id="btnl" name="commandName" value="Save&Next" />*@
 

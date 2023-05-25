@@ -22,8 +22,8 @@ namespace SMS_MAIL.GateWay
         {
             _config = config;
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-            configurationBuilder.AddJsonFile(path, false);
+            //string path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            //configurationBuilder.AddJsonFile(path, false);
         }
 
 
@@ -34,15 +34,15 @@ namespace SMS_MAIL.GateWay
         {
             try
             {
-                string _username = configurationBuilder.Build().GetSection("EMAIL:UserName").Value;
-                string _password = configurationBuilder.Build().GetSection("EMAIL:Password").Value;
+                string _username = _config.GetSection("EMAIL:UserName").Value;
+                string _password = _config.GetSection("EMAIL:Password").Value;
                 MailMessage mm = new MailMessage();
-                string _fromEmail = configurationBuilder.Build().GetSection("EMAIL:FromMail").Value;
+                string _fromEmail = _config.GetSection("EMAIL:FromMail").Value;
                 mm.From = new MailAddress(_fromEmail);
                 SmtpClient smtp = new SmtpClient();
-                smtp.Host = configurationBuilder.Build().GetSection("EMAIL:Host").Value;
+                smtp.Host = _config.GetSection("EMAIL:Host").Value;
                 smtp.EnableSsl = true;
-                smtp.Port =Convert.ToInt32(configurationBuilder.Build().GetSection("EMAIL:Port").Value);
+                smtp.Port =Convert.ToInt32(_config.GetSection("EMAIL:Port").Value);
                 
                 NetworkCredential NetworkCred = new NetworkCredential(_username, _password);
                 smtp.UseDefaultCredentials = false;
@@ -52,7 +52,7 @@ namespace SMS_MAIL.GateWay
             }
             catch (Exception ex)
             {
-                throw ex;
+                //throw ex;
                 return -1;
             }
 
@@ -63,11 +63,11 @@ namespace SMS_MAIL.GateWay
         {
             try 
             {
-                string uname = configurationBuilder.Build().GetSection("SMS:SMSUSERNAME").Value;
-                string password = configurationBuilder.Build().GetSection("SMS:SMSUSERPWD").Value;
-                string senderid = configurationBuilder.Build().GetSection("SMS:SMSSENDER").Value;
-                string smsapi = configurationBuilder.Build().GetSection("SMS:SMSAPI").Value;
-                string peid = configurationBuilder.Build().GetSection("SMS:PEID").Value;
+                string uname = _config.GetSection("SMS:SMSUSERNAME").Value;
+                string password = _config.GetSection("SMS:SMSUSERPWD").Value;
+                string senderid = _config.GetSection("SMS:SMSSENDER").Value;
+                string smsapi = _config.GetSection("SMS:SMSAPI").Value;
+                string peid = _config.GetSection("SMS:PEID").Value;
 
 
 

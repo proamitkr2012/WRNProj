@@ -72,6 +72,12 @@
     <None Include="Views\Registration\preVaildateOTP.cshtml" />
     <None Include="Views\Registration\stdlogin.cshtml" />
     <None Include="Views\StudentCourse\addCourse.cshtml" />
+    <None Include="Views\StudentCourse\courseFessPay1.cshtml" />
+    <None Include="Views\StudentCourse\stdchoosenSubjects.cshtml" />
+    <None Include="Views\StudentCourse\stdCollegeSelection.cshtml" />
+    <None Include="Views\StudentCourse\stdformprev.cshtml" />
+    <None Include="Views\StudentCourse\stdSubjects.cshtml" />
+    <None Include="Views\StudentCourse\stdsubjectSelection.cshtml" />
     <None Include="Views\Student\ChooseCourse_College.cshtml" />
     <None Include="Views\Student\stdprofile.cshtml" />
     <None Include="Views\Student\stdQualification.cshtml" />

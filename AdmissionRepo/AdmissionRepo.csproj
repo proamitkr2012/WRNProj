@@ -14,6 +14,7 @@
     <ProjectReference Include="..\AdmissionData\AdmissionData.csproj" />
     <ProjectReference Include="..\AdmissionModel\AdmissionModel.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\SMS_MAILAPP\SMS_MAILAPP.csproj" />
   </ItemGroup>
 
 </Project>

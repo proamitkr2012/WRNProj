@@ -10,6 +10,7 @@ namespace AdmissionModel
       public string  ApplicationNo { get; set; }
       public string CourseName { get; set; } 
       public bool IsSelect { get; set; }
+      public int IsNEP { get; set; }
 
     }
 

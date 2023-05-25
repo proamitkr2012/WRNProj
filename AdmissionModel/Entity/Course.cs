@@ -12,6 +12,7 @@ namespace AdmissionModel
      public string CourseName { get; set; }
      public  string CourseType { get; set; }
      public int CourseTypeId { get; set; }
-
+     public int IsNEP { get; set; }
+     public string CourseCode { get; set; }
     }
 }
