@@ -42,3 +42,5 @@ E:\VRS\Agra\Project\WRNProjworking\WRNProj\extentionMethod\obj\Release\net6.0\ex
 E:\VRS\Agra\Project\WRNProjworking\WRNProj\extentionMethod\obj\Release\net6.0\refint\extentionMethod.dll
 E:\VRS\Agra\Project\WRNProjworking\WRNProj\extentionMethod\obj\Release\net6.0\extentionMethod.pdb
 E:\VRS\Agra\Project\WRNProjworking\WRNProj\extentionMethod\obj\Release\net6.0\ref\extentionMethod.dll
+D:\vrs\Admissiondbrau\WRNProj\extentionMethod\bin\Release\net6.0\SMS_MAILAPP.dll
+D:\vrs\Admissiondbrau\WRNProj\extentionMethod\bin\Release\net6.0\SMS_MAILAPP.pdb

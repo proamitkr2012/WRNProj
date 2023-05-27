@@ -504,7 +504,8 @@
           "AdmissionData": "1.0.0",
           "AdmissionModel": "1.0.0",
           "Infrastructure": "1.0.0",
-          "Microsoft.AspNetCore.Http.Abstractions": "2.0.1"
+          "Microsoft.AspNetCore.Http.Abstractions": "2.0.1",
+          "SMS_MAILAPP": "1.0.0"
         },
         "runtime": {
           "AdmissionRepo.dll": {}

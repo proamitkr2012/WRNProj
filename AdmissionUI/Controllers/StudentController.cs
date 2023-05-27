@@ -4,6 +4,7 @@ using AdmissionModel.Entity;
 using AdmissionRepo;
 using AdmissionUI.Models;
 using AutoMapper;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Security.Claims;
@@ -103,7 +104,7 @@ namespace AdmissionUI.Controllers
                 var std = mapper.Map<StudentRegModel>(stdmaster);
                 std.EncrptedData = str;
                 std.Newdata = !string.IsNullOrEmpty(stdmaster.Aadhar) ? 0 : 1;
-                std.DOB = stdmaster.DOB.Value.ToString("dd/MM/yyyy");
+                std.DOB = !string.IsNullOrEmpty(stdmaster.DOB.ToString())? stdmaster.DOB.Value.ToString("dd/MM/yyyy"):"";
                 //check course is paid or not
                 std.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
 
