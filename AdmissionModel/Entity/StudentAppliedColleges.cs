@@ -11,6 +11,11 @@ namespace AdmissionModel
       public string CourseName { get; set; } 
       public bool IsSelect { get; set; }
       public int IsNEP { get; set; }
+      public int IsSubSelect { get; set; }
+      public string City  { get; set; }
+      public string CollegeType { get; set; }
+      public int IsRWCollege { get; set; }
+        
 
     }
 

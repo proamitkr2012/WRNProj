@@ -80,7 +80,7 @@
 
 
         <div class="text-center mt-5">
-            <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
         </div>
         <div class="card">
@@ -139,7 +139,7 @@
                                     <th>Course</th>
                                     <th>Fees</th>
                                     <th>TransactionNo</th>
-                                    <th>PaidDate</th>
+                                    <th>Payment Date</th>
                                     <th>CRN</th>
                                     <th colspan="2">Action</th>
                                     
@@ -212,16 +212,27 @@
 
                     <div class="col-md-4">
 
-                        @if (Model.studentapplyList != null && Model.studentapplyList.Count(x => x.IsPaid == 1) > 0)
-                        {
-                            <a asp-action="stdformprev" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block  text-white">Previw Form</a>
-                        }
+                        @*@@if (Model.studentapplyList != null && Model.studentapplyList.Count(x => x.IsPaid == 1) > 0)
+                        {*@
+                            <a asp-action="stdformprev" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block  text-white">Preview Form</a>
+                        @*}*@
                     </div>
 
 
                 </div>
 
+                <div class="row">
 
+                    <div class="col-sm-2">
+                        <span style="color:darkred;font-size:14px">Note:</span>
+                    </div>
+                    <div class="col-sm-12">
+                        <p style="text-align:justify">
+                            Please select  
+                            checkbox for make  payment.(कृपया पेमेंट करने के लिए दिए गए चेक बॉक्स पर क्लिक करें |)
+                        </p>
+                    </div>
+                </div>
 
             </div>
         </div>

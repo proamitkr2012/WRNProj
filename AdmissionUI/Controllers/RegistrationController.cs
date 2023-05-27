@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using AdmissionModel;
+using System.Linq.Expressions;
 
 namespace AdmissionUI.Controllers
 {
@@ -103,8 +104,6 @@ namespace AdmissionUI.Controllers
                                 //Integrate Sms gateway Here 
                                 var t = await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
                                 var e = await _iuow.iSMS.sendMail(studentMasters.Email, msg);
-
-
                                 return RedirectToAction("preVaildateOTP", new { tid = str });
 
                             }
@@ -340,12 +339,55 @@ namespace AdmissionUI.Controllers
 
         }
 
+        public async Task<IActionResult> forgotPassword()
+        {
+            ValidatePreOTPModel vl = new ValidatePreOTPModel();
+            return  View(vl);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> forgotPassword(ValidatePreOTPModel vl)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(vl.InputOTP))
+                {
+                    var std = await _iuow.studentPreRepo.GetByMobileNoAsync(vl.InputOTP);
+
+                    if (!string.IsNullOrEmpty(std.ApplicationNo))
+                    {
+                        string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", std.ApplicationNo, 0));
+                        return RedirectToAction("createpassword", new { tid = str });
+                    }
+                    else
+                    {
+                        vl.Status = -1;
+                        vl.Msg = "Registered Mobile No. is not valid ";
+                        return View(vl);
+                    }
+
+                }
+                else
+                {
+                    vl.Status = -1;
+                    vl.Msg = "Please enter registered Mobile No.";
+                    return View(vl);
+
+                }
+            }
+            catch(Exception ex)
+            {
+                vl.Status = -1;
+                vl.Msg = " Enter Mobile No. is not valid ";
+                return View(vl);
+
+            }
+            
+        }
 
         public async Task<IActionResult> stdlogout()
         {
-            
-            
-            return RedirectToAction("stdlogin");
+           return RedirectToAction("stdlogin");
         
         }
 

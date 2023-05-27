@@ -82,7 +82,7 @@
 
 
         <div class="text-center mt-5">
-            <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
         </div>
         <div class="card">
@@ -144,9 +144,10 @@
                                             <td> @item.CourseName</td>
 
                                             <td>
+                                               
                                                 @if (item.IsNEP == 1)
                                                 {
-                                                    <a asp-action="stdSubjects" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" asp-route-cid="@item.CourseId" asp-route-ccid="@item.CollegeCode" class="btn btn-danger btn-block text-white">Select Subject</a>
+                                                    <a asp-action="stdSubjects" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" asp-route-cid="@item.CourseId" asp-route-ccid="@item.CollegeCode" class=@(item.IsSubSelect==0?"btn btn-danger btn-block text-white":"btn btn-success btn-block text-white")>Select Subject</a>
                                                 }
 
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].ApplicationNo" />

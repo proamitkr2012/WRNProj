@@ -80,7 +80,7 @@
     
     
     <div class="text-center mt-5">
-        <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
     </div>
     <div class="card">
@@ -168,8 +168,8 @@
                         <label>
                                 SubCategory: <span class="text-danger">*</span>
                         </label>
-                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.Subcategory,"SubCategory","SubCategory"))" asp-for="SubCategory">
-                        </select>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.Subcategory,"SubCategory","SubCategory"))" asp-for="SubCategory" onchange="return validatesubcat();">
+                            </select>
                             <span class="text-danger" asp-validation-for="SubCategory"></span>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                         <label>
                                 Gender: <span class="text-danger">*</span>
                         </label>
-                        <select class="form-select" aria-label="Default select example" asp-for="Gender" >
+                            <select class="form-select" aria-label="Default select example" asp-for="Gender" onchange="return validatesubcat();">
                             <option selected value="0">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -269,7 +269,8 @@
                                 <option value="Sikh">Sikh</option>
                                 <option value="Buddhism">Buddhism</option>
                                 <option value="Jainism">Jainism</option>
-                                
+                                <option value="Christian">Christian</option>
+                                <option value="Other">Other</option>
                             </select>
                             
                             
@@ -374,14 +375,16 @@
                 </div>
                 <div class="row">
                 <div class="col-md-4">
+                    @if(Model.isPaidCourseFees==0)
+                    {
                         <input type="submit" class="btn btn-success btn-block text-white"
                                id="btnl" value="Submit" />
-                       
+                    }  
                </div>
                         <div class="col-md-4">
                             @if (Model.Newdata == 0)
                             {
-                                <a asp-action="stdQualification" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Next</a>
+                                <a asp-action="stdQualification" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
                             }
                         </div>
                 </div>
@@ -594,6 +597,23 @@
         }
 
         return false;
+    }
+
+    function validatesubcat()
+    {
+       var s= $('#SubCategory').val();
+       var g= $('#Gender').val();
+       
+        if (s.toLowerCase()=='female') 
+        {
+            if (g.toLowerCase() != 'female')
+            {
+              $('#Gender').val('Female');
+            }
+        }
+       
+    
+     return false;
     }
 
     

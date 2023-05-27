@@ -243,7 +243,8 @@ namespace AdmissionUI.Controllers
             var lisapplycollege = await _iuow.studentApplyCollege.GetAllStudentselectCollegeByCourseIdAsync (sc);
             if (lisapplycollege != null && lisapplycollege.Count() > 0)
             {
-                std.studentapplycollegeList = lisapplycollege.ToList().OrderBy(x=>x.CollegeName).ToList();
+                std.studentapplycollegeList = lisapplycollege.ToList();
+                    //.OrderBy(x=>x.CollegeName ).ThenBy(n => n.City).ThenBy(n => n.IsRWCollege).ToList();
             }
             else
             {
@@ -292,7 +293,7 @@ namespace AdmissionUI.Controllers
             var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
             var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
             string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
-            //StudentMasters studentMasters = await _iuow.studentPreRepo.GetByIdAsync(appno);
+          
             
             StudentAppliedColleges sc = new StudentAppliedColleges() { ApplicationNo = appno, CourseId = 0 };
             var lisapplycollege = await _iuow.studentApplyCollege.GetAllStudentselectCollegeByCourseIdAsync(sc);

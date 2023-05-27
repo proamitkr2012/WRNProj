@@ -103,6 +103,10 @@ namespace AdmissionUI.Controllers
                 var std = mapper.Map<StudentRegModel>(stdmaster);
                 std.EncrptedData = str;
                 std.Newdata = !string.IsNullOrEmpty(stdmaster.Aadhar) ? 0 : 1;
+                std.DOB = stdmaster.DOB.Value.ToString("dd/MM/yyyy");
+                //check course is paid or not
+                std.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
+
                 return View(std);
             }
             catch (Exception ex)
@@ -256,6 +260,9 @@ namespace AdmissionUI.Controllers
                 eligibiltyModel.Newdata = 0;
             }
 
+            //check course is paid or not
+            eligibiltyModel.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
+
             return View(eligibiltyModel);
         }
 
@@ -358,7 +365,11 @@ namespace AdmissionUI.Controllers
                 li.Add(stdmaster);
             }
             eligibiltyModel.stdweightageList = li;
-           return View(eligibiltyModel);
+
+            //check course is paid or not
+            eligibiltyModel.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
+
+            return View(eligibiltyModel);
 
         }
 
@@ -426,6 +437,11 @@ namespace AdmissionUI.Controllers
             stddoc.ApplicationNo = appno;
             stddoc.EncrptedData = str;
             stddoc.Std_Photo =string.IsNullOrEmpty( studentMasters.Std_PHOTO)?"Photo.jpg": studentMasters.Std_PHOTO;
+
+            //check course is paid or not
+            stddoc.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
+
+
             return View(stddoc);
         }
 

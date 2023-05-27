@@ -4,7 +4,7 @@
 }
 
 
-<form asp-action="stdQualification" method="post">
+<form asp-action="stdQualification" method="post" onsubmit="return validate()">
 
     <div class="container p-3">
         <ul class="steps">
@@ -83,7 +83,7 @@
         
         
         <div class="text-center mt-5">
-            <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
         </div>
         <div class="card">
@@ -245,7 +245,7 @@
                                         </td>
                                         
                                         <td>
-                                            <select asp-for="@Model.QualifationList[idx].ExamStatus" onchange="setOther(this,@item.EntryID)"  class="form-select">
+                                            <select asp-for="@Model.QualifationList[idx].ExamStatus" onchange="setOther(this,@item.EntryID)"  class="form-select passed">
                                                 <option value="Passed" selected>Passed</option>
                                                 @if (item.DocName != "10th")
                                                 {
@@ -276,7 +276,7 @@
                                                 }
                                             </select>
                                         </td>
-                                        <td><input type="number" placeholder="0" value="@item.Percentage" class="form-control" asp-for="@Model.QualifationList[idx].Percentage" />  </td>
+                                        <td><input type="text" placeholder="0" value="@item.Percentage" class="form-control" asp-for="@Model.QualifationList[idx].Percentage" onkeypress="return isFloatKey(event);" />  </td>
                                          
                                     </tr>
                                     idx = idx + 1;
@@ -294,8 +294,18 @@
 
                      </div>
                     <div class="col-md-4 mt-4">
-                        <input type="submit" class="btn btn-success btn-block text-white"
-                               id="btnl" value="Save&Next" />
+
+                        @if (Model.isPaidCourseFees == 0)
+                        {
+                            <input type="submit" class="btn btn-success btn-block text-white"
+                            id="btnl" value="Save&Next" />
+                        }
+                        else
+                        {
+                            <a asp-action="stdWeightage" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
+                        }
+
+                        
 
                     </div>
                 </div>
@@ -335,10 +345,14 @@
         var  isper = $("#QualifationList_" + enterid + "__IsCGPA").val();
         if (isper == "False" ) 
         {
-            if  ( (marobt != null && marobt != '') && (martot != null && martot != ''))
+            if  ( (marobt != null && marobt != '0') && (martot != null && martot != '0'))
             {
                 var per = parseFloat((parseInt(marobt) * 100 / martot)).toFixed(2);
                 $("#QualifationList_" + enterid + "__Percentage").val(per);
+            }
+            else
+            {
+                $("#QualifationList_" + enterid + "__Percentage").val('0');
             }
             
         }
@@ -352,5 +366,122 @@
         return false;
     }
 
+    function validate()
+    {
+         var idx=0;
+         var msg="";
+        $('.passed').each(function () 
+        {
+             
+
+            if ($('#QualifationList_' + idx + '__ExamStatus').val() == 'Passed') 
+            {
+
+                var docname = $('#QualifationList_' + idx + '__DocName').val();
+                var subject = $('#QualifationList_' + idx + '__Subject').val();  
+                var board =   $('#QualifationList_' + idx + '__Board_Universty_Name').val();
+                var preRollNo = $('#QualifationList_' + idx + '__PreRollNo').val();
+                var markObt = $('#QualifationList_' + idx + '__MarkObt').val();
+                var totalMarks = $('#QualifationList_' + idx + '__TotalMarks').val();
+                var percentage = $('#QualifationList_' + idx + '__Percentage').val();
+
+
+                if (subject==null || subject=='') 
+                {
+                    msg = msg + 'Please enter ' + docname+' subject\n'
+                }
+
+
+                if (board == null || board == 'Select Board') {
+                    msg = msg + 'Please select  ' + docname + ' Board/University\n'
+                }
+
+                if (preRollNo == null || preRollNo == '') {
+                    msg = msg + 'Please enter ' + docname + ' rollno.\n'
+                }
+
+                if ( markObt == '0') {
+                    msg = msg + 'Please enter ' + docname + ' Marks Obtain.\n'
+                }
+                if (totalMarks == '0') {
+                    msg = msg + 'Please enter ' + docname + 'Total Marks\n'
+                }
+
+                if (percentage == null || percentage == '' || percentage == '0') {
+                    msg = msg + 'Please enter ' + docname + ' Percentage\CGPA.\n'
+                }
+            
+            }
+            else
+            {
+                var markObt = $('#QualifationList_' + idx + '__MarkObt').val('');
+                var totalMarks = $('#QualifationList_' + idx + '__TotalMarks').val('');
+                var percentage = $('#QualifationList_' + idx + '__Percentage').val('');
+           
+                var docname = $('#QualifationList_' + idx + '__DocName').val();
+                var subject = $('#QualifationList_' + idx + '__Subject').val();
+                var board = $('#QualifationList_' + idx + '__Board_Universty_Name').val();
+                var preRollNo = $('#QualifationList_' + idx + '__PreRollNo').val();
+
+                if (subject == null || subject == '') {
+                    msg = msg + 'Please enter ' + docname + ' subject\n'
+                }
+
+
+                if (board == null || board == 'Select Board') {
+                    msg = msg + 'Please select  ' + docname + ' Board/University\n'
+                }
+
+                if (preRollNo == null || preRollNo == '') {
+                    msg = msg + 'Please enter ' + docname + ' rollno.\n'
+                }
+            
+            
+            
+            
+            }
+            idx++;
+        });
+        
+        if (msg.length>0) 
+        {
+          alert(msg);
+          return false;
+        }
+    
+     return true;
+    }
+
+
+</script>
+
+<script language="javascript">
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function isFloatKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+            return false;
+
+        return true;
+
+    }
+
+    function noEnterKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+       return false;
+    }
+     
+    
 
 </script>

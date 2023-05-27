@@ -97,6 +97,31 @@ namespace AdmissionRepo
             return null;
         }
 
+
+        public async Task<StudentMasters> GetByMobileNoAsync(string mobileNo)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "select_newstudentmasterByMobile";
+                    var param = new DynamicParameters();
+                    param.Add("@ApplicationNo", mobileNo);
+                    var list = await SqlMapper.QuerySingleOrDefaultAsync<StudentMasters>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return null;
+        }
+
         public async  Task<int> UpdateAsync(StudentMasters entity)
         {
 

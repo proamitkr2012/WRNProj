@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace AdmissionUI.Models
 {
-    public class StdDocUploadModel
+    public class StdDocUploadModel:ResponseModel
     {
         public string ApplicationNo { get; set; }
         public string? EncrptedData { get; set; }

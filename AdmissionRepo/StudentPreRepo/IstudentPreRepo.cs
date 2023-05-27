@@ -16,5 +16,7 @@ namespace AdmissionRepo
         public Task<int> IsAadharExists(string aadhar);
 
         Task<int> UploadDocData(string appno, string path);
+
+        Task<StudentMasters> GetByMobileNoAsync(string mobileNo);
     }  
 }

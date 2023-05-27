@@ -77,7 +77,7 @@
 <body>
 
 
-    <div id="printadmitcard" style=" background-color: #fff; color: #000; font-family: Arial; font-size: 14px">
+    <div id="print1" style=" background-color: #fff; color: #000; font-family: Arial; font-size: 14px">
         <div class="page" style="page-break-after: always;">
             <div class="subpage">
 
@@ -89,7 +89,7 @@
                         <td style="width:98%;text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:30px;font-weight:bold;font-size:21px">
                             DR. BHIMRAO AMBEDKAR UNIVERSITY, AGRA <br />
                             डॉ० भीमराव आंबेडकर विश्वविद्यालय, आगरा<br />
-                            (Called At The Place Of Agra University, Agra) <br />
+                            (FORMERLY AGRA UNIVERSITY, AGRA ) <br />
 
                         </td>
 
@@ -98,12 +98,12 @@
 
                 </table>
 
-                College Details :
+                
                 <table style="width:100%;margin-top:10px">
                     <tr>
                         <td style="width:50%;text-align:left;white-space:nowrap">
                             <span style="text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:0px;font-weight:bold;font-size: 14px">
-                                WRN No. &nbsp; @Model.ApplicationNo
+                                <!--WRN No. &nbsp;  Model.ApplicationNo-->
                             </span>
                         </td>
                         <td style="width:50%;text-align:right">
@@ -130,7 +130,7 @@
                     <tr>
 
                         <td style="text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  font-weight:bold;font-size: 18px">
-                            <h2 style="font-family:Arial;font-weight:bold;font-size:16px">Admission Web Registration Form @Model.Session </h2>
+                            <h2 style="font-family:Arial;font-weight:bold;font-size:16px">Admission Cum Web Registration Form - @Model.Session </h2>
                         </td>
 
                     </tr>
@@ -143,8 +143,8 @@
 
                         <tr>
 
-                            <th style="width:20%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px"> WRN No.</th>
-                            <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:18px;font-weight:bold;font-size: 16px; text-transform:uppercase">
+                            <th style="width:20%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 16px;color:darkred"> WRN No.</th>
+                            <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:18px;font-weight:bold;font-size: 16px; text-transform:uppercase;color:darkred">
                                 @Model.ApplicationNo
                             </td>
 
@@ -241,6 +241,14 @@
                             <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
 
                                 @Model.Category
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> SubCategory </th>
+                            <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+
+                                @Model.SubCategory
                             </td>
 
                         </tr>
@@ -359,7 +367,7 @@
                     </tbody>
                 </table>
 
-              <span style="font-size:14px;font-weight:bold">
+              <span style="font-size:14px;font-weight:bold;margin-top:20px">
                     Payment Details(<strong>
                         @{
                           var status=Model.studentapplyList.Count(x => x.IsPaid == 1)>0? "Paid" : "UnPaid"; 
@@ -423,43 +431,53 @@
 
                     </tbody>
                 </table>
-                <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
-                    <tr>
-                        <td style="width:30%; font-size:14px;font-weight:bold;border:1px solid #000;"> Weightage Details</td>
-                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;line-height:12px;font-weight:normal;font-size: 12px; text-transform:uppercase">
-                            
 
-                            @{
-                                var wtg = "";
-                                int t = 0;
-                                if (Model.stdweightageList != null && Model.stdweightageList.Count(x => x.Name.Length > 0 && x.StdWeightID > 0) > 0)
-                                {
+                @if (Model.stdweightageList != null && Model.stdweightageList.Count(x => x.Name.Length > 0 && x.StdWeightID > 0) > 0)
+                {
+
+                     
+
+                    <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
+                        <tr>
+                            <!--<td style="width:95%; font-size:14px;font-weight:bold;border:1px solid #000;"> Weightage Details</td>-->
+                            <td style="width:30%; font-size:14px;font-weight:bold;border:1px solid #000;"> Total Weightage </td>
+                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;line-height:12px;font-weight:normal;font-size: 12px; text-transform:uppercase">
+
+                                @{
+                                    var wtg = "";
+                                    int t = 0;
+                                    var wttotal = 0;
                                     foreach (var wt in Model.stdweightageList)
                                     {
                                         if (wt.StdWeightID > 0)
                                         {
                                             if (t == 0) wtg = wt.Name;
                                             else
-                                                wtg = wtg + ", " + wt.Name;
+                                                wtg = wtg + "," + wt.Name;
 
+                                            wttotal = wttotal + wt.Weight;
                                             t++;
                                         }
                                     }
+
+
                                 }
+                                
+                                <span style="text-align:justify;font-size:14px;font-weight:bold">
+                                    @(wttotal > 17 ? 17 : wttotal)
 
-                            }
-                            <p style="text-align:justify"> @wtg</p>
-                           
+                                </span>
+                            </td>
+                        
+                        </tr>
+                        
+                         
+
+                    </table>
 
 
-                        </td>
-                    </tr>
-                    
-                   </table>
-                
-                   
-                       
-                
+                }      
+
 
 
               
@@ -481,7 +499,7 @@
                         <td style="width:98%;text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:30px;font-weight:bold;font-size:21px">
                             DR. BHIMRAO AMBEDKAR UNIVERSITY, AGRA <br />
                             डॉ० भीमराव आंबेडकर विश्वविद्यालय, आगरा<br />
-                            (Called At The Place Of Agra University, Agra) <br />
+                             (FORMERLY AGRA UNIVERSITY, AGRA ) <br />
 
                         </td>
 
@@ -491,17 +509,17 @@
                 </table>
                 @if (ViewBag.CollegeList != null)
                 {
-                    <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
+                    <table style="width: 100%;border-collapse: collapse;margin-top:50px" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 15px">
                                     Course
                                 </th>
-                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 15px">
                                     Code
                                 </th>
 
-                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 15px">
                                     College
                                 </th>
 
@@ -557,7 +575,12 @@
             </div>
            </div>
    </div>
-    <div class="row">
+    
+   
+   
+   
+   
+   <div class="row">
         <div class="col-md-2"></div>
             <div class="col-md-2"><a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a></div>
         <div class="col-md-4"><a href="javascript:void(0)" onclick="return DocumentPrint('')" class="btn btn-primary btn-block text-white"> Print</a> </div>
@@ -576,7 +599,7 @@
         function DocumentPrint(name) {
            
             var display_settings = "toolbar=yes,location=no,directoried=yes,menubar=yes,scrollbars=yes,top=25,left=100,height=500 width=800,resizable=yes";
-            var content = document.getElementById("printadmitcard").innerHTML;
+            var content = document.getElementById("print1").innerHTML;
             var docprint = window.open('', '', display_settings);
             docprint.document.write('<html><head></head><form onLoad="self.print();"><center>' + content + '</center></form></html>');
             docprint.print();

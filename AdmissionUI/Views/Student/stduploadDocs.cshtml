@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "AdmissionForm";
 }
-
+<form id="form1" name="form1" asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" method="get">
 <div class="container p-3">
     <ul class="steps">
         <li class="step">
@@ -81,7 +81,7 @@
 
 
     <div class="text-center mt-5">
-        <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
     </div>
     <div class="card">
@@ -106,9 +106,10 @@
                          
                       
                         <img src="@Model.Std_Photo" width="150" height="150" id="imgpreview1">
-                         
-                        <input type="file" asp-for="ImageFile" onchange="showfile('ImageFile','Photo',this)" accept=".png,.PNG,.bmp,.BMP,.jpeg,.JPEG,.jpg,.JPG">
-                       
+                        @if (Model.isPaidCourseFees ==0)
+                        {
+                          <input type="file" asp-for="ImageFile" onchange="showfile('ImageFile','Photo',this)" accept=".png,.PNG,.bmp,.BMP,.jpeg,.JPEG,.jpg,.JPG">
+                        }
 
                     </div>
                 </div>
@@ -124,8 +125,20 @@
                         <a asp-action="stdWeightage" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
                     </div>
                     <div class="col-6 col-sm-3">
-                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Save & Next</a>
-                       @* <input type="button" onclick="SubmitUploadOnclick()" id="btnl" class="btn btn-primary btn-block" value="Save & Next" />
+                       
+
+                       @if (Model.isPaidCourseFees == 0)
+                        { 
+                            <input type="button" onclick="return SubmitUploadOnclick();" id="btnl" class="btn btn-success btn-block" value="Save & Next" />
+                            <!-- <a  onclick="" asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Save & Next</a>-->
+                        }
+                        else
+                        {
+                            <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white"> Next</a>
+                        } 
+
+
+                        @* <input type="button" onclick="SubmitUploadOnclick()" id="btnl" class="btn btn-primary btn-block" value="Save & Next" />
                         <a class="btn btn-primary btn-block text-white" id="btnlwait" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Please Wait...</a>*@
                     </div>
                 </div>
@@ -138,7 +151,7 @@
 </div>
 
     
-
+</form>
 
 
 
@@ -354,21 +367,27 @@
 
 
     <script>
-        function SubmitUploadOnclick() {
-            var s = true;
-            $('input[type=checkbox]:not(:checked)').each(function () {
-                s = false;
-            });
-            if (s) {
-                //window.location.href = "/admission-form-step5/" + 'Model.EncrptedRoll';
-            } else {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Please upload all documents',
-                    showConfirmButton: false,
-                    timer: 3000
-                })
+    function SubmitUploadOnclick() {
+         
+        var ispaid=@Model.isPaidCourseFees;
+
+        if (ispaid==0)
+         {
+          
+            var filep=  document.getElementById("imgpreview1").src;
+            let position = filep.search("/Photo.jpg");
+           
+
+            var fuData = document.getElementById("ImageFile");
+            var FileUploadPath = fuData.value;
+
+
+            if (FileUploadPath == '' && position>0) {
+                alert("Please upload an image");
+               return ;  
             }
-        }
+            form1.submit();
+         
+         }
+    }
     </script>

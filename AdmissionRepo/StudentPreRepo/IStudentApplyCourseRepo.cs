@@ -9,6 +9,6 @@ namespace AdmissionRepo
         Task<int> updateCourseFeesPaymentStatus(StudentAppliedCourse entity);
         Task<string> genrateGrpFeesforPayment(string appno,int courseID,double amt);
         Task<int> updateCourseFeesGrnStatus(StudentAppliedCourse entity);
-
+        Task<int> IsAnyCoursePaidByStd(string appno);
     }
 }

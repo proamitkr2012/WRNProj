@@ -82,7 +82,7 @@
         
         
         <div class="text-center mt-5">
-            <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
         </div>
         <div class="card">
@@ -111,12 +111,12 @@
                     @Html.HiddenFor(x=>x.EncrptedData)
                     @Html.HiddenFor(x=>x.ApplicationNo)
                     <div class="col-sm-12 text-center border  p-2">
-                        <table class="table" id="qual">
+                        <table class="table" id="qual" style="width: 100%;border-collapse: collapse;"  >
                             <thead>
                                 <tr>
-                                    <td>SrNo.</td>
-                                    <td style="text-align:left;">Name</td>
-                                    <td>Weightage</td>
+                                    <td style="text-align:left;width:5%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">SrNo.</td>
+                                    <td style="text-align:left;width:75%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Name</td>
+                                    <td style="text-align:left;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Weightage</td>
 
                                 </tr>
                             </thead>
@@ -127,17 +127,17 @@
                                 @foreach (var item in Model.stdweightageList)
                                 {
                                     <tr>
-                                          <td>
+                                        <td style="text-align:left;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">
                                             <span>@(idx+1)</span>
                                          </td>
 
-                                        <td style="text-align:left;">
+                                        <td style="text-align:left;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">
                                             <input type="checkbox" class="@item.ParentId" asp-for="@Model.stdweightageList[idx].ctrlWeightage" checked="@(item.StdWeightID==0?false:true)" onclick="setCheckbox(this);" />
                                             <label for="@Model.stdweightageList[idx].ctrlWeightage"> @item.Name </label>
                                             <input type="hidden" class="form-control"   asp-for="@Model.stdweightageList[idx].ID" />
                                             <input type="hidden" class="form-control" asp-for="@Model.stdweightageList[idx].StdWeightID" />
                                         </td>
-                                        <td>
+                                        <td style="text-align:left;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">
                                             @item.Weight
                                         </td>
                                     </tr>
@@ -156,8 +156,20 @@
 
                     </div>
                     <div class="col-md-4 mt-4">
-                        <input type="submit" class="btn btn-success btn-block text-white"
-                               id="btnl" value="Save&Next" />
+
+                        @if (Model.isPaidCourseFees == 0)
+                        {
+                            <input type="submit" class="btn btn-success btn-block text-white"
+                                   id="btnl" value="Save&Next" />
+                        }
+                        else
+                        {
+                            <a asp-action="stduploadDocs" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
+                        }
+
+
+
+                       
 
                     </div>
                 </div>
@@ -172,27 +184,80 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="~/js/step2.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        
+       var ispaid= @Model.isPaidCourseFees;
+        if (ispaid>0) 
+        {
+            $('input[type=checkbox]').each(function () 
+            {
+               $(this).prop("disabled", true);
+            });
+       
+        }
+
+
+    });
+
+
+</script>
 
 <script type="text/javascript">
-function setCheckbox(obj)
-{  
+function setCheckbox(obj) {
+
+
+        var clname = obj.className;
+        var id = obj.id;
+
         if (obj.checked)
         {
-       
-            var clname = obj.className;
-            var id = obj.id
-            $('input[type=checkbox]').each(function () {
-              
-                if ($(this)[0].className == clname && $(this)[0].checked) 
+            
+          
+            if (id=="stdweightageList_0__ctrlWeightage") 
+            {
+                $('input[type=checkbox]').each(function () 
                 {
-                    if ($(this)[0] != obj.id)
+                    if ($(this)[0].id != "stdweightageList_0__ctrlWeightage")
                     {
                         $(this)[0].checked = false;
+                        $(this).prop("disabled", true);
                     }
-                }
-            });
+                
+                });
+                obj.checked = true;
+            }
+            else{
 
-            obj.checked=true;
+                $('input[type=checkbox]').each(function () {
+              
+                    if ($(this)[0].className == clname && $(this)[0].checked) 
+                    {
+                        if ($(this)[0] != obj.id)
+                        {
+                            $(this)[0].checked = false;
+
+                        }
+                    }
+                });
+                obj.checked = true;
+            }
+
+           
+        }
+        else{
+            if (id == "stdweightageList_0__ctrlWeightage")
+            {
+                $('input[type=checkbox]').each(function () 
+                {
+                    $(this)[0].checked = false;
+                    $(this).removeAttr("disabled");
+                });
+                //obj.checked = true;
+            }
+        
+        
         }
     
 }

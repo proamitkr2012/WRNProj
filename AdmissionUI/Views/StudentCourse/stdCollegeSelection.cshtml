@@ -81,7 +81,7 @@
 
 
         <div class="text-center mt-5">
-            <h2>Admission Web Registration  Form - (2023)</h2>
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
 
         </div>
         <div class="card">
@@ -133,13 +133,15 @@
                                 </table>
                                 }
 
-                        <table class="data-table table table-bordered stripe hover nowrap">
+                        <table   style="width: 100%;border-collapse: collapse;">
                             <thead>
                                 <tr>
-                                    <th class="table-plus datatable-nosort">Sr.No.</th>
-                                    <th>Code</th>
-                                    <th>College</th>
-                                    <th>Address</th>
+                                    <th style="width:5%" class="table-plus datatable-nosort">Sr.No.</th>
+                                    <th style="width:10%;text-align:left">Type</th>
+                                    <th style="width:5%;text-align:left">Code</th>
+                                    <th style="width:60%;text-align:left">College</th>
+                                    <th style="width:15%;text-align:left">District</th>
+
                                     <th colspan="2">Action</th>
 
                                 </tr>
@@ -152,12 +154,13 @@
                                     foreach (var item in Model.studentapplycollegeList)
                                     {
                                         <tr>
-                                            <td class="table-plus">@(srno + 1)</td>
-                                            <td>@item.CollegeCode</td>
-                                            <td style="text-align:left"><p style="text-align:justify-all;font-weight:bold">@item.CollegeName</p></td>
-                                            <td> </td>
-                                             
-                                            <td>
+                                            <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">@(srno + 1)</td>
+                                            <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">@item.CollegeType</td>
+                                            <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">@item.CollegeCode</td>
+                                            <td style="text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; "><p style="text-align:justify-all">@item.CollegeName</p></td>
+                                            <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; "> @item.City</td>
+
+                                            <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">
                                                 <input type="checkbox" onclick="return setCollege(@item.CourseId,'@Model.ApplicationNo','@item.CollegeCode',this)" asp-for="@Model.studentapplycollegeList[srno].IsSelect" />
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].ApplicationNo" />
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].CourseId" />

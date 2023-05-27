@@ -224,12 +224,35 @@ namespace AdmissionRepo
             }
         }
 
+        public async Task<int> IsAnyCoursePaidByStd(string appno)
+        {
+            int i = 0;
+
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "IsanycoursePaidByStudent";
+                    var param = new DynamicParameters();
+                    param.Add("@ApllicationNo", appno);
+                    i = await SqlMapper.QuerySingleOrDefaultAsync<int> (connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return i;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+            return i;
 
 
 
-
-
-
-
+             
+        }
     }
 }
