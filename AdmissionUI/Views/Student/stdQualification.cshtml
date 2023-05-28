@@ -174,7 +174,7 @@
                                             <select asp-for="@Model.QualifationList[idx].PassingYear" class=" form-control">
                                                 @if (item.DocName == "10th")
                                                 {
-                                                    for (int i = 1980; i < 2021; i++)
+                                                    for (int i = 1980; i < 2022; i++)
                                                     {
                                                         if (!string.IsNullOrEmpty(item.PassingYear))
                                                         {
@@ -198,7 +198,7 @@
                                                 }
                                                 else if (item.DocName == "12th")
                                                 {
-                                                    for (int i = 1990; i < 2022; i++)
+                                                    for (int i = 1990; i < 2024; i++)
                                                     {
                                                         if (!string.IsNullOrEmpty(item.PassingYear))
                                                         {
