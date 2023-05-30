@@ -120,12 +120,12 @@
                                 </p>
                                 if (!string.IsNullOrEmpty(item.FilePath))
                                 {
-                                    <input type="checkbox" name="docupload" checked hidden>
+                                    <input type="checkbox" data-doc="@item.DocID" name="docupload" checked hidden>
                                     <img src="@item.FilePath" width="150" height="150" id="@(item.EntryID+"fileshow")">
                                 }
                                 else
                                 {
-                                    <input type="checkbox" name="docupload" hidden>
+                                    <input type="checkbox" data-doc="@item.DocID" name="docupload" hidden>
                                     <img src="" width="150" height="150" id="@(item.EntryID+"fileshow")">
                                 }
 
@@ -357,7 +357,10 @@
         function SubmitUploadOnclick() {
             var s = true;
             $('input[type=checkbox]:not(:checked)').each(function () {
-                s = false;
+                var doc = $(this).data("doc");
+               // alert(doc)
+               if(doc!=15){
+                s = false;}
             });
             if (s) {
                 window.location.href = "/admission-form-step5/" + '@Model.EncrptedRoll';

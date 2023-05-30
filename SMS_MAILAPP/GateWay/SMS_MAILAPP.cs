@@ -30,7 +30,7 @@ namespace SMS_MAIL.GateWay
 
 
 
-        public async   Task<int>  sendMail(string emailId, string msg)
+        public async   Task<int>  sendMail(string emailId, string subject, string msg)
         {
             try
             {
@@ -39,6 +39,10 @@ namespace SMS_MAIL.GateWay
                 MailMessage mm = new MailMessage();
                 string _fromEmail = _config.GetSection("EMAIL:FromMail").Value;
                 mm.From = new MailAddress(_fromEmail);
+                mm.To.Add(emailId);
+                mm.Subject = subject;
+                mm.Body = msg;
+
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = _config.GetSection("EMAIL:Host").Value;
                 smtp.EnableSsl = true;

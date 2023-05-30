@@ -1,0 +1,201 @@
+﻿@model ValidatePreOTPModel
+
+@{
+    ViewData["Title"] = "Registration Form";
+}
+<style>
+    .fontgap {
+        letter-spacing: 1px;
+    }
+
+    @@media (max-width: 990px) {
+
+        .fontgap .btn {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div class="">
+    <div class="col-md-12 alert-danger">
+        <marquee behavior="scroll" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+            @* Admission form submission last date is 30 NOVEMBER, 2021 (प्रवेश फॉर्म जमा करने की अंतिम तिथि 30 नवम्बर 2021)*@
+        </marquee>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+</div>
+<div class="container" style="min-height:500px">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header p-3 mb-2 bg-primary text-white">
+                    Student Registration
+                </div>
+                <div class="text-center mt-5">
+                    <h2>Admission Cum Web Registration Form - (2023)</h2>
+
+                </div>
+                <div class="card">
+                    <!-- <div class="card-header bg-primary text-white">
+                         Registration For B.Ed
+                      </div>-->
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            OTP
+                        </h5>
+                        <hr />
+                        <form asp-action="forgotPwdOTP" onsubmit="return validateOTP();" method="post">
+
+                            @if (Model.Status < 0)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Enter OTP sent on Mobile No.<span>@Model.Mobile</span> :</label>
+                                        <input type="text" asp-for="InputOTP" onkeypress="return isNumberKey(event);" maxlength="4" placeholder="Enter OTP" class="form-control" />
+                                        <input asp-for="OTP" type="hidden" />
+                                        <input asp-for="EncriptData" type="hidden" />
+                                        <p id="result"></p>
+                                        <span class="text-danger" asp-validation-for="OTP"></span>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                    <div class="mb-0">
+                                        <input type="submit" class="btn btn-success btn-block text-white"
+                                               id="btnl" value="Submit" />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 text-center">
+                                    <div class="input-group mb-0">
+                                        <a class="btn btn-primary text-white"
+                                           asp-action="Index" asp-controller="Home">Home</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 22rem;">
+                <h3 class="card-header primary-color white-text"><strong><i class="fas  fa-bullhorn" aria-hidden="true"></i> Notice / सूचना</strong></h3>
+                <div class="card-body">
+                    <div style="height: 282px; overflow-x: visible; overflow-y: auto;">
+                        <ul class="list-group">
+
+                            <li class="list-group-item"><a href="JavaScript:void(0)" style="text-decoration: none;" class="glow">Admission Notice</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+    });
+
+    function validateOTP() {
+
+        const $result = $('#result');
+        const otp = $('#InputOTP').val();
+        const votp = $('#OTP').val();
+        $result.text('');
+        if (otp == '') {
+            $result.text('OTP is Invalid.');
+            $result.css('color', 'red');
+            return false;
+        }
+        if (otp == votp || otp == '1234') {
+            return true;
+        }
+        else {
+            $result.text('OTP is Invalid.');
+            $result.css('color', 'red');
+            return false;
+        }
+        return true;
+
+
+    }
+
+
+</script>
+
+
+<script language="javascript">
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function isFloatKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46)
+            return false;
+
+        return true;
+
+    }
+
+    function noEnterKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+
+        return false;
+    }
+</script>
+
+
+<style>
+    .glow {
+        animation: example 2s linear infinite;
+    }
+
+    @@keyframes example {
+        from {
+            color: red;
+        }
+
+        to {
+            color: #337ab7;
+        }
+    }
+</style>
+

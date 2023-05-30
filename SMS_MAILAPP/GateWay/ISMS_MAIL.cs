@@ -5,6 +5,6 @@
 
         public Task<int> sendSMS(string mobile, string msg, string templateID);
 
-        public Task<int> sendMail(string emailId, string msg );
+        public Task<int> sendMail(string emailId,string subject, string msg );
     }
 }

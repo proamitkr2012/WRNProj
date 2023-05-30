@@ -72,10 +72,10 @@
                                 <td>Board/University</td>
                                 <td>Roll No.</td>
                                 <td>Passing Year</td>
-                                <td>Marks Obtained</td>
-                                <td>Marks Total</td>
-                                <td>Percentage/CGPA</td>
-                                <td>Percentage</td>
+                                <td width="5%">Marks Obtained</td>
+                                <td width="7%">Marks Total</td>
+                                <td width="8%">Percentage/CGPA</td>
+                                <td width="8%">Percentage</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
@@ -167,7 +167,7 @@
                                             }
                                             else
                                             {
-                                                for (int i = 1992; i < 2022; i++)
+                                                for (int i = 2008; i < 2023; i++)
                                                 {
                                                     if (!string.IsNullOrEmpty(item.PassingYear))
                                                     {
@@ -219,13 +219,13 @@
                                             }
                                             else
                                             {
-                                                <input type="button" onclick="SaveButtonOnclick(@item.EntryID,@item.DocID)" id="@(item.EntryID+"btnl")" class="btn btn-primary btn-block btnsave" value="Save" />
+                                                <input type="button" onclick="SaveButtonOnclick(@item.EntryID,@item.DocID)" data-doc="@item.DocID" id="@(item.EntryID+"btnl")" class="btn btn-primary btn-block btnsave" value="Save" />
                                             }
                                         }
                                         else
                                         {
 
-                                            <input type="button" id="@(item.EntryID+"btnl")" class="btn btn-secondary btn-block" value="Save" />
+                                            <input type="button" id="@(item.EntryID+"btnl")" data-doc="@item.DocID" class="btn btn-secondary btn-block" value="Save" />
                                         }
                                         <a class="btn btn-primary btn-block text-white" id="@(item.EntryID + "btnlwait")" style="display:none"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i>  Wait...</a>
                                     </td>
@@ -270,7 +270,9 @@
         var stat = true;
         $("#qual .btnsave").each(function () {
             var self = $(this);
-            if (self.val() == "Save") {
+            var doc = $(this).data("doc");
+            //alert(doc)
+            if (self.val() == "Save" && doc!=15) {
                 stat = false;
             }
         });

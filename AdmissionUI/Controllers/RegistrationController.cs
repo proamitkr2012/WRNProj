@@ -67,8 +67,7 @@ namespace AdmissionUI.Controllers
                                 string msg= rnd+" is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
                                 //Integrate Sms gateway Here 
                                 var t=  await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
-                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, msg);
-                               
+                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, "DBRAU OTP Verification ", msg);
                                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.PreRegID_PK, rnd));
                                 return RedirectToAction("preVaildateOTP", new { tid = str });
                             }
@@ -103,7 +102,7 @@ namespace AdmissionUI.Controllers
                                 string msg = rnd + " is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
                                 //Integrate Sms gateway Here 
                                 var t = await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
-                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, msg);
+                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, "DBRAU OTP Verification ", msg);
                                 return RedirectToAction("preVaildateOTP", new { tid = str });
 
                             }
@@ -342,7 +341,7 @@ namespace AdmissionUI.Controllers
         public async Task<IActionResult> forgotPassword()
         {
             ValidatePreOTPModel vl = new ValidatePreOTPModel();
-            return  View(vl);
+            return View(vl);
         }
 
         [HttpPost]
@@ -356,8 +355,14 @@ namespace AdmissionUI.Controllers
 
                     if (!string.IsNullOrEmpty(std.ApplicationNo))
                     {
-                        string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", std.ApplicationNo, 0));
-                        return RedirectToAction("createpassword", new { tid = str });
+                        string rnd = General.GenerateRandomOTP(4);
+                        string msg = rnd + " is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
+                        string tempid = _iconfig.GetSection("SMS:OTPTEMPID").Value;
+                        var t = await _iuow.iSMS.sendSMS(std.Mobile, msg, tempid);
+                        var e = await _iuow.iSMS.sendMail(std.Email, "DBRAU OTP Verification ", msg);
+
+                        string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", std.ApplicationNo, rnd));
+                        return RedirectToAction("forgotPwdOTP", new { tid = str });
                     }
                     else
                     {
@@ -375,15 +380,90 @@ namespace AdmissionUI.Controllers
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 vl.Status = -1;
                 vl.Msg = " Enter Mobile No. is not valid ";
                 return View(vl);
 
             }
-            
+
         }
+
+
+        public async Task<IActionResult> forgotPwdOTP(string? tid)
+        {
+
+
+            ValidatePreOTPModel validatePreOTP = new ValidatePreOTPModel();
+            string strReq = "";
+            strReq = tid.Replace("%2F", "/");
+            tid = strReq;
+            //strReq = strReq.Substring(strReq.IndexOf('?') + 1);
+
+            if (!strReq.Equals(""))
+            {
+                strReq = DecryptQueryString(strReq);
+                string[] arrMsgs = strReq.Split('&');
+                string[] arrIndMsg;
+                string Memcode = "", SMS = "";
+                arrIndMsg = arrMsgs[0].Split('='); //Get the Name
+                Memcode = arrIndMsg[1].ToString().Trim();
+                arrIndMsg = arrMsgs[1].Split('='); //Get the Age
+                SMS = arrIndMsg[1].ToString().Trim();
+                var std = await _iuow.studentPreRepo.GetByIdAsync(Memcode);
+
+                validatePreOTP.OTP = SMS;
+                validatePreOTP.EncriptData = tid;
+                validatePreOTP.Mobile = std.Mobile.Substring(0, 2) + "XXXX" + std.Mobile.Substring(6, std.Mobile.Length - 6);
+            }
+
+            return View(validatePreOTP);
+
+
+
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> forgotPwdOTP(ValidatePreOTPModel validatePreOTP)
+        {
+            string strReq = "";
+            strReq = validatePreOTP.EncriptData.Replace("%2F", "/");
+            //strReq = strReq.Substring(strReq.IndexOf('?') + 1);
+
+            if (!strReq.Equals(""))
+            {
+                strReq = DecryptQueryString(strReq);
+                string[] arrMsgs = strReq.Split('&');
+                string[] arrIndMsg;
+                string Memcode = "", OTPs = "";
+                arrIndMsg = arrMsgs[0].Split('='); //Get the Name
+                Memcode = arrIndMsg[1].ToString().Trim();
+                arrIndMsg = arrMsgs[1].Split('='); //Get the Age
+                OTPs = arrIndMsg[1].ToString().Trim();
+                if (OTPs == validatePreOTP.InputOTP.Trim())
+                {
+                    //Responsemessage Contain ApplicationNO
+                    string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", Memcode, Memcode));
+                    return RedirectToAction("createpassword", new { tid = str });
+
+                }
+                else
+                {
+                    validatePreOTP.Status = -1;
+                    validatePreOTP.Msg = "OTP is Invalid !";
+                }
+
+            }
+            return View(validatePreOTP);
+
+        }
+
+
+
+
 
         public async Task<IActionResult> stdlogout()
         {
