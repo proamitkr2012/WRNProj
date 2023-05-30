@@ -169,15 +169,37 @@
 
 
                     </div>
+
+
+                    <div class="col-sm-12 text-center border  p-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="text-heading" style="text-align:justify"> Before submitting the application form candidates must ensure that all entries made by them in the above application are authentic and correct. After depositing the application fee, no modification will be possible in the application and the application fee deposited will not be refunded under any circumstances. If the candidate shares the login and password sent on mobile and email, he/she will be responsible for any misuse of login and password. I declare that if the information provided by me is found to be false during the admission process or if I am found to be not eligible as per the admission guidelines, then my application will be treated as cancelled.</p>
+
+                                <p class="text-heading" style="text-align:justify"> अभ्यर्थी सुनिश्चित कर ले कि उसके द्वारा आवेदन में उपरोक्त भरी गयी समस्त प्रविष्टियां प्रामाणिक एवं सही है। आवेदन शुल्क जमा करने के उपरांत आवेदन में किसी भी प्रकार का संशोधन संभव नहीं होगा एवं जमा किया गयाआवेदन शुल्क किसी भी दशा में वापस नहीं किया जाएगा | मोबाइल एवं ईमेल पर प्रेषित लॉगइन एवं पासवर्ड को किसी से साझा नहीं करें, अन्यथा लॉगइन एवं पासवर्ड के दुरुपयोग का अभ्यर्थी स्वयं जिम्मेवार होगा | मैं घोषणा करता/करती हूं कि प्रवेश प्रक्रिया अनुसार अगर मेरे द्वारा प्रदत्त सूचना असत्य अथवा में प्रवेश नियमावली अनुसार अनर्ह पाया जाता/जाती हूं तो मेरा आवेदन पत्र स्वतः निरस्त माना जाए |</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                       <div class="col-md-2">
+                                <input type="checkbox" id="chkagree" onclick="setAgree(this,'divpaybtndiv')" /> I Agree
+                        </div>
+                            <div class="col-md-5">
+                            </div>
+                            <div class="col-md-5">
+                            </div>
+                    </div>
+                   </div>
+                    
                     <div class="col-md-2   offset-md-3 mt-4">
                         <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                     </div>
-                    <div class="col-md-4 mt-4">
+                    <div class="col-md-4 mt-4" id="divpaybtndiv" style="display:none">
                          @if (Model.studentapplyList != null && Model.studentapplyList.Count > 0)
                                 {
-                        <input type="submit" class="btn btn-success btn-block text-white"
-                               id="btnl" name="commandName" value="Pay & Next" />
+                             
+                                    <input type="submit" class="btn btn-success btn-block text-white"
+                                    id="btnl" name="commandName" value="Pay & Next" />
                                 }
 
                     </div>
@@ -223,6 +245,23 @@
             }
         }
         return false;
+    }
+
+
+</script>
+<script type="text/javascript">
+    function setAgree(obj,objdiv)
+    {
+      if(obj.checked)
+       {
+            $('#' + objdiv).show(10);
+       }
+       else
+       {
+             $('#' + objdiv).hide(10);
+       }
+        
+    
     }
 
 

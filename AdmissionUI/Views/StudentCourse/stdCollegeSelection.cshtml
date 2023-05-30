@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "AdmissionForm";
 }
-
+ 
 
 <form asp-action="courseFessPay1" asp-controller="StudentCourse" method="post">
 
@@ -105,7 +105,19 @@
                         </div>
                     </div>
                 }
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-2">
+                        <a asp-action="addCourse" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
+                    </div>
+                    <div class="col-md-4">
+                        <div id="sn">
+                            <a asp-action="stdsubjectSelection" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Save & Next</a>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="row">
 
@@ -153,7 +165,7 @@
 
                                     foreach (var item in Model.studentapplycollegeList)
                                     {
-                                        <tr>
+                                        <tr id="tr@(srno)" style="cursor: pointer;background-color:@(item.IsSelect == false ? "#e5e5e5" : "#d9fdd3")" onclick="return rowClick(@item.CourseId,'@Model.ApplicationNo','@item.CollegeCode',this,event);">
                                             <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">@(srno + 1)</td>
                                             <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">@item.CollegeType</td>
                                             <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">@item.CollegeCode</td>
@@ -161,7 +173,7 @@
                                             <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; "> @item.City</td>
 
                                             <td style="font-weight:bold ;text-align:left;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px; ">
-                                                <input type="checkbox" onclick="return setCollege(@item.CourseId,'@Model.ApplicationNo','@item.CollegeCode',this)" asp-for="@Model.studentapplycollegeList[srno].IsSelect" />
+                                                <input type="checkbox" onclick="return setCollege(@item.CourseId,'@Model.ApplicationNo','@item.CollegeCode',this,0,event)" asp-for="@Model.studentapplycollegeList[srno].IsSelect" />
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].ApplicationNo" />
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].CourseId" />
                                             </td>
@@ -186,13 +198,9 @@
                     </div>
                     <div class="col-md-4 mt-4">
                         <div id="sn">
-                            <a asp-action="stdsubjectSelection" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Save&Next</a>
+                            <a asp-action="stdsubjectSelection" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Save & Next</a>
                         </div>
-                        
-                        @* <input type="submit" class="btn btn-success btn-block text-white"
-                               id="btnl" name="commandName" value="Save&Next" />*@
-
-                    </div>
+                      </div>
                 </div>
 
 
@@ -207,9 +215,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-    function setCollege(varcourseID, varappo,varccode, obj) {
+    function setCollege(varcourseID, varappo,varccode,varid,isrow,e ) {
 
-            var checkcount=0;
+        var obj = isrow == 1 ? document.getElementById(varid) : varid;
+       
+        if (isrow==1)
+        {
+            obj.checked = !obj.checked;
+        }
+        
+        obj.parentNode.parentNode.style = (obj.checked == true) ? "cursor: pointer;background-color: #d9fdd3" : "cursor: pointer;background-color: #e5e5e5";
+        
+        var checkcount=0;
         $('input[type=checkbox]').each(function () 
         {
               if ($(this)[0].checked) 
@@ -218,7 +235,7 @@
               }
         });
 
-        console.log(checkcount);
+      
 
         if (checkcount<=10)
         {
@@ -241,7 +258,6 @@
                         if (result == 1) 
                         {
                             
-
                             var total = $('#total').text();
                             if (models.CatId == 1)
                             {
@@ -286,11 +302,21 @@
          {
             alert("You can choose only 10 colleges");
             obj.checked = false;
-         }
+            obj.parentNode.parentNode.style = (obj.checked == true) ? "cursor: pointer;background-color: #d9fdd3" : "cursor: pointer;background-color: #e5e5e5";
 
-         
+        }
+
+        e.stopPropagation();
         return false;
     }
+
+    function rowClick(varcourseID, varappo, varccode, obj,evt) { 
+        
+        var checkctrl = $("#" + obj.id + " input:checkbox")[0];
+        setCollege(varcourseID, varappo, varccode, checkctrl.id,1,evt);
+
+    }
+
 
 
    function setdiv() 
@@ -308,5 +334,10 @@
    }
  
     setdiv();
+
+
+
+
+
 </script>
 
