@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Dashboard\BedNewEntry.cshtml" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
@@ -62,6 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Dashboard\BedNewEntry.cshtml" />
     <None Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_footer.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_header.cshtml" />

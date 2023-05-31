@@ -45,7 +45,7 @@
             <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
             <div class="sidebar-btn-group pb-30 mb-10">
                 <a href="javascript:void(0);"
-                   class="btn btn-outline-primary sidebar-light">White</a>
+                   class="btn btn-outline-primary sidebar-light">Black</a>
               
             </div>
 
@@ -67,14 +67,21 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
 
+
                 <li>
-                    <a asp-action="Index" asp-controller="Dashboard" class="dropdown-toggle no-arrow">
+                    <a asp-action="Index" asp-controller="Dashboard" class="dropdown-toggle no-arrow @(ViewData["ActiveMenu"]!=null && ViewData["ActiveMenu"].Equals("Dashboard")?"active":"")">
+                        <span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-action="BedNewEntry" asp-controller="Dashboard" class="dropdown-toggle no-arrow @(ViewData["ActiveMenu"]!=null && ViewData["ActiveMenu"].Equals("Bednewentry")?"active":"")">
                         <span class="micon bi bi-diagram-3"></span><span class="mtext">New Apply(B.Ed)</span>
                     </a>
                 </li>
 
                 <li>
-                    <a asp-action="StudentNewAdded" asp-controller="Dashboard" class="dropdown-toggle no-arrow">
+                    <a asp-action="StudentNewAdded" asp-controller="Dashboard" class="dropdown-toggle no-arrow @(ViewData["ActiveMenu"]!=null && ViewData["ActiveMenu"].Equals("BedList")?"active":"")">
                         <span class="micon bi bi-diagram-3"></span><span class="mtext">Student List</span>
                     </a>
                 </li>

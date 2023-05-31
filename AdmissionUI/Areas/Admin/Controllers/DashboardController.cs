@@ -48,7 +48,14 @@ namespace AdmissionUI.Areas.Admin.Controllers
 
             return View();
         }
+        public IActionResult BedNewEntry()
+        {
 
+            ViewBag.CollegeList = UOF.IAdmin.GetCollegeList();
+
+            return View();
+        }
+        
         [HttpPost]
         public async Task<IActionResult> PreEntry([FromBody] StudentMastersDTO model)
         {
