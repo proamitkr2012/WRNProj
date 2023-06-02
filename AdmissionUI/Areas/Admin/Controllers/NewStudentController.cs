@@ -1,8 +1,10 @@
-﻿using AdmissionModel;
+﻿using AdmissionData.Entities;
+using AdmissionModel;
 using AdmissionRepo;
 using AdmissionUI.Controllers;
 using AdmissionUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
@@ -86,10 +88,48 @@ namespace AdmissionUI.Areas.Admin.Controllers
 
 
 
-
-		public IActionResult SearchStudent()
+		 
+		public async Task<IActionResult> SearchStudent()
 		{
-			return View();
+			SearchStudentModel sm = new SearchStudentModel();
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+
+            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(0)).ToList();
+            courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+            ViewBag.Courses = courselist;
+
+            return View(sm);
 		}
-	}
+
+		[HttpPost]
+        public async Task<IActionResult> SearchStudent(SearchStudentModel sm)
+        {
+         
+            SearchStudent ss = new SearchStudent();
+            ss.CourseTypeId = sm.CourseTypeId;
+			ss.SearchText =!string.IsNullOrEmpty( sm.SearchText) ?sm.SearchText:"";
+            ss.CourseID =sm.CourseID;
+
+            var list = await _iuow.adminDashBoard.SearchStudentsData(ss);
+
+            if (list != null && list.Count() > 0)
+            {
+                sm.studentList = list.ToList();
+            }
+
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+
+            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(sm.CourseTypeId)).ToList();
+            courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+            ViewBag.Courses = courselist;
+
+            return View(sm);
+        }
+
+
+    }
 }

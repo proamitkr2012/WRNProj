@@ -1,4 +1,5 @@
-﻿using AdmissionModel.DTO;
+﻿using AdmissionModel;
+using AdmissionModel.DTO;
 using AdmissionRepo;
 using AdmissionRepo.Utilities;
 using AdmissionUI.Models;
@@ -64,6 +65,82 @@ namespace AdmissionUI.Areas.Admin.Controllers
             return Json(null);
 
         }
+
+
+        public async Task<IActionResult> TotalBedStudentDetails()
+        {
+            SearchStudentModel sm = new SearchStudentModel();
+            SearchStudent ss = new SearchStudent();
+            ss.CourseTypeId = 0; ss.SearchText = string.Empty;
+            var list = await UOF.adminDashBoard.TotalBedStudentList(ss);
+
+            if (list != null && list.Count() > 0)
+            {
+                sm.studentList = list.ToList();
+            }
+
+            return View(sm);
+        }
+
+        public async Task<IActionResult> RegBedStudentDetails()
+        {
+            SearchStudentModel sm = new SearchStudentModel();
+            SearchStudent ss = new SearchStudent();
+            ss.CourseTypeId = 0; ss.SearchText = string.Empty;
+            ss.CourseID = 0;
+            var list = await UOF.adminDashBoard.RegisteredBedStudentList(ss);
+
+            if (list != null && list.Count() > 0)
+            {
+                sm.studentList = list.ToList();
+            }
+
+            return View(sm);
+        }
+
+
+        public async Task<IActionResult> BedStudentsFees()
+        {
+            SearchStudentModel sm = new SearchStudentModel();
+            SearchStudent ss = new SearchStudent();
+            ss.CourseTypeId = 0; ss.SearchText = string.Empty;
+            ss.CourseID = 0;
+            var list = await UOF.adminDashBoard.Bed_StudentFees_List(ss);
+
+            if (list != null && list.Count() > 0)
+            {
+                sm.studentList = list.ToList();
+            }
+
+            return View(sm);
+        }
+
+        public async Task<IActionResult> BedStudentsCourseFees()
+        {
+            SearchStudentModel sm = new SearchStudentModel();
+            SearchStudent ss = new SearchStudent();
+            ss.CourseTypeId = 0; ss.SearchText = string.Empty;
+            ss.CourseID = 0;
+            var list = await UOF.adminDashBoard.Bed_StudentFees_List(ss);
+
+            if (list != null && list.Count() > 0)
+            {
+                sm.studentList = list.ToList();
+            }
+
+            return View(sm);
+        }
+
+
+
+
+
+
+
+
+
+
+
         public string GetClientIp()
         {
             string _ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();

@@ -42,6 +42,8 @@ namespace AdmissionRepo
             return null;
         }
 
+      
+
         public async Task<DashBoardEntityCount>RegisterationDataCountReport()
         {
             using (IDbConnection connection = _connectionFactory.GetConnection)
@@ -64,6 +66,36 @@ namespace AdmissionRepo
                 }
             }
             return null;
+        }
+
+        public async Task<IEnumerable<StudentAllData>> RegisteredBedStudentList(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "selectAllBedRegisteredStudents";
+                    var param = new DynamicParameters();
+                    param.Add("@CourseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@CourseID", searchStudent.CourseID);
+                    param.Add("@SearchText", searchStudent.SearchText);
+                    param.Add("@PgIndex", searchStudent.PgIndex);
+                    param.Add("@PgSize", searchStudent.PgSize);
+                    var list = await SqlMapper.QueryAsync<StudentAllData>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
         }
 
         public async Task<IEnumerable<StudentAllData>> RegisteredStudentList(SearchStudent searchStudent)
@@ -96,7 +128,42 @@ namespace AdmissionRepo
             }
         }
 
-		public async Task<IEnumerable<StudentAllData>> Student_Course_Fees_List(SearchStudent searchStudent)
+
+        public async Task<IEnumerable<StudentAllData>> SearchStudentsData(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "SearchStudentsData";
+                    var param = new DynamicParameters();
+                    param.Add("@CourseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@CourseID", searchStudent.CourseID);
+                    param.Add("@SearchText", searchStudent.SearchText);
+                    param.Add("@PgIndex", searchStudent.PgIndex);
+                    param.Add("@PgSize", searchStudent.PgSize);
+                    var list = await SqlMapper.QueryAsync<StudentAllData>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+        }
+
+
+
+
+
+        public async Task<IEnumerable<StudentAllData>> Student_Course_Fees_List(SearchStudent searchStudent)
 		{
 			using (IDbConnection connection = _connectionFactory.GetConnection)
 			{
@@ -126,7 +193,68 @@ namespace AdmissionRepo
 			}
 		}
 
-		public async Task<IEnumerable<StudentAllData>> TotalStudentList(SearchStudent searchStudent  )
+
+        public async Task<IEnumerable<StudentAllData>> Bed_StudentFees_List(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "selectAllBedStudent_Fees";
+                    var param = new DynamicParameters();
+                    param.Add("@CourseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@CourseID", searchStudent.CourseID);
+                    param.Add("@SearchText", searchStudent.SearchText);
+                    param.Add("@PgIndex", searchStudent.PgIndex);
+                    param.Add("@PgSize", searchStudent.PgSize);
+                    var list = await SqlMapper.QueryAsync<StudentAllData>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+        }
+
+
+        public async Task<IEnumerable<StudentAllData>> TotalBedStudentList(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "selectAllBedStudents";
+                    var param = new DynamicParameters();
+                    param.Add("@CourseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@SearchText", searchStudent.SearchText);
+                    param.Add("@PgIndex", searchStudent.PgIndex);
+                    param.Add("@PgSize", searchStudent.PgSize);
+                    var list = await SqlMapper.QueryAsync<StudentAllData>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<StudentAllData>> TotalStudentList(SearchStudent searchStudent  )
 		{
 			using (IDbConnection connection = _connectionFactory.GetConnection)
 			{

@@ -1,4 +1,5 @@
 ﻿using AdmissionData.Entities;
+using AdmissionModel;
 using AdmissionRepo;
 using AdmissionUI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,13 @@ namespace AdmissionUI.Controllers
             return Ok(cities);
         }
 
-
+        [HttpPost]
+        public async Task<IActionResult> getCourses([FromBody] HomeModels models)
+        {
+             var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(models.CatId)).ToList();
+             //courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+             return Ok(courselist);
+        }
 
     }
 }

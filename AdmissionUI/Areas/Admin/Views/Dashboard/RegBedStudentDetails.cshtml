@@ -6,19 +6,17 @@
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
     <div class="pd-20">
-        <h4 class="text-blue h4">Student Courses and  Fees List</h4>
+        <h4 class="text-blue h4">Registered Student List</h4>
 
     </div>
     <div class="pb-20">
         <table class="data-table table stripe hover nowrap">
             <thead>
                 <tr>
-                   
+                    <th>Course</th>
+                    <th class="table-plus datatable-nosort">RollNo.</th>
                     <th class="table-plus datatable-nosort">WRN</th>
                     <th>Name</th>
-                    <th>Amount</th>
-                    <th>Courses</th>
-                    <th>CRN</th>
                     <th>Father Name</th>
                     <th>Mother Name</th>
                     <th>Gender</th>
@@ -26,7 +24,7 @@
                     <th>DOB</th>
                     <th>Adhar</th>
                     <th>Created</th>
-                    <th>Type</th>
+
 
                 </tr>
             </thead>
@@ -36,12 +34,10 @@
                     foreach (var item in Model.studentList)
                     {
                         <tr>
-                          
-                            <td class="table-plus">@item.ApplicationNo</td>
+                            <td>@item.CourseTypeName</td>
+                            <td class="table-plus">@item.Roll</td>
+                            <td class="table-plus">@item.WRN</td>
                             <td>@item.Name</td>
-                            <th>@item.Amount</th>
-                            <th>@item.Courses</th>
-                            <th>@item.CRN</th>
                             <td>@item.FatherName</td>
                             <td>@item.MotherName</td>
                             <td>@item.Gender</td>
@@ -49,7 +45,6 @@
                             <td>@item.DOB.Value.ToString("dd MMM yyyy")</td>
                             <td>@item.Aadhar</td>
                             <td>@item.CreatedDate</td>
-                            <td>@item.CourseTypeName</td>
                         </tr>
                     }
 

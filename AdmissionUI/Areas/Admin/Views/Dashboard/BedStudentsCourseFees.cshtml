@@ -13,12 +13,11 @@
         <table class="data-table table stripe hover nowrap">
             <thead>
                 <tr>
-                   
+                    <th class="table-plus datatable-nosort">RollNo.</th>
                     <th class="table-plus datatable-nosort">WRN</th>
                     <th>Name</th>
-                    <th>Amount</th>
                     <th>Courses</th>
-                    <th>CRN</th>
+                     <th>Amount</th>
                     <th>Father Name</th>
                     <th>Mother Name</th>
                     <th>Gender</th>
@@ -36,12 +35,11 @@
                     foreach (var item in Model.studentList)
                     {
                         <tr>
-                          
-                            <td class="table-plus">@item.ApplicationNo</td>
+                            <td class="table-plus">@item.Roll</td>
+                            <td class="table-plus">@item.WRN</td>
                             <td>@item.Name</td>
+                            <th>B.Ed.</th>
                             <th>@item.Amount</th>
-                            <th>@item.Courses</th>
-                            <th>@item.CRN</th>
                             <td>@item.FatherName</td>
                             <td>@item.MotherName</td>
                             <td>@item.Gender</td>
