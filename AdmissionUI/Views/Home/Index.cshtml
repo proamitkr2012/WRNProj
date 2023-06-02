@@ -14,6 +14,57 @@
             overflow: hidden;
         }
     }
+
+    .corners1,
+    .corners {
+        background: #FFF;
+      /*  height: 500px;*/
+        /*margin: 100px auto;*/
+        /*max-width: 400px;*/
+        line-height: 25px;
+        position: relative;
+       /* width: 80%;*/
+        font-family: arial;
+        font-size: 14px;
+        font-weight: bold;
+      
+       /* padding-top: 40px;*/
+        -webkit-box-shadow: 0 1px 7px hsla(0,0%,0%,.2);
+        -moz-box-shadow: 0 1px 7px hsla(0,0%,0%,.2);
+        box-shadow: 0 1px 7px hsla(0,0%,0%,.2);
+    }
+
+        /* Corner Effect */
+    .corners1::after,
+        .corners:before {
+            background: #f8d7da;
+            content: '';
+            height: 20px;
+            position: absolute;
+            top: -15px;
+            width: 100px;
+            -webkit-box-shadow: 0 5px 10px -7px hsla(0,0%,0%,.5);
+            -moz-box-shadow: 0 5px 10px -7px hsla(0,0%,0%,.5);
+            box-shadow: 0 5px 10px -7px hsla(0,0%,0%,.5);
+        }
+
+        .corners1:after {
+            left: -50px;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        .corners:before {
+            right: -50px;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
 </style>
 <div class="">
     <div class="col-md-12 alert-danger">
@@ -23,11 +74,11 @@
     </div>
     <div class="clearfix">&nbsp;</div>
 </div>
-<div class="container" style="min-height:500px">
+<div class="container" style="min-height:500px;">
     <div class="row">
         <div class="col-sm-8">
-            <div class="card">
-                <h5 class="card-header   mb-2 bg-primary text-white">
+            <div class="corners1 card">
+                <h5 class="card-header   mb-2 bg-primary text-white ">
                     Informations
                 </h5>
                 <div class="card-body">
@@ -42,7 +93,7 @@
 
             </div>
             <div class="card mt-4">
-                <h5 class="card-header  bg-success text-white">
+                <h5 class="card-header  bg-success text-white ">
                     Web Registration
                 </h5>
                 <div class="card-body">
@@ -50,7 +101,7 @@
                         <div class="col-sm-6 mt-3">  <a asp-action="Registration" asp-controller="Home" class="btn btn-success btn-lg w-100"><i class="fa-regular fa-clipboard"></i> B.Ed New Registration</a></div>
                         <div class="col-sm-6 mt-3">  <a asp-action="Login" asp-controller="Home" class="btn btn-success btn-lg w-100"><i class="fas fa-sign-in" aria-hidden="true"></i> Candidate Login Only For B.Ed</a></div>
                      
-                        <div class="col-sm-6 mt-3 col-xs-12 ">  <a asp-action="preRegistration" asp-controller="Registration" class="btn btn-primary btn-lg w-100 text-white "> Registration For Other Courses</a></div>
+                        <div class="col-sm-6 mt-3 col-xs-12 ">  <a asp-action="preRegistration" asp-controller="Registration" class="btn btn-primary btn-lg w-100 text-white "> <i class="fa-regular fa-clipboard"></i> Registration For Other Courses</a></div>
 
                         <div class="col-sm-6 mt-3">  <a asp-action="stdlogin" asp-controller="Registration" class="btn btn-primary btn-lg w-100"><i class="fas fa-sign-in" aria-hidden="true"></i> Candidate Login For Other Courses</a></div>
 
@@ -60,8 +111,8 @@
             </div>
         </div>
         <div class="col-sm-4 col-xs-12">
-            <div class="card w-100" style="width: 22rem;">
-                <h3 class="card-header primary-color white-text"><strong><i class="fas  fa-bullhorn" aria-hidden="true"></i> Notice / सूचना</strong></h3>
+            <div class=" corners w-100">
+                <h4 class="card-header bg-primary text-white newsline"> News & Announcements</h4>
                 <div class="card-body">
                     <div style="height: 282px; overflow-x: visible; overflow-y: auto;" >
                         <ul class="list-group">
@@ -90,4 +141,35 @@
             color: #337ab7;
         }
     }
+
+    .newsline {
+        font-family: sans-serif;
+      /*  margin: 100px auto;*/
+        color: #228B22;
+        text-align: center;
+        
+        position: relative;
+    }
+
+    .newsline:before {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 5px;
+            background: red;
+            left: 0;
+            top: 50%;
+            position: absolute;
+        }
+
+    .newsline:after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 5px;
+            background: red;
+            right: 0;
+            top: 50%;
+            position: absolute;
+        }
 </style>
