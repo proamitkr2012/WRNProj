@@ -97,14 +97,14 @@
             </div>
             <div class="d-flex justify-content-between align-items-end">
                 <div class="text-white">
-                    <div class="font-14">Total Application(Candi.) </div>
+                    <div class="font-14">Total Application(Candidate) </div>
                     <div class="font-24 weight-500">
 						<a asp-controller="NewStudent" asp-action="TotalStudentDetails" target="_blank" class="text-decoration-none text-white">	@Model.NewAdmissionDataCount.TotalWRN</a>
 
 					</div>
                 </div>
                 <div class="text-white">
-                    <div class="font-14">Fee Paid Candidate</div>
+					<div class="font-14">Fee Paid (Candidate)</div>
 					<div class="font-24 weight-500">
 						<a asp-controller="NewStudent" asp-action="RegStudentDetails" target="_blank" class="text-decoration-none text-white">
 						@Model.NewAdmissionDataCount.TotalRegistered
@@ -164,7 +164,7 @@
 			</div>
 			<div class="d-flex justify-content-between align-items-end">
 				<div class="text-white">
-					<div class="font-14">Total Application(Candi.)</div>
+					<div class="font-14">Total Application(Candidate)</div>
 					<div class="font-24 weight-500">
 
 						<a asp-controller="Dashboard" asp-action="TotalBedStudentDetails" target="_blank" class="text-decoration-none text-white">
@@ -175,7 +175,7 @@
 						</div>
 				</div>
 				<div class="text-white">
-					<div class="font-14">Fee Paid Candidate</div>
+					<div class="font-14">Fee Paid (Candidate)</div>
 					<div class="font-24 weight-500">
 						<a asp-controller="Dashboard" asp-action="RegBedStudentDetails" target="_blank" class="text-decoration-none text-white">
 							@Model.BedAdmissionDataCount.TotalRegistered
