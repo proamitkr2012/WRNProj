@@ -3,9 +3,12 @@ using AdmissionModel;
 using AdmissionRepo;
 using AdmissionUI.Controllers;
 using AdmissionUI.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
@@ -178,11 +181,40 @@ namespace AdmissionUI.Areas.Admin.Controllers
         }
 
 
-        [HttpPost]
+        
         public async Task<IActionResult> actionSearchStudent(string tid, string catid)
         {
+            string strReq = "";
+            strReq = tid.Replace("%2F", "/");
+            tid = strReq;
+            //strReq = strReq.Substring(strReq.IndexOf('?') + 1);
 
-            return RedirectToAction("stdprofile", "Student");
+            if (!strReq.Equals(""))
+            {
+                strReq = DecryptQueryString(strReq);
+                string[] arrMsgs = strReq.Split('&');
+                string[] arrIndMsg;
+                string Memcode = "", SMS = "";
+                arrIndMsg = arrMsgs[0].Split('='); //Get the Name
+                Memcode = arrIndMsg[1].ToString().Trim();
+                arrIndMsg = arrMsgs[1].Split('='); //Get the Age
+                SMS = arrIndMsg[1].ToString().Trim();
+                var identity = new ClaimsIdentity(new[] {
+                    new Claim(ClaimTypes.Sid,Memcode)
+                    ,new Claim(ClaimTypes.Role,CurrentUser.Roles.ToString() )
+                    ,new Claim(ClaimTypes.Name,"" )
+                     ,new Claim(ClaimTypes.PrimarySid,CurrentUser.UserId.ToString() )
+                    }, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", tid, 1));
+                return RedirectToAction("stdprofile", "Student", new { tid = str });
+            }
+            else
+            {
+
+                return RedirectToAction("SearchStudent");
+            }
         }
 
 
