@@ -89,7 +89,7 @@
                            <td> <img src="@item.Std_PHOTO" width="150" height="150" id="imgpreview1"></td>
                            <td>@item.CRN</td>
                                             <td>
-                                                <a asp-action="" asp-controller="" asp-route-tid=" @(item.EncrptedData)" asp-route-cid="@item.ApplicationNo">
+                                                <a asp-action="actionSearchStudent" asp-controller="NewStudent" asp-route-tid=" @(item.EncrptedData)" asp-route-cid="1">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                             </td>

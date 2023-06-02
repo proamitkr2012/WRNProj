@@ -19,7 +19,7 @@ namespace AdmissionUI.Areas.Admin.Controllers
         {
 			_logger = logger;
 			_iuow = iuow;
-			//, IHostingEnvironment EnvhostingEnv = Env;
+			//,IHostingEnvironment EnvhostingEnv = Env;
 		}
 
 	
@@ -122,10 +122,7 @@ namespace AdmissionUI.Areas.Admin.Controllers
                 sm.listcourseWise  = list.ToList();
             }
             return View(sm);
-           
-
-
-        }
+         }
 
 
 
@@ -145,46 +142,50 @@ namespace AdmissionUI.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-        public async Task<IActionResult> SearchStudent(SearchStudentModel sm)
+        public async Task<IActionResult> SearchStudent(SearchStudentModel sm )
         {
-         
-            SearchStudent ss = new SearchStudent();
-            ss.CourseTypeId = sm.CourseTypeId;
-			ss.SearchText =!string.IsNullOrEmpty( sm.SearchText) ?sm.SearchText:"";
-            ss.CourseID =sm.CourseID;
+            
+                SearchStudent ss = new SearchStudent();
+                ss.CourseTypeId = sm.CourseTypeId;
+                ss.SearchText = !string.IsNullOrEmpty(sm.SearchText) ? sm.SearchText : "";
+                ss.CourseID = sm.CourseID;
 
-            var list = await _iuow.adminDashBoard.SearchStudentsData(ss);
+                var list = await _iuow.adminDashBoard.SearchStudentsData(ss);
 
-            if (list != null && list.Count() > 0)
-            {
-                sm.studentList = list.ToList();
-
-                for(int i=0;i<sm.studentList.Count;i++)
+                if (list != null && list.Count() > 0)
                 {
-                    sm.studentList[i].EncrptedData = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", sm.studentList[i].ApplicationNo, 0));
+                    sm.studentList = list.ToList();
+
+                    for (int i = 0; i < sm.studentList.Count; i++)
+                    {
+                        sm.studentList[i].EncrptedData = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", sm.studentList[i].ApplicationNo, 0));
+                    }
                 }
-            }
 
-            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
-            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
-            ViewBag.CourseType = listcoursetype;
+                var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+                listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+                ViewBag.CourseType = listcoursetype;
 
-            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(sm.CourseTypeId)).ToList();
-            courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
-            ViewBag.Courses = courselist;
+                var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(sm.CourseTypeId)).ToList();
+                courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+                ViewBag.Courses = courselist;
 
-            return View(sm);
+                return View(sm);
+            
+
+
+
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> SearchStudent(string tid,string catid)
-        //{
+        [HttpPost]
+        public async Task<IActionResult> actionSearchStudent(string tid, string catid)
+        {
 
-        //    return RedirectToAction("stdprofile", "Student");
-        //}
+            return RedirectToAction("stdprofile", "Student");
+        }
 
- 
+
         public string EncryptQueryString(string strQueryString)
         {
             EncryptDecryptQueryString objEDQueryString = new EncryptDecryptQueryString();
