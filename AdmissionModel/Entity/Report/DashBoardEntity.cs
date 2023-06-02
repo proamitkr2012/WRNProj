@@ -12,6 +12,8 @@ namespace AdmissionModel
     public double TotalRegistered{  get; set; }
     public double NoofFeePaid     {  get; set; }
     public double TotalAmount { get; set; }
+    public int CourseId { get; set; }
+    public string CourseName { get; set; }
 
     }
 }

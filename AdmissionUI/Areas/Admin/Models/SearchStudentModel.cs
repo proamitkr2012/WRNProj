@@ -11,5 +11,6 @@ namespace AdmissionUI.Models
 		public int PgIndex { get; set; } = 1;
         public int PgSize { get; set; } = 50;
 	    public List<StudentAllData> studentList { get; set; }
-	}
+        public List<DashBoardEntityCount> listcourseWise { get; set; }
+    }
 }

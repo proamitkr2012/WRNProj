@@ -16,6 +16,7 @@ namespace AdmissionModel
 		public string? SabTranId { get; set; }
         public string? Amount { get; set; }
 		public string? CRN { get; set; }
+        public string? EncrptedData { get; set; }
 
-	}
+    }
 }

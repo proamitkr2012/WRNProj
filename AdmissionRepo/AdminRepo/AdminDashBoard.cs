@@ -282,5 +282,32 @@ namespace AdmissionRepo
 				return null;
 			}
 		}
-	}
+
+        public async Task<IEnumerable<DashBoardEntityCount>> CourseWiseStudentCount(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "Dash_CourseAppliedCount";
+                    var param = new DynamicParameters();
+                    param.Add("@courseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@CourseID", searchStudent.CourseID);
+                    var list = await SqlMapper.QueryAsync<DashBoardEntityCount>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+        }
+    }
 }

@@ -10,5 +10,7 @@ namespace AdmissionUI.Models
 		public DashBoardEntityCount BedAdmissionDataCount
 		{ get; set; }
 
+		
+
 	}
 }

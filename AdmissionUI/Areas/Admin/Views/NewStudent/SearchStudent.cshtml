@@ -88,9 +88,21 @@
                             <td>@item.Mobile</td>
                            <td> <img src="@item.Std_PHOTO" width="150" height="150" id="imgpreview1"></td>
                            <td>@item.CRN</td>
-                                            <td><a>Profile</a></td>
-                                            <td><a>Qualification</a></td>
-                                            <td><a>Weightage</a></td>
+                                            <td>
+                                                <a asp-action="" asp-controller="" asp-route-tid=" @(item.EncrptedData)" asp-route-cid="@item.ApplicationNo">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
                         </tr>
                     }
 

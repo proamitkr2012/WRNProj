@@ -5,6 +5,7 @@ using AdmissionUI.Controllers;
 using AdmissionUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using System.Collections.Generic;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
@@ -86,10 +87,50 @@ namespace AdmissionUI.Areas.Admin.Controllers
 			return View(sm);
 		}
 
+        public async Task<IActionResult>  CourseWiseStudentCount()
+        {
+            SearchStudentModel sm = new SearchStudentModel();
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+
+            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(-1)).ToList();
+            courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+            ViewBag.Courses = courselist;
+
+            return View(sm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CourseWiseStudentCount(SearchStudentModel sm    )
+        {
+            SearchStudent ss=new SearchStudent();
+            ss.CourseTypeId = sm.CourseTypeId;
+            ss.CourseID = sm.CourseID;
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(sm.CourseTypeId)).ToList();
+            courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+            ViewBag.Courses = courselist;
 
 
-		 
-		public async Task<IActionResult> SearchStudent()
+            var list = await _iuow.adminDashBoard.CourseWiseStudentCount(ss);
+
+            if (list != null && list.Count() > 0)
+            {
+                sm.listcourseWise  = list.ToList();
+            }
+            return View(sm);
+           
+
+
+        }
+
+
+
+
+        public async Task<IActionResult> SearchStudent()
 		{
 			SearchStudentModel sm = new SearchStudentModel();
             var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
@@ -117,6 +158,11 @@ namespace AdmissionUI.Areas.Admin.Controllers
             if (list != null && list.Count() > 0)
             {
                 sm.studentList = list.ToList();
+
+                for(int i=0;i<sm.studentList.Count;i++)
+                {
+                    sm.studentList[i].EncrptedData = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", sm.studentList[i].ApplicationNo, 0));
+                }
             }
 
             var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
@@ -129,6 +175,29 @@ namespace AdmissionUI.Areas.Admin.Controllers
 
             return View(sm);
         }
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> SearchStudent(string tid,string catid)
+        //{
+
+        //    return RedirectToAction("stdprofile", "Student");
+        //}
+
+ 
+        public string EncryptQueryString(string strQueryString)
+        {
+            EncryptDecryptQueryString objEDQueryString = new EncryptDecryptQueryString();
+            return objEDQueryString.Encrypt(strQueryString, "r0b1nr0y");
+        }
+
+
+        private string DecryptQueryString(string strQueryString)
+        {
+            EncryptDecryptQueryString objEDQueryString = new EncryptDecryptQueryString();
+            return objEDQueryString.Decrypt(strQueryString, "r0b1nr0y");
+        }
+
 
 
     }

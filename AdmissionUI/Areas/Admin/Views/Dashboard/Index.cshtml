@@ -92,19 +92,19 @@
                 </div>
                 <div class="font-14 text-right">
 
-                    <div class="font-30">Registrations</div>
+                    <div class="font-30">WRN Registrations</div>
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-end">
                 <div class="text-white">
-                    <div class="font-14">Total WRN</div>
+                    <div class="font-14">Total Application(Candi.) </div>
                     <div class="font-24 weight-500">
 						<a asp-controller="NewStudent" asp-action="TotalStudentDetails" target="_blank" class="text-decoration-none text-white">	@Model.NewAdmissionDataCount.TotalWRN</a>
 
 					</div>
                 </div>
                 <div class="text-white">
-                    <div class="font-14">Registered</div>
+                    <div class="font-14">Fee Paid Candidate</div>
 					<div class="font-24 weight-500">
 						<a asp-controller="NewStudent" asp-action="RegStudentDetails" target="_blank" class="text-decoration-none text-white">
 						@Model.NewAdmissionDataCount.TotalRegistered
@@ -125,12 +125,12 @@
 				</div>
 				<div class="font-14 text-right ">
 
-					<div class="font-30 text-black">Fees</div>
+					<div class="font-30 text-black">Course Fee</div>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between align-items-end">
 				<div class="text-black">
-					<div class="font-14">No. Of Fee Paid</div>
+					<div class="font-14">Fees Paid </div>
 					<div class="font-24 weight-500">
 						<a asp-controller="NewStudent" asp-action="StudentsCourseFees" target="_blank" class="text-decoration-none">
 						@Model.NewAdmissionDataCount.NoofFeePaid

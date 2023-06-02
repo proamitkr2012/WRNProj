@@ -1,0 +1,145 @@
+﻿@model SearchStudentModel
+@{
+    ViewData["Title"] = "StudentNewAdded"; ViewData["ActiveMenu"] = "Course Wise Status";
+}
+
+<!-- Simple Datatable start -->
+
+<form asp-action="CourseWiseStudentCount" asp-controller="NewStudent" method="post">
+
+    <div class="card-box mb-30">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Course Wise Status </h4>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Course Type</label>
+                            <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(ViewBag.CourseType,"CourseTypeId","CourseTypeName"))" asp-for="CourseTypeId">
+                            </select>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Course</label>
+                            <select class="form-select" aria-label="Default select example" asp-for="CourseID" asp-items="@(new SelectList(ViewBag.Courses,"CourseId","CourseName"))">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label></label>
+                            <input type="submit" class="btn btn-success btn-block text-white"
+                                   id="btnl" name="commandName" value="Search" />
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                
+                <div class="row">
+                    <div class="pb-20">
+                        <table class="table table-bordered  nowrap">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th  style="width:5%">SrNo.</th>
+                                    <th style="width:25%">Course</th>
+                                    <th style="width:20%">Total Applied Candi.</th>
+                                    <th style="width:20%">Fee Not Paid Candi.</th>
+                                    <th style="width:20%">Fee Paid Candi.</th>
+                                    <th style="width:10%">Amount (INR)</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var srno = 1;
+                                }
+                                @if (Model.listcourseWise != null && Model.listcourseWise.Count > 0)
+                                {
+                                    foreach (var item in Model.listcourseWise)
+                                    {
+                                        <tr>
+                                            <td>@srno</td>
+                                            <td>@item.CourseName</td>
+                                            <td>@(item.TotalWRN+item.TotalRegistered)</td>
+                                            <td>@item.TotalWRN</td>
+                                            <td>@item.TotalRegistered</td>
+                                            <td>@item.TotalAmount.ToString("#0,00")</td>
+                                           
+                                             
+                                        </tr>
+                                        srno = srno + 1;
+                                    }
+
+
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $("#CourseTypeId").change(function (e) {
+                var models = {};
+                models.CatId = $(this).val();
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Content("~/master/getCourses")',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    processData: false,
+                    data: JSON.stringify(models),
+                    //headers: { "Authorization": localStorage.getItem('token') },
+                    success: function (result) {
+                        $('#CourseID')
+                            .empty()
+                            .append('<option selected="selected" value="0">Select Course</option>');
+
+                        if (result != null && result.length > 0) {
+                            var rw = 0;
+
+                            var customers = result;
+
+                            var rows = '';
+                            for (var i = 0; i < result.length; i++) {
+
+                                var opt = new Option(customers[i].CourseName, customers[i].CourseId);
+                                document.getElementById("CourseID").options.add(opt);
+
+                            }
+                        }
+
+                    }, error: function () {
+                        alert("There was error !");
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+</form>
