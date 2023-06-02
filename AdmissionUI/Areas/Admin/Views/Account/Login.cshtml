@@ -47,11 +47,11 @@
                             <div class="forgot-password">
                             <a href="forgot-password.html">Forgot Password</a>
                             </div>
-                            </div>*@
+                            </div>
                             <div class="captcha-box" style="text-align:center">
                                 <canvas id="canvas" height=80 style='height:80px'></canvas>
                                 <input name="code" autocomplete="off" class="form-control" placeholder="Captcha Code" id="captcha">
-                            </div>
+                            </div>*@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -112,14 +112,14 @@
             $("#Password").removeClass("input-validation-error");
         }
 
-
-        const ans = captcha.valid($('input[name="code"]').val());
-        if (ans == false) {
-            flag = false;
-            $("#captcha").addClass("input-validation-error");
-        } else {
-            $("#captcha").removeClass("input-validation-error");
-        }
+        /* ------------for capcha------------*/
+        //const ans = captcha.valid($('input[name="code"]').val());
+        //if (ans == false) {
+        //    flag = false;
+        //    $("#captcha").addClass("input-validation-error");
+        //} else {
+        //    $("#captcha").removeClass("input-validation-error");
+        //}
 
         if (flag) {
             var obj = {

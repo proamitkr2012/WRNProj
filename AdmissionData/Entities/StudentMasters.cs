@@ -64,6 +64,6 @@ namespace AdmissionData.Entities
         [NotMapped]
         public string? Std_PHOTO { get; set; }
 
-
+        
     }
 }

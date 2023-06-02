@@ -1,4 +1,5 @@
 ﻿using AdmissionModel;
+using AdmissionModel.DTO;
 using AdmissionRepo;
 using AdmissionRepo.Utilities;
 using AdmissionUI.Helpers;
@@ -6,20 +7,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net;
 using System.Security.Claims;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using AdmissionModel.DTO;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Data.SqlClient;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+	[Area("Admin")]
     public class AccountController : Controller
     {
         protected readonly IHttpContextAccessor httpContextAccessor;

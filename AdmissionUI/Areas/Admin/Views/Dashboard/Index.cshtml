@@ -1,4 +1,4 @@
-﻿@model StudentPreData
+﻿@model AdminRptModel
 @{
 	ViewData["Title"] = "Index";
 	ViewData["ActiveMenu"] = "Dashboard";
@@ -82,7 +82,7 @@
 *@
 <div class="row pb-10">
 
-    <div class="col-md-4 mb-20">
+    <div class="col-md-6 mb-20">
         <div class="card-box min-height-200px pd-20 mb-20"
              data-bgcolor="orange">
             <div class="d-flex justify-content-between pb-20 text-white">
@@ -97,46 +97,88 @@
             </div>
             <div class="d-flex justify-content-between align-items-end">
                 <div class="text-white">
-                    <div class="font-14">Total</div>
-                    <div class="font-24 weight-500">1865</div>
+                    <div class="font-14">Total WRN</div>
+                    <div class="font-24 weight-500">
+						<a asp-controller="NewStudent"  asp-action="TotalStudentDetails" target="_blank" class="text-decoration-none">	@Model.NewAdmissionDataCount.TotalWRN</a>
+
+					</div>
                 </div>
                 <div class="text-white">
-                    <div class="font-14">Total</div>
-                    <div class="font-24 weight-500">1865</div>
+                    <div class="font-14">Registered</div>
+					<div class="font-24 weight-500">
+						<a asp-controller="NewStudent" asp-action="RegStudentDetails" target="_blank" class="text-decoration-none">
+						@Model.NewAdmissionDataCount.TotalRegistered
+						</a>
+					</div>
                 </div>
             </div>
         </div>
 
     </div>
-	<div class="col-md-4 mb-20">
+	<div class="col-md-6 mb-20">
 		<div class="card-box min-height-200px pd-20 mb-20"
 			 data-bgcolor="white">
 			<div class="d-flex justify-content-between pb-20 text-white">
 				<div class="icon h1 text-black">
-					<i class="fa fa-users" aria-hidden="true"></i>
+					<i class="fa fa-money" aria-hidden="true"></i>
 
 				</div>
 				<div class="font-14 text-right ">
 
-					<div class="font-30 text-black">Registrations</div>
+					<div class="font-30 text-black">Fees</div>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between align-items-end">
 				<div class="text-black">
-					<div class="font-14">Total</div>
-					<div class="font-24 weight-500">1865</div>
+					<div class="font-14">No. Of Fee Paid</div>
+					<div class="font-24 weight-500">
+						<a asp-controller="NewStudent" asp-action="StudentsCourseFees" target="_blank" class="text-decoration-none">
+						@Model.NewAdmissionDataCount.NoofFeePaid
+						</a>
+					</div>
 				</div>
 				<div class="text-black">
-					<div class="font-14">Total</div>
-					<div class="font-24 weight-500">1865</div>
+					<div class="font-14">Total Amount</div>
+					<div class="font-24 weight-500">
+						<a asp-controller="NewStudent" asp-action="StudentsFees" target="_blank" class="text-decoration-none">
+						@Model.NewAdmissionDataCount.TotalAmount.ToString("#0,00")
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 
 	</div>
-	<div class="col-md-4 mb-20">
+	<div class="col-md-6 mb-20">
 		<div class="card-box min-height-200px pd-20 mb-20"
 			 data-bgcolor="green">
+			<div class="d-flex justify-content-between pb-20 text-white">
+				<div class="icon h1 text-white">
+					<i class="fa fa-users" aria-hidden="true"></i>
+
+				</div>
+				<div class="font-14 text-right">
+
+					<div class="font-30">B.Ed. Registrations</div>
+				</div>
+			</div>
+			<div class="d-flex justify-content-between align-items-end">
+				<div class="text-white">
+					<div class="font-14">Total Registration</div>
+					<div class="font-24 weight-500"> @Model.BedAdmissionDataCount.TotalWRN</div>
+				</div>
+				<div class="text-white">
+					<div class="font-14">Registered</div>
+					<div class="font-24 weight-500"> @Model.BedAdmissionDataCount.TotalRegistered</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-md-6 mb-20">
+		<div class="card-box min-height-200px pd-20 mb-20"
+			 data-bgcolor="orange">
 			<div class="d-flex justify-content-between pb-20 text-white">
 				<div class="icon h1 text-white">
 					<i class="fa fa-money" aria-hidden="true"></i>
@@ -144,50 +186,23 @@
 				</div>
 				<div class="font-14 text-right">
 
-					<div class="font-30">Registrations</div>
+					<div class="font-30">B.Ed. Fees</div>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between align-items-end">
 				<div class="text-white">
-					<div class="font-14">Total</div>
-					<div class="font-24 weight-500">1865</div>
+					<div class="font-14">No.Of Fees Paid </div>
+					<div class="font-24 weight-500"> @Model.BedAdmissionDataCount.NoofFeePaid</div>
 				</div>
 				<div class="text-white">
-					<div class="font-14">Total</div>
-					<div class="font-24 weight-500">1865</div>
+					<div class="font-14">Total Amount</div>
+					<div class="font-24 weight-500">  @Model.BedAdmissionDataCount.TotalAmount.ToString("#0,00")</div>
 				</div>
 			</div>
 		</div>
 
 	</div>
-
-	<div class="col-md-4 mb-20">
-		<div class="card-box min-height-200px pd-20 mb-20"
-			 data-bgcolor="orange">
-			<div class="d-flex justify-content-between pb-20 text-white">
-				<div class="icon h1 text-white">
-					<i class="fa fa-users" aria-hidden="true"></i>
-
-				</div>
-				<div class="font-14 text-right">
-
-					<div class="font-30">Registrations</div>
-				</div>
-			</div>
-			<div class="d-flex justify-content-between align-items-end">
-				<div class="text-white">
-					<div class="font-14">Total</div>
-					<div class="font-24 weight-500">1865</div>
-				</div>
-				<div class="text-white">
-					<div class="font-14">Total</div>
-					<div class="font-24 weight-500">1865</div>
-				</div>
-			</div>
-		</div>
-
-	</div>
-	<div class="col-md-4 mb-20">
+	@*<div class="col-md-4 mb-20">
 		<div class="card-box min-height-200px pd-20 mb-20"
 			 data-bgcolor="white">
 			<div class="d-flex justify-content-between pb-20 text-white">
@@ -238,6 +253,6 @@
 			</div>
 		</div>
 
-	</div>
+	</div>*@
 </div>
 

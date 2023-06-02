@@ -1,23 +1,8 @@
-﻿using AdmissionData.Entities;
-using AdmissionModel;
-using AdmissionModel.DTO;
-using AdmissionModel.Enum;
+﻿using AdmissionModel.DTO;
 using AdmissionRepo;
 using AdmissionRepo.Utilities;
+using AdmissionUI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http;
-using System;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.IO;
-using Newtonsoft.Json;
-using System.Linq;
 using System.Globalization;
 
 namespace AdmissionUI.Areas.Admin.Controllers
@@ -41,12 +26,15 @@ namespace AdmissionUI.Areas.Admin.Controllers
             UOF = uow;
         }
 
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
-           
-           ViewBag.CollegeList= UOF.IAdmin.GetCollegeList();
+            var data = await UOF.adminDashBoard.RegisterationDataCountReport();
+			var bedData = await UOF.adminDashBoard.BedRegisterationDataCountReport();
+            AdminRptModel am = new AdminRptModel();
+            am.NewAdmissionDataCount = data ;
+            am.BedAdmissionDataCount = bedData;
 
-            return View();
+			return View(am);
         }
         public IActionResult BedNewEntry()
         {
@@ -89,8 +77,14 @@ namespace AdmissionUI.Areas.Admin.Controllers
         {
             List<StudentMastersDTO> studentlist = new List<StudentMastersDTO>();
             studentlist = UOF.IAdmin.GETStudentNewAdded(CurrentUser.UserId);
-
             return View(studentlist);
         }
+
+ 
+
+
+
+
+
     }
 }

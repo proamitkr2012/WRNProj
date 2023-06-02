@@ -4,7 +4,7 @@
     {
         public int Status { get; set; } = 0;
         public string Msg { get; set; } = "";
-
-        public int isPaidCourseFees { get;set; }
+		public string Roles { get; set; } = "";
+		public int isPaidCourseFees { get;set; }
     }
 }

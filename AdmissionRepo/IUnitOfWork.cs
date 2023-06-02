@@ -16,5 +16,8 @@ namespace AdmissionRepo
         public  IStudentApplyCourseRepo studentApplyCourse { get; }
         public IstudentApplyCollegeRepo studentApplyCollege { get; }
         public ISMS_MAIL  iSMS { get; }
+
+        public IAdminDashBoardRepo adminDashBoard{ get; }
+        
     }
 }

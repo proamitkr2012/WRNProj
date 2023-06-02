@@ -18,8 +18,8 @@ namespace ServiceRegistration
             services.AddScoped<IStdWeightageRep, StdWeightageRep>();
             services.AddScoped<IStudentApplyCourseRepo, StudentApplyCourseRepo>();
             services.AddScoped<IstudentApplyCollegeRepo, studentApplyCollegeRepo > ();
-         
-
+            services.AddScoped<IAdminDashBoardRepo, AdminDashBoardRepo>();
+        
 
 
         }

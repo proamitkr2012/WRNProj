@@ -18,8 +18,9 @@ namespace AdmissionRepo
         private readonly IStudentApplyCourseRepo _istudentApplyCourse;
         private readonly IstudentApplyCollegeRepo _istudentApplyCollege;
         private readonly ISMS_MAIL _iSMS;
+        public IAdminDashBoardRepo _adminDashBoard { get; }
         public UnitOfWork(DataContext _db, IDapperContext dapperContext, IMailClient mailClient, IstudentPreRepo istudentPreRepo, IMasterRepo imasterRepo, IStudentQualificationRepo iqulificationRepo
-            , IStdWeightageRep iStdWeightageRep, IStudentApplyCourseRepo istudentApplyCourse, IstudentApplyCollegeRepo istudentApplyCollege, ISMS_MAIL iSMS)
+            , IStdWeightageRep iStdWeightageRep, IStudentApplyCourseRepo istudentApplyCourse, IstudentApplyCollegeRepo istudentApplyCollege, ISMS_MAIL iSMS, IAdminDashBoardRepo adminDashBoard)
         {
             db = _db;
             _dapperContext = dapperContext;
@@ -30,6 +31,7 @@ namespace AdmissionRepo
             _istudentApplyCourse = istudentApplyCourse;
             _istudentApplyCollege = istudentApplyCollege;
             _iSMS = iSMS;
+            _adminDashBoard = adminDashBoard;   
         }
 
         private AdminRepository _IAdmin;
@@ -94,6 +96,11 @@ namespace AdmissionRepo
         {
             get { return _iSMS; }
         }
+
+        public IAdminDashBoardRepo adminDashBoard 
+        { 
+            get { return _adminDashBoard; }
+        } 
 
         public int SaveChanges()
         {

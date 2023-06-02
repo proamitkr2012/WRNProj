@@ -466,8 +466,9 @@ namespace AdmissionUI.Controllers
 
 
         public async Task<IActionResult> stdlogout()
-        {
-           return RedirectToAction("stdlogin");
+		{
+			await HttpContext.SignOutAsync();
+			return RedirectToAction("stdlogin");
         
         }
 
