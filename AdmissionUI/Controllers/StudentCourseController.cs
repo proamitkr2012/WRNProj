@@ -4,6 +4,7 @@ using AdmissionRepo;
 using AdmissionUI.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Claims;
 
@@ -157,7 +158,7 @@ namespace AdmissionUI.Controllers
             var lisapplycourses = await _iuow.studentApplyCourse.GetAllAsyncByAppNo(appno);
             if (lisapplycourses != null && lisapplycourses.Count() > 0)
             {
-                std.studentapplyList = lisapplycourses.ToList().Where(x => x.IsFor_Paid == true  && x.IsPaid==0).ToList();
+                std.studentapplyList = lisapplycourses.ToList().Where(x => x.IsFor_Paid == true  && x.IsPaid==0 && string.IsNullOrEmpty(x.TransactionID)  ).ToList();
             }
             else
             {
@@ -195,6 +196,7 @@ namespace AdmissionUI.Controllers
             {
                 var res = 0;
                 var fees = std.studentapplyList.Sum(x => x.Fees);
+                string courses = string.Join(",",std.studentapplyList.Select(x => x.CourseId));
                 var grn =await _iuow.studentApplyCourse.genrateGrpFeesforPayment(std.ApplicationNo, std.studentapplyList[0].CourseId, fees);
                 foreach (var item in std.studentapplyList)
                 {

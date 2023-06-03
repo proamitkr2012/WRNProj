@@ -156,7 +156,7 @@ namespace AdmissionRepo
                     param.Add("@Religion", entity. Religion);
                     param.Add("@Nationalty", entity.Nationalty );
                     param.Add("@EWS", entity.Ews);
-                    
+                    param.Add("@CreatedBy", entity.CreatedBy);
                     var rowsInserted = await SqlMapper.ExecuteAsync(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
                     connection.Close();
                     return rowsInserted;

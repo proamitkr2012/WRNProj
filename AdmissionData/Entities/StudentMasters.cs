@@ -63,7 +63,10 @@ namespace AdmissionData.Entities
         public int CourseTypeID { get; set; } = 0;
         [NotMapped]
         public string? Std_PHOTO { get; set; }
-
         
+        [NotMapped]
+        public string? CreatedBy { get; set; }
+
+
     }
 }
