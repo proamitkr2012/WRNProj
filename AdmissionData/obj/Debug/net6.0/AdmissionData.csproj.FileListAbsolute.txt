@@ -46,3 +46,15 @@ E:\VRS\Agra\Project\agaraworking_amitv2\WRNProj\AdmissionData\obj\Debug\net6.0\A
 E:\VRS\Agra\Project\agaraworking_amitv2\WRNProj\AdmissionData\obj\Debug\net6.0\refint\AdmissionData.dll
 E:\VRS\Agra\Project\agaraworking_amitv2\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.pdb
 E:\VRS\Agra\Project\agaraworking_amitv2\WRNProj\AdmissionData\obj\Debug\net6.0\ref\AdmissionData.dll
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\bin\Debug\net6.0\AdmissionData.deps.json
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\bin\Debug\net6.0\AdmissionData.dll
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\bin\Debug\net6.0\AdmissionData.pdb
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.csproj.AssemblyReference.cache
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.GeneratedMSBuildEditorConfig.editorconfig
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.AssemblyInfoInputs.cache
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.AssemblyInfo.cs
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.csproj.CoreCompileInputs.cache
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.dll
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\refint\AdmissionData.dll
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\AdmissionData.pdb
+E:\VRS\Agra\NewProject\AgraEntrance\WRNProj\AdmissionData\obj\Debug\net6.0\ref\AdmissionData.dll

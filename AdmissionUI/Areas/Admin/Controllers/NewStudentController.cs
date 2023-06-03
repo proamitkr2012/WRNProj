@@ -201,14 +201,14 @@ namespace AdmissionUI.Areas.Admin.Controllers
                 SMS = arrIndMsg[1].ToString().Trim();
                 var identity = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Sid,Memcode)
-                    ,new Claim(ClaimTypes.Role,CurrentUser.Roles.ToString() )
+                    ,new Claim(ClaimTypes.Role,CurrentUser.Roles[0].ToString() )
                     ,new Claim(ClaimTypes.Name,"" )
                      ,new Claim(ClaimTypes.PrimarySid,CurrentUser.UserId.ToString() )
                     }, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
                 var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", tid, 1));
-                return RedirectToAction("stdprofile", "Student", new { tid = str });
+                return RedirectToAction("stdprofile", "Student", new { area = "", tid = str });
             }
             else
             {

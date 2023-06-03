@@ -19,6 +19,7 @@ namespace AdmissionModel
      public double Fees { get; set; }
      public bool IsFor_Paid { get;set; }
      public bool Status { get; set; }
+     public int PaymentStatus { get; set; }
      public string SabTranId { get; set; }
     }
 }

@@ -60,10 +60,11 @@ namespace AdmissionUI.Controllers
            
             try
             {
-
-                var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
+				
+				var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
                 var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
-                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
+                var roles= HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+				string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
                 
                 var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno);
 
@@ -107,8 +108,9 @@ namespace AdmissionUI.Controllers
                 std.DOB = !string.IsNullOrEmpty(stdmaster.DOB.ToString())? stdmaster.DOB.Value.ToString("dd/MM/yyyy"):"";
                 //check course is paid or not
                 std.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
+                std.Roles = roles;
 
-                return View(std);
+				return View(std);
             }
             catch (Exception ex)
             {

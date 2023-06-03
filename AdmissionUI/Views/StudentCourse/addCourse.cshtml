@@ -165,7 +165,7 @@
                                                 @if (item.IsPaid==0)
                                                 {
                                                     <input type="checkbox" asp-for="@Model.studentapplyList[srno].IsFor_Paid" checked="@item.IsFor_Paid" style= "@(item.Status ? "display:none" : "" )"  />
-                                                    <div style="@((item.Status && item.IsPaid==0) ? "display:block" : "display:none" )">Payment Under Process</div>
+                                                    <div style="@((item.Status && item.IsPaid==0) ? "display:block" : "display:none" )">@(item.PaymentStatus==1?"Payment Under Process":(item.PaymentStatus==3?"Transaction fail":""))</div>
                                                 
                                                 }
                                                 else

@@ -374,20 +374,32 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-4">
-                    @if(Model.isPaidCourseFees==0)
-                    {
+               
+                       @if (Model.Roles.ToLower() == "admin")
+                       {
+                            <div class="col-md-4">
+                                <input type="submit" class="btn btn-success btn-block text-white"
+                                       id="btnl" value="Submit" />
+                            </div>
+                       }
+                       else
+                        {
+                      <div class="col-md-4">
+                       @if(Model.isPaidCourseFees==0)
+                       {
                         <input type="submit" class="btn btn-success btn-block text-white"
                                id="btnl" value="Submit" />
-                    }  
-               </div>
+                       }  
+                       </div>
                         <div class="col-md-4">
                             @if (Model.Newdata == 0)
                             {
                                 <a asp-action="stdQualification" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
                             }
                         </div>
-                </div>
+                      }
+                    
+                 </div>
 
                  
             </div>

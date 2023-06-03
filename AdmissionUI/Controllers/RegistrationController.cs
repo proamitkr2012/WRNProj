@@ -420,10 +420,6 @@ namespace AdmissionUI.Controllers
 
             return View(validatePreOTP);
 
-
-
-
-
         }
 
         [HttpPost]
@@ -461,11 +457,7 @@ namespace AdmissionUI.Controllers
 
         }
 
-
-
-
-
-        public async Task<IActionResult> stdlogout()
+       public async Task<IActionResult> stdlogout()
 		{
 			await HttpContext.SignOutAsync();
 			return RedirectToAction("stdlogin");
