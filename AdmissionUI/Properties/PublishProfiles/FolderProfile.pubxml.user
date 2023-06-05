@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\New folder\agrapub</_PublishTargetUrl>
-    <History>True|2023-06-03T12:03:13.3843722Z;</History>
+    <_PublishTargetUrl>C:\Users\HP\Desktop\admpub</_PublishTargetUrl>
+    <History>True|2023-06-05T11:11:29.4591526Z;True|2023-06-05T16:39:30.5961442+05:30;True|2023-06-05T15:51:45.1967394+05:30;False|2023-06-05T15:50:59.8507666+05:30;True|2023-06-03T17:33:13.3843722+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>
