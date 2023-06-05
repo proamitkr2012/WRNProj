@@ -187,6 +187,7 @@ namespace AdmissionUI.Controllers
                     var mapper = new Mapper(config);
                      var stdmaster = mapper.Map<StudentMasters>(std);
                      stdmaster.CreatedBy= roles=="0"?stdmaster.ApplicationNo:!string.IsNullOrEmpty(userid) ? userid : "admin";
+                    stdmaster.Roles = roles;
                     int res=await _iuow.studentPreRepo.UpdateAsync(stdmaster);
                     if (res > 0)
                     {

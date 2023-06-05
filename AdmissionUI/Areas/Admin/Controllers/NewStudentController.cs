@@ -137,7 +137,7 @@ namespace AdmissionUI.Areas.Admin.Controllers
             listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
             ViewBag.CourseType = listcoursetype;
 
-            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(0)).ToList();
+            var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(-1)).ToList();
             courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
             ViewBag.Courses = courselist;
 
