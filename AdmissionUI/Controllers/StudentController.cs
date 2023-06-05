@@ -146,7 +146,7 @@ namespace AdmissionUI.Controllers
                 var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
                 var roles = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
-                var userid= HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid).Value;
+                var userid= HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid)!=null? HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid).Value:"";
                 var lst = _iuow.IAdmin.GetStateList().Where(x => x.Id > 0).OrderByDescending(x => x.SortOrder).ToList();
                 lst.Insert(0, new tblState { Id = 0, Name = "Select State" });
                 ViewBag.States = lst;

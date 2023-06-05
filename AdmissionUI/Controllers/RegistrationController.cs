@@ -307,11 +307,12 @@ namespace AdmissionUI.Controllers
                     if (stddata.IsActive == true)
                     {
 
-                    var identity = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Sid,stddata.ApplicationNo )
+                        var identity = new ClaimsIdentity(new[] {
+                     new Claim(ClaimTypes.Sid,stddata.ApplicationNo )
                     ,new Claim(ClaimTypes.Role,"0" )
                     ,new Claim(ClaimTypes.Name,stddata.Name )
-                    }, CookieAuthenticationDefaults.AuthenticationScheme);
+                    ,new Claim(ClaimTypes.PrimarySid,"")
+                    },CookieAuthenticationDefaults.AuthenticationScheme); 
                      var principal = new ClaimsPrincipal(identity);
                      var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                      string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, 1));
