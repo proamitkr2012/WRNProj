@@ -20,7 +20,7 @@ using AdmissionUI.Areas.Admin.Filters;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
-    [CustomAdminAuthorize(Roles = "Admin")]
+    [CustomAdminAuthorize(Roles = "Admin,Emp"  )]
     [Area("Admin")]
     public class BaseController : Controller
     {

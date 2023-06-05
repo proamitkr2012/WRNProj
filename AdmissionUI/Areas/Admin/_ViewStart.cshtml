@@ -5,6 +5,11 @@
         {
             Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
         }
+
+        if (CurrentUser.Roles.Contains("Emp"))
+        {
+            Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+        }
      
     }
     else

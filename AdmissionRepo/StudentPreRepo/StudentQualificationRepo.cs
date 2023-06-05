@@ -42,7 +42,9 @@ namespace AdmissionRepo
                     param.Add("@Percentage", entity.Percentage); 
                     param.Add("@IsCGPA", entity.IsCGPA);
                     param.Add("@EnteryID", entity.EntryID);
-                    var rowsInserted = await SqlMapper.ExecuteAsync(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    param.Add("@CreatedBy", entity.CreatedBy);
+                    param.Add("@Roles", entity.Roles);
+                   var rowsInserted = await SqlMapper.ExecuteAsync(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
                     connection.Close();
                     return rowsInserted;
                 }

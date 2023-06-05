@@ -116,7 +116,7 @@
                             <thead>
                                 <tr>
                                     <td>Exam</td>
-                                    <td>Stream</td>
+                                    <td>Subject</td>
                                     <td>Board/University</td>
                                     <td>Roll No.</td>
                                     <td>Passing Year</td>
@@ -293,21 +293,34 @@
                         <a asp-action="stdprofile" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
 
                      </div>
-                    <div class="col-md-4 mt-4">
 
+                      @if (Model.Roles.ToLower() == "admin" || Model.Roles.ToLower() == "emp")
+                       {
+                        <div class="col-md-4 mt-4">
+                            <input type="submit" class="btn btn-success btn-block text-white"
+                                   id="btnl" value="Save & Next" />
+                            </div>
+                               
+                       }
+                     else
+                    {
+                          
+                        <div class="col-md-4 mt-4">
                         @if (Model.isPaidCourseFees == 0)
                         {
                             <input type="submit" class="btn btn-success btn-block text-white"
-                            id="btnl" value="Save&Next" />
+                            id="btnl" value="Save & Next" />
                         }
                         else
                         {
                             <a asp-action="stdWeightage" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
                         }
+                        </div>
+                    }
 
                         
 
-                    </div>
+                   
                 </div>
 
 

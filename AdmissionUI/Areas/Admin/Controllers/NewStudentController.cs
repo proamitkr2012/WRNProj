@@ -209,7 +209,7 @@ namespace AdmissionUI.Areas.Admin.Controllers
                 var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", tid, 1));
                 return RedirectToAction("stdprofile", "Student", new { area = "", tid = str });
-            }
+             }
             else
             {
 

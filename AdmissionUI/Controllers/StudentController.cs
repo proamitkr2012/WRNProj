@@ -225,6 +225,9 @@ namespace AdmissionUI.Controllers
 
             var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
             var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+            var roles = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            var userid = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid) != null ? HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid).Value : "";
+           
             string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
 
 
@@ -269,7 +272,7 @@ namespace AdmissionUI.Controllers
 
             //check course is paid or not
             eligibiltyModel.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
-
+            eligibiltyModel.Roles = roles;
             return View(eligibiltyModel);
         }
 
@@ -285,6 +288,11 @@ namespace AdmissionUI.Controllers
             var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
             var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
             string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
+            var roles = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            var userid = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid) != null ? HttpContext.User.Claims.First(c => c.Type == ClaimTypes.PrimarySid).Value : "";
+
+
+
             ViewBag.Boards = await _iuow.masterRepo.GetEducationalBoard();
             ViewBag.University = await _iuow.masterRepo.GetAlllUniversity();
             var config = new MapperConfiguration(cfg =>
@@ -301,6 +309,9 @@ namespace AdmissionUI.Controllers
             {
                 var stdquli = mapper.Map<StudentQualification>(item);
                     stdquli.ApplicationNo = elg.ApplicationNo;
+                    stdquli.CreatedBy = roles == "0" ? elg.ApplicationNo : !string.IsNullOrEmpty(userid) ? userid : elg.ApplicationNo;
+                    stdquli.Roles = roles;
+
 
                 if (item.Board_Universty_Name.ToLower() == "other")
                 {
@@ -317,6 +328,8 @@ namespace AdmissionUI.Controllers
                     stdquli.Board_Universty_Name = item.Board_Other;
                     
                 }
+
+
 
                 int j = await _iuow.qulificationRepo.AddAsync(stdquli);
 

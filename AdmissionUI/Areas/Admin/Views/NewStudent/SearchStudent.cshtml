@@ -70,8 +70,8 @@
                     <th>Photo</th>
                     <th>CRN</th>
                      <th> Profile</th>
-                     <th> Qualification</th>
-                     <th> Weightage</th>
+                   <!--<th> Qualification</th>
+                   <th> Weightage</th>-->
                  </tr>
             </thead>
             <tbody>
@@ -86,10 +86,16 @@
                             <td>@item.FatherName</td>
                             <td>@item.Gender</td>
                             <td>@item.Mobile</td>
-                           <td> <img src="@item.Std_PHOTO" width="150" height="150" id="imgpreview1"></td>
+                           <td> <img src="@item.Std_PHOTO" width="50" height="50" id="imgpreview1"></td>
                            <td>@item.CRN</td>
                                             <td>
-                                                <a asp-action="actionSearchStudent"   asp-controller="NewStudent" asp-route-tid="@(item.EncrptedData)" asp-route-cid="1" target="_blank">
+                                                <a asp-action="actionSearchStudent"  asp-controller="NewStudent" asp-route-tid="@(item.EncrptedData)" asp-route-cid="1" target="_blank">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+
+                                            @*<td>
+                                                <a asp-action="actionSearchStudent" asp-controller="NewStudent" asp-route-tid="@(item.EncrptedData)" asp-route-cid="2" target="_blank">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -97,12 +103,7 @@
                                                 <a>
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
-                                            </td>
-                                            <td>
-                                                <a>
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
+                                            </td>*@
                         </tr>
                     }
 

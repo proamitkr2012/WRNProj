@@ -374,12 +374,15 @@
                     </div>
                 </div>
                 <div class="row">
-               
-                       @if (Model.Roles.ToLower() == "admin")
+
+                        @if (Model.Roles.ToLower() == "admin" || Model.Roles.ToLower() == "emp")
                        {
                             <div class="col-md-4">
                                 <input type="submit" class="btn btn-success btn-block text-white"
                                        id="btnl" value="Submit" />
+                            </div>
+                            <div class="col-md-4">
+                                <a asp-action="stdQualification" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
                             </div>
                        }
                        else
