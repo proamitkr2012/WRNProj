@@ -67,6 +67,7 @@ namespace AdmissionData.Entities
         [NotMapped]
         public string? CreatedBy { get; set; }
 
-
+        [NotMapped]
+        public string? Roles { get; set; }
     }
 }

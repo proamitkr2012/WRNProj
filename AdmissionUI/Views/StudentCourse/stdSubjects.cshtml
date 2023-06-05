@@ -125,8 +125,8 @@
                                     <th>College  </th>
                                     <th>Course  </th>
                                     <th>Main Subject</th>
+                                    <th> Vocational </th>
                                     <th>Co-Curricular Subject </th>
-                                    <th>Skill Development Subject </th>
                                     @*<th colspan="2">Action</th>*@
 
                                 </tr>
@@ -153,11 +153,11 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select" aria-label="Default select example" asp-for="@Model.stdapplycolsubList[srno].CoSubjectID" asp-items="@(new SelectList(ViewBag.CoSubjects,"SubjectId","Subject"))">
+                                                <select class="form-select" aria-label="Default select example" asp-for="@Model.stdapplycolsubList[srno].SkillSubjectID" asp-items="@(new SelectList(ViewBag.Skills,"SubjectId","Subject"))">
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select" aria-label="Default select example" asp-for="@Model.stdapplycolsubList[srno].SkillSubjectID" asp-items="@(new SelectList(ViewBag.Skills,"SubjectId","Subject"))">
+                                                <select class="form-select" aria-label="Default select example" asp-for="@Model.stdapplycolsubList[srno].CoSubjectID" asp-items="@(new SelectList(ViewBag.CoSubjects,"SubjectId","Subject"))">
                                                 </select>
 
                                                 <input type="hidden" asp-for="@Model.stdapplycolsubList[srno].ApplicationNo" />
