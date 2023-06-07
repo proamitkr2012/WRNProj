@@ -172,6 +172,8 @@
 
 
                                             <select asp-for="@Model.QualifationList[idx].PassingYear" class=" form-control">
+                                                <option value="">--Year--</option>
+                                                
                                                 @if (item.DocName == "10th")
                                                 {
                                                     for (int i = 1980; i < 2022; i++)
@@ -198,7 +200,7 @@
                                                 }
                                                 else if (item.DocName == "12th")
                                                 {
-                                                    for (int i = 1990; i < 2024; i++)
+                                                    for (int i = 1980; i < 2024; i++)
                                                     {
                                                         if (!string.IsNullOrEmpty(item.PassingYear))
                                                         {
@@ -353,6 +355,7 @@
 
     function calpercent(obj, enterid) 
     {
+       
         var marobt=  $("#QualifationList_" + enterid + "__MarkObt").val();
         var martot = $("#QualifationList_" + enterid + "__TotalMarks").val();
         var  isper = $("#QualifationList_" + enterid + "__IsCGPA").val();
@@ -393,15 +396,19 @@
                 var docname = $('#QualifationList_' + idx + '__DocName').val();
                 var subject = $('#QualifationList_' + idx + '__Subject').val();  
                 var board =   $('#QualifationList_' + idx + '__Board_Universty_Name').val();
-                var preRollNo = $('#QualifationList_' + idx + '__PreRollNo').val();
+                var preRollNo=$('#QualifationList_' + idx + '__PreRollNo').val();
                 var markObt = $('#QualifationList_' + idx + '__MarkObt').val();
                 var totalMarks = $('#QualifationList_' + idx + '__TotalMarks').val();
                 var percentage = $('#QualifationList_' + idx + '__Percentage').val();
-
+                var myear = $("#QualifationList_" + idx + "__PassingYear").val();
 
                 if (subject==null || subject=='') 
                 {
                     msg = msg + 'Please enter ' + docname+' subject\n'
+                }
+
+                if (myear == null || myear == '') {
+                    msg = msg + 'Please enter ' + docname + 'Passing year\n'
                 }
 
 
@@ -427,6 +434,7 @@
             }
             else
             {
+                var myear = $("#QualifationList_" + idx + "__PassingYear").val();
                 var markObt = $('#QualifationList_' + idx + '__MarkObt').val('');
                 var totalMarks = $('#QualifationList_' + idx + '__TotalMarks').val('');
                 var percentage = $('#QualifationList_' + idx + '__Percentage').val('');
@@ -448,7 +456,11 @@
                 if (preRollNo == null || preRollNo == '') {
                     msg = msg + 'Please enter ' + docname + ' rollno.\n'
                 }
-            
+
+                if (myear == null || myear == '') {
+                    msg = msg + 'Please enter ' + docname + 'Passing year\n'
+                }
+
             
             
             
