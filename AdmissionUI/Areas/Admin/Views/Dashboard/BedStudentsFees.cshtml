@@ -15,18 +15,17 @@
                 <tr>
 
                     <th class="table-plus datatable-nosort">WRN</th>
+                    <th>Roll</th>
                     <th>Name</th>
                     <th>Amount</th>
                     <th>Courses</th>
-                    <th>CRN</th>
                     <th>Father Name</th>
                     <th>Mother Name</th>
                     <th>Gender</th>
-                    <th>Mobile</th>
                     <th>DOB</th>
-                    <th>Adhar</th>
-                    <th>Created</th>
-                    <th>Type</th>
+                    <th>PaidDate</th>
+                    <th>AppNo</th>
+                    
 
                 </tr>
             </thead>
@@ -36,8 +35,9 @@
                     foreach (var item in Model.studentList)
                     {
                         <tr>
-                            <th>@item.Roll</th>
+
                             <td class="table-plus">@item.WRN</td>
+                            <th>@item.Roll</th>
                             <td>@item.Name</td>
                             <th>@item.Amount</th>
                             <th>B.Ed.</th>
@@ -45,11 +45,11 @@
                             <td>@item.FatherName</td>
                             <td>@item.MotherName</td>
                             <td>@item.Gender</td>
-                            <td>@item.Mobile</td>
+                            
                             <td>@item.DOB.Value.ToString("dd MMM yyyy")</td>
-                            <td>@item.Aadhar</td>
-                            <td>@item.CreatedDate</td>
-                            <td>@item.CourseTypeName</td>
+
+                            <td>@item.PaymentDate</td>
+                            <td>@item.ApplicationNo</td>
                         </tr>
                     }
 
