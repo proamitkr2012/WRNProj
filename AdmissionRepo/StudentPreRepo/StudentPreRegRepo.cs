@@ -4,12 +4,6 @@ using Dapper;
 using DataAccess.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Data;
-using System.Drawing;
-using System.Net.NetworkInformation;
-using System.Numerics;
-using System.Reflection;
-using System.Xml.Linq;
-using static Dapper.SqlMapper;
 
 namespace AdmissionRepo
 {
