@@ -517,7 +517,7 @@ namespace AdmissionUI.Controllers
                     var Name = System.Net.Http.Headers.ContentDispositionHeaderValue.Parse(file.ContentDisposition).Name.Trim('"');
                     List<string> fileParts = fileName.Split('.').ToList();
 
-                    var ext = fileParts[1].ToString();
+                    var ext =Path.GetExtension(fileName);// fileParts[1].ToString();
 
                     string name = Path.GetFileNameWithoutExtension(fileName);
                    // string time = DateTime.Now.ToString("yyyyMMddHHmmss");
