@@ -50,11 +50,6 @@ namespace AdmissionRepo
                 return -1;
             }
 
-
-
-
-
-
         }
 
         public async Task<int> AddStudentAppliedCollegesSubject(StudentAppliedCollegesSubject entity)
