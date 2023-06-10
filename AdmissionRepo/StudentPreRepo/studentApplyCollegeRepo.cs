@@ -64,7 +64,7 @@ namespace AdmissionRepo
 
                 try
                 {
-                    var query = "temp_insertUpdateStudentSubject";
+                    var query = "insertUpdateStudentSubject";
                     var param = new DynamicParameters();
                     param.Add("@CCode", entity.CCode);
                     param.Add("@CourseId", entity.CourseId);
