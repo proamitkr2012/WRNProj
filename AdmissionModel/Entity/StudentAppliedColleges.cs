@@ -25,6 +25,7 @@ namespace AdmissionModel
         public int MajorSubjectID { get; set; }
         public int CoSubjectID { get; set; }
         public int SkillSubjectID { get; set; }
+        public int ChoiceOrder { get; set; }
         
 
     }

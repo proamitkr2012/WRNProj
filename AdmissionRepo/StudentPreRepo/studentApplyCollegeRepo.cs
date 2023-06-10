@@ -64,7 +64,7 @@ namespace AdmissionRepo
 
                 try
                 {
-                    var query = "insertUpdateStudentSubject";
+                    var query = "temp_insertUpdateStudentSubject";
                     var param = new DynamicParameters();
                     param.Add("@CCode", entity.CCode);
                     param.Add("@CourseId", entity.CourseId);
@@ -72,6 +72,7 @@ namespace AdmissionRepo
                     param.Add("@MajorSubjectID", entity.MajorSubjectID);
                     param.Add("@CoSubjectID", entity.CoSubjectID);
                     param.Add("@SkillSubjectID", entity.SkillSubjectID);
+                    param.Add("@ChoiceOrder", entity.ChoiceOrder); 
                     var rowsInserted = await SqlMapper.ExecuteAsync(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
                     connection.Close();
                     return rowsInserted;
@@ -133,7 +134,7 @@ namespace AdmissionRepo
             throw new NotImplementedException();
         }
 
-        public async Task<StudentAppliedCollegesSubject> getStudentAppliedCollegesSubject(StudentAppliedCollegesSubject entity)
+        public async Task<IEnumerable<StudentAppliedCollegesSubject>> getStudentAppliedCollegesSubject(StudentAppliedCollegesSubject entity)
         {
             using (IDbConnection connection = _connectionFactory.GetConnection)
             {
@@ -145,7 +146,7 @@ namespace AdmissionRepo
                     param.Add("@CourseID", entity.CourseId);
                     param.Add("@ApplicationNo", entity.ApplicationNo);
                     param.Add("@CCode", entity.CCode);
-                    var list = await SqlMapper.QuerySingleOrDefaultAsync<StudentAppliedCollegesSubject>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    var list = await SqlMapper.QueryAsync<StudentAppliedCollegesSubject>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
                     connection.Close();
                     return list;
                 }
@@ -160,6 +161,9 @@ namespace AdmissionRepo
                 return null;
             }
         }
+
+
+         
 
         public async  Task<IEnumerable<StudentSubjects>> getStudentChoosensSubject(string appno)
         {

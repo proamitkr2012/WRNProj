@@ -318,7 +318,7 @@ namespace AdmissionUI.Controllers
 
             public async Task<IActionResult> stdSubjects(string? tid, string cid, string ccid)
             {
-              string id = tid;
+            string id = tid;
             if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
             {
                 return RedirectToAction("stdlogin", "Registration");
@@ -331,35 +331,42 @@ namespace AdmissionUI.Controllers
             //StudentMasters studentMasters = await _iuow.studentPreRepo.GetByIdAsync(appno);
             int icid = !string.IsNullOrEmpty(cid) ? Convert.ToInt32(cid) : 0;
             StudentAppliedColleges sc = new StudentAppliedColleges() { ApplicationNo = appno, CourseId = 0 };
+            var listmajor = (await _iuow.masterRepo.GetAllCollegeMajorSubjects(ccid, icid)).ToList();
             var lisapplycollege = await _iuow.studentApplyCollege.GetAllStudentselectCollegeByCourseIdAsync(sc);
             if (lisapplycollege != null && lisapplycollege.Count() > 0)
             {
-               var listcoll = lisapplycollege.ToList().Where(x => x.SRNO > 0 && x.CourseId== icid && x.CollegeCode==ccid).OrderBy(x => x.CollegeName).ToList();
+                var listcoll = lisapplycollege.ToList().Where(x => x.SRNO > 0 && x.CourseId== icid && x.CollegeCode==ccid).OrderBy(x => x.CollegeName).ToList();
                
-                
                 var listselectedcollege = new List<StudentAppliedCollegesSubject>();
-                foreach (var item in listcoll) {
 
-                    listselectedcollege.Add(new StudentAppliedCollegesSubject() { ApplicationNo=item.ApplicationNo,CourseId=item.CourseId, CCode=item.CollegeCode,CollegeCode=item.CollegeCode, CollegeName=item.CollegeName,CourseName=item.CourseName });
+                int uperlimt = listmajor.Count() > 10 ? 10: listmajor.Count();
+
+                for(int rw=0;rw< uperlimt;rw++) 
+                {
+                listselectedcollege.Add(new StudentAppliedCollegesSubject() { ApplicationNo= listcoll[0].ApplicationNo,CourseId= listcoll[0].CourseId, CCode= listcoll[0].CollegeCode,CollegeCode= listcoll[0].CollegeCode, CollegeName= listcoll[0].CollegeName,CourseName= listcoll[0].CourseName,ChoiceOrder=rw+1 });
                 }
                 var studsubject = await _iuow.studentApplyCollege.getStudentAppliedCollegesSubject(new StudentAppliedCollegesSubject() { ApplicationNo = appno , CourseId =icid, CCode = ccid });
+                
                 if (studsubject != null)
                 {
                     int idx = 0;
                     foreach (var item in listselectedcollege)
                     {
-                        if (listselectedcollege[idx].ApplicationNo == studsubject.ApplicationNo && item.CCode == studsubject.CCode && item.CourseId == studsubject.CourseId) {
-                            listselectedcollege[idx].MajorSubjectID = studsubject.MajorSubjectID;
-                            listselectedcollege[idx].CoSubjectID=studsubject.CoSubjectID;
-                            listselectedcollege[idx].SkillSubjectID=studsubject.SkillSubjectID;
+                        foreach (var subitem in studsubject)
+                        {
+                            if (listselectedcollege[idx].ApplicationNo == subitem.ApplicationNo && item.CCode == subitem.CCode && item.CourseId == subitem.CourseId && item.ChoiceOrder==subitem.ChoiceOrder)
+                            {
+                                listselectedcollege[idx].ChoiceOrder = subitem.ChoiceOrder;
+                                listselectedcollege[idx].MajorSubjectID = subitem.MajorSubjectID;
+                                listselectedcollege[idx].CoSubjectID = subitem.CoSubjectID;
+                                listselectedcollege[idx].SkillSubjectID = subitem.SkillSubjectID;
+                            }
                         }
                         idx++;
                     }
 
                 }
-                
-                
-                std.stdapplycolsubList = listselectedcollege;
+                  std.stdapplycolsubList = listselectedcollege;
             }
             else
             {
@@ -370,7 +377,12 @@ namespace AdmissionUI.Controllers
             std.EncrptedData = str;
             std.Ccode = ccid;
             std.CourseID = icid;
-            var listmajor = (await _iuow.masterRepo.GetAllCollegeMajorSubjects(ccid, icid)).ToList();
+          
+            
+            
+           
+            
+
             listmajor.Insert(0, new Subjects { SubjectId = 0, Subject = "Select Major Minor Subject" });
             ViewBag.Majors = listmajor;
 
@@ -379,11 +391,8 @@ namespace AdmissionUI.Controllers
 
             ViewBag.CoSubjects = listco;
             var listskill = (await _iuow.masterRepo.GetAllCollegeSkillSubjects(ccid, icid)).ToList();
-            listskill.Insert(0, new Subjects { SubjectId = 0, Subject = "Select Skill Development " });
-
+            listskill.Insert(0, new Subjects { SubjectId = 0, Subject = "Select Vocational" });
             ViewBag.Skills = listskill;
-
-
             return View(std);
         }
 
@@ -435,7 +444,7 @@ namespace AdmissionUI.Controllers
 
             //ViewBag.CoSubjects = listco;
             //var listskill = (await _iuow.masterRepo.GetAllCollegeSkillSubjects(std.Ccode, std.CourseID)).ToList();
-            //listskill.Insert(0, new Subjects { SubjectId = 0, Subject = "Select Skill Development " });
+            //listskill.Insert(0, new Subjects { SubjectId = 0, Subject = "Select Vocational " });
 
             //ViewBag.Skills = listskill;
 

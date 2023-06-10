@@ -8,7 +8,7 @@ namespace AdmissionRepo
 
         public Task<int> AddStudentAppliedCollegesSubject(StudentAppliedCollegesSubject entity);
 
-        public Task<StudentAppliedCollegesSubject> getStudentAppliedCollegesSubject(StudentAppliedCollegesSubject entity);
+        public Task<IEnumerable<StudentAppliedCollegesSubject>> getStudentAppliedCollegesSubject(StudentAppliedCollegesSubject entity);
         public Task<IEnumerable<StudentSubjects>> getStudentChoosensSubject(string appno);
 
     }

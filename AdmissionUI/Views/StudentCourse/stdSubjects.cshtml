@@ -4,7 +4,7 @@
 }
 
 
-<form asp-action="stdSubjects" asp-controller="StudentCourse" method="post">
+<form asp-action="stdSubjects" asp-controller="StudentCourse" method="post" onsubmit="return validateSubject();">
 
     <div class="container p-3">
         <ul class="steps">
@@ -92,7 +92,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">
-                    Apply for Course
+                    Choose Subject
                 </h5>
                 <hr />
 
@@ -117,17 +117,38 @@
                         @Html.HiddenFor(x=>x.ApplicationNo)
                         @Html.HiddenFor(x=>x.Ccode)
                         @Html.HiddenFor(x=>x.CourseID)
-                        <table class="data-table table table-bordered stripe hover nowrap">
+                        @if (Model.stdapplycolsubList != null && Model.stdapplycolsubList.Count > 0)
+                        {
+                            <table class="data-table table table-bordered nowrap" style="width: 100%;border-collapse: collapse;">
                             <thead>
-                                <tr>
-                                    <th class="table-plus datatable-nosort">Sr.No.</th>
+                                 <tr>
+                                    
                                     <th>Code  </th>
                                     <th>College  </th>
                                     <th>Course  </th>
-                                    <th>Main Subject</th>
-                                    <th> Vocational </th>
-                                    <th>Co-Curricular Subject </th>
-                                    @*<th colspan="2">Action</th>*@
+                                  </tr>
+                                  <tr>
+
+                                        <td>@Model.stdapplycolsubList[0].CCode</td>
+                                        <td style="text-align:left"><p style="text-align:justify-all;font-weight:bold">@Model.stdapplycolsubList[0].CollegeName</p></td>
+                                         <td class="table-plus">@Model.stdapplycolsubList[0].CourseName</td>
+
+                                  </tr>
+
+                                 </thead>
+                              </table>
+
+
+
+                            <table class="data-table table table-bordered nowrap" style="width: 100%;border-collapse: collapse;" id="tableId">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%" class="table-plus datatable-nosort">Sr.No.</th>
+                                   
+                                        <th style="width:35%">Main Subject</th>
+                                        <th style="width:30%"> Vocational </th>
+                                        <th style="width:30%">Co-Curricular Subject </th>
+                                   
 
                                 </tr>
                             </thead>
@@ -136,18 +157,11 @@
                                     var srno = 0;
                                     var total = 0;
                                 }
-                                @if (Model.stdapplycolsubList != null && Model.stdapplycolsubList.Count > 0)
-                                {
-                                    
-
-                                    foreach (var item in Model.stdapplycolsubList)
-                                    {
+                               
+                               @foreach (var item in Model.stdapplycolsubList)
+                               {
                                         <tr>
                                             <td class="table-plus">@(srno + 1)</td>
-                                            <td>@item.CCode</td>
-                                            <td style="text-align:left"><p style="text-align:justify-all;font-weight:bold">@item.CollegeName</p></td>
-
-                                            <td class="table-plus">@item.CourseName</td>
                                             <td>
                                                 <select class="form-select major" aria-label="Default select example" onchange="return setOnlyOnMajor(this)" asp-for="@Model.stdapplycolsubList[srno].MajorSubjectID" asp-items="@(new SelectList(ViewBag.Majors,"SubjectId","Subject"))">
                                                 </select>
@@ -159,7 +173,7 @@
                                             <td>
                                                 <select class="form-select" aria-label="Default select example" asp-for="@Model.stdapplycolsubList[srno].CoSubjectID" asp-items="@(new SelectList(ViewBag.CoSubjects,"SubjectId","Subject"))">
                                                 </select>
-
+                                                <input type="hidden" asp-for="@Model.stdapplycolsubList[srno].ChoiceOrder" />
                                                 <input type="hidden" asp-for="@Model.stdapplycolsubList[srno].ApplicationNo" />
                                                 <input type="hidden" asp-for="@Model.stdapplycolsubList[srno].CourseId" />
                                                 <input type="hidden" asp-for="@Model.stdapplycolsubList[srno].CCode" />
@@ -170,11 +184,11 @@
                                         srno = srno + 1;
                                          
                                     }
-                                }
+                              
                                 
                             </tbody>
                         </table>
-
+                        }
                         </div>
                     <div class="col-md-2   offset-md-3 mt-4">
                         <a asp-action="stdsubjectSelection" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Back</a>
@@ -216,6 +230,41 @@
 
 
         return false;
+    }
+
+    function validateSubject() {
+        debugger;
+        var row = document.getElementById('tableId').tBodies[0].rows.length;
+        var flag=true;
+        var msg="";
+        for (var i = 0; i < row;i++)
+        {
+           
+             if ($('#stdapplycolsubList_' + i + "__MajorSubjectID").val() == '' || $('#stdapplycolsubList_' + i + "__MajorSubjectID").val() == '0')
+             {
+                msg = msg + "Please select Major - Minor at Sr.No. - " + (i + 1) + "\n";
+                flag=false;
+             }
+            if ($('#stdapplycolsubList_' + i + "__SkillSubjectID").val() == '' || $('#stdapplycolsubList_' + i + "__SkillSubjectID").val() == '0') {
+                msg = msg + "Please select vocational at Sr.No. - " + (i + 1) + "\n";
+                flag = false;
+            }
+
+            if ($('#stdapplycolsubList_' + i + "__CoSubjectID").val() == '' || $('#stdapplycolsubList_' + i + "__CoSubjectID").val() == '0') {
+                msg = msg + "Please select cocurricular at Sr.No. - " + (i + 1) + "\n";
+                flag = false;
+            }
+        
+        }
+
+        if(!flag)
+        {
+         alert(msg);
+
+            return false;
+        }
+
+        return true;
     }
 
 
