@@ -99,5 +99,7 @@ namespace AdmissionUI.Models
         public int Newdata { get; set; } = 0;
 
         public string Std_PHOTO { get; set; } = "";
+
+        public string? PWD { get; set; }   
     }
 }

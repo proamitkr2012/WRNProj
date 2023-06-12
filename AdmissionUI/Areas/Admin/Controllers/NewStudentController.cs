@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.Collections.Generic;
 using System.Security.Claims;
+using AutoMapper;
 
 namespace AdmissionUI.Areas.Admin.Controllers
 {
@@ -180,6 +181,9 @@ namespace AdmissionUI.Areas.Admin.Controllers
 
         }
 
+      
+
+
 
         
         public async Task<IActionResult> actionSearchStudent(string tid, string catid)
@@ -216,6 +220,33 @@ namespace AdmissionUI.Areas.Admin.Controllers
                 return RedirectToAction("SearchStudent");
             }
         }
+
+
+
+        public async Task<IActionResult> getStudentDetailsByWRN()
+        {
+          var std =  new StudentRegModel();
+           return View(std);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> getStudentDetailsByWRN( string appno )
+        {
+            var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                //Configuring Employee and EmployeeDTO
+                cfg.CreateMap<StudentMasters, StudentRegModel>();
+                //Any Other Mapping Configuration ....
+            });
+            //Create an Instance of Mapper and return that Instance
+            var mapper = new Mapper(config);
+            var std = mapper.Map<StudentRegModel>(stdmaster);
+            std.ApplicationNo = appno;
+            return View(std);
+        }
+
 
 
         public string EncryptQueryString(string strQueryString)
