@@ -6,6 +6,10 @@
         letter-spacing: 1px;
     }
 
+    .btn-lg {
+        font-size: 1rem;
+    }
+
     @@media (max-width: 990px) {
 
         .fontgap .btn {
@@ -33,11 +37,12 @@
                 </h5>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6 mt-3">  <a href="#" class="btn btn-outline-success w-100"><i class="fas  fa-bullhorn" aria-hidden="true"></i>  Guidelines And Instructions For Applicants</a></div>
-                        <div class="col-sm-6 mt-3">  <a href="#" class="btn btn-outline-danger w-100"><i class="fas  fa-file  " aria-hidden="true"></i> Brochure</a></div>
-                     
-                       
+                        <div class="col-sm-6 mt-3">  <a href="~/doc/Admission Process.docx hindi.pdf" class="btn btn-outline-danger w-100" target="_blank"><i class="fas  fa-bullhorn" aria-hidden="true"></i>  Guidelines And Instructions For Applicants</a></div>
+                        <div class="col-sm-6 mt-3">  <a href="~/doc/Admission-brochure.pdf" class="btn btn-outline-success w-100" target="_blank"><i class="fas  fa-file" aria-hidden="true"></i> Brochure</a></div>
 
+                        <p class="mt-3 text-danger">
+                            निर्देश:- (फॉर्म भरने से पहले अभ्यर्थी से अपेक्षा है कि उक्त निर्देशों को अवश्य पढ़ लें )
+                        </p>
                     </div>
                 </div>
 
@@ -48,9 +53,9 @@
                 </h5>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6 mt-3">  <a asp-action="Registration" asp-controller="Home" class="btn btn-success btn-lg w-100"><i class="fa-regular fa-clipboard"></i> B.Ed New Registration</a></div>
+                        <div class="col-sm-6 mt-3">  <a asp-action="Registration" asp-controller="Home" class=" btn btn-success btn-lg w-100"><i class="fa-regular fa-clipboard"></i> B.Ed New Registration</a></div>
                         <div class="col-sm-6 mt-3">  <a asp-action="Login" asp-controller="Home" class="btn btn-success btn-lg w-100"><i class="fas fa-sign-in" aria-hidden="true"></i> Candidate Login Only For B.Ed</a></div>
-                     
+
                         <div class="col-sm-6 mt-3 col-xs-12 ">  <a asp-action="preRegistration" asp-controller="Registration" class="btn btn-primary btn-lg w-100 text-white "> <i class="fa-regular fa-clipboard"></i> Registration For Other Courses</a></div>
 
                         <div class="col-sm-6 mt-3">  <a asp-action="stdlogin" asp-controller="Registration" class="btn btn-primary btn-lg w-100"><i class="fas fa-sign-in" aria-hidden="true"></i> Candidate Login For Other Courses</a></div>
@@ -64,10 +69,10 @@
             <div class=" w-100">
                 <h4 class="card-header bg-primary text-white newsline"> News & Announcements</h4>
                 <div class="card-body">
-                    <div style="height: 282px; overflow-x: visible; overflow-y: auto;" >
+                    <div style="height: 282px; overflow-x: visible; overflow-y: auto;">
                         <ul class="list-group">
 
-                            <li class="list-group-item"><a href="JavaScript:void(0)"  style="text-decoration: none;" class="glow">Admission Notice</a></li>
+                            <li class="list-group-item"><a href="JavaScript:void(0)" style="text-decoration: none;" class="glow">Admission Notice</a></li>
 
                         </ul>
                     </div>
@@ -94,14 +99,13 @@
 
     .newsline {
         font-family: sans-serif;
-      /*  margin: 100px auto;*/
+        /*  margin: 100px auto;*/
         color: #228B22;
         text-align: center;
-        
         position: relative;
     }
 
-    .newsline:before {
+        .newsline:before {
             content: "";
             display: block;
             width: 30px;
@@ -112,7 +116,7 @@
             position: absolute;
         }
 
-    .newsline:after {
+        .newsline:after {
             content: "";
             display: block;
             width: 30px;
