@@ -105,7 +105,7 @@ namespace AdmissionUI.Controllers
                 var std = mapper.Map<StudentRegModel>(stdmaster);
                 std.EncrptedData = str;
                 std.Newdata = !string.IsNullOrEmpty(stdmaster.Aadhar) ? 0 : 1;
-                std.DOB = !string.IsNullOrEmpty(stdmaster.DOB.ToString())? stdmaster.DOB.Value.ToString("dd/MM/yyyy"):"";
+                std.DOB = !string.IsNullOrEmpty(stdmaster.DOB.ToString())? stdmaster.DOB.Value.ToString("dd/MMM/yyyy"):"";
                 //check course is paid or not
                 std.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
                 std.Roles = roles;
