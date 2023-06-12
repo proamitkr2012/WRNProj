@@ -7,6 +7,7 @@ using AutoMapper;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 using System.Security.Claims;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
@@ -105,7 +106,7 @@ namespace AdmissionUI.Controllers
                 var std = mapper.Map<StudentRegModel>(stdmaster);
                 std.EncrptedData = str;
                 std.Newdata = !string.IsNullOrEmpty(stdmaster.Aadhar) ? 0 : 1;
-                std.DOB = !string.IsNullOrEmpty(stdmaster.DOB.ToString())? stdmaster.DOB.Value.ToString("dd/MMM/yyyy"):"";
+                std.DOB = !string.IsNullOrEmpty(stdmaster.DOB.ToString())? stdmaster.DOB.Value.ToString("dd-MMM-yyyy"):"";
                 //check course is paid or not
                 std.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
                 std.Roles = roles;
@@ -170,37 +171,41 @@ namespace AdmissionUI.Controllers
                 var listsubcate = (await _iuow.masterRepo.GetSubCategory(0)).ToList();
                 listsubcate.Insert(0, new StudentSubcategory { SubCategoryId = 0, SubCategory = "Select SubCategory" });
                 ViewBag.Subcategory = listsubcate;
-               // var errorList = ModelState.Where(x => x.Value.Errors.Count > 0)
-               //.ToDictionary(kvp => kvp.Key, kvp => ((int)kvp.Value.ValidationState));
-
-                if (ModelState.IsValid)
+                // var errorList = ModelState.Where(x => x.Value.Errors.Count > 0)
+                //.ToDictionary(kvp => kvp.Key, kvp => ((int)kvp.Value.ValidationState));
+                if (!string.IsNullOrEmpty(std.DOB))
                 {
-                    var dob = Convert.ToDateTime(std.DOB);
+                    var dob = Convert.ToDateTime(std.DOB, CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
                     std.DOB = dob.ToString("yyyy-MM-dd");
-                    var config = new MapperConfiguration(cfg =>
+                    if (ModelState.IsValid)
                     {
-                        //Configuring Employee and EmployeeDTO
-                        cfg.CreateMap<StudentRegModel, StudentMasters >();
-                        //Any Other Mapping Configuration ....
-                    });
-                    //Create an Instance of Mapper and return that Instance
-                    var mapper = new Mapper(config);
-                     var stdmaster = mapper.Map<StudentMasters>(std);
-                     stdmaster.CreatedBy= roles=="0"?stdmaster.ApplicationNo:!string.IsNullOrEmpty(userid) ? userid : "admin";
-                    stdmaster.Roles = roles;
-                    int res=await _iuow.studentPreRepo.UpdateAsync(stdmaster);
-                    if (res > 0)
-                    {
-                        string enc = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
-                        return RedirectToAction("stdQualification", new { tid = enc });
+                        //  dob = Convert.ToDateTime(std.DOB);
+                        //std.DOB = dob.ToString("yyyy-MM-dd");
+                        var config = new MapperConfiguration(cfg =>
+                        {
+                            //Configuring Employee and EmployeeDTO
+                            cfg.CreateMap<StudentRegModel, StudentMasters>();
+                            //Any Other Mapping Configuration ....
+                        });
+                        //Create an Instance of Mapper and return that Instance
+                        var mapper = new Mapper(config);
+                        var stdmaster = mapper.Map<StudentMasters>(std);
+                        stdmaster.CreatedBy = roles == "0" ? stdmaster.ApplicationNo : !string.IsNullOrEmpty(userid) ? userid : "admin";
+                        stdmaster.Roles = roles;
+                        int res = await _iuow.studentPreRepo.UpdateAsync(stdmaster);
+                        if (res > 0)
+                        {
+                            string enc = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
+                            return RedirectToAction("stdQualification", new { tid = enc });
+
+                        }
+                        else
+                        {
+                            std.Status = -1;
+                            std.Msg = "OOps somthing error,record has not been saved !";
+                        }
 
                     }
-                    else
-                    {
-                        std.Status = -1;
-                        std.Msg = "OOps somthing error,record has not been saved !";
-                    }
-
                 }
                 return View(std);
             }
