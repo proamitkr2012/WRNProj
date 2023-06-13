@@ -378,11 +378,6 @@ namespace AdmissionUI.Controllers
             std.Ccode = ccid;
             std.CourseID = icid;
           
-            
-            
-           
-            
-
             listmajor.Insert(0, new Subjects { SubjectId = 0, Subject = "Select Major Minor Subject" });
             ViewBag.Majors = listmajor;
 

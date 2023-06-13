@@ -249,10 +249,17 @@
                                         <td>
                                             <select asp-for="@Model.QualifationList[idx].ExamStatus" onchange="setOther(this,@item.EntryID)"  class="form-select passed">
                                                 <option value="Passed" selected>Passed</option>
+                                                
                                                 @if (item.DocName != "10th")
                                                 {
                                                     <option value="Appearing" >Appearing</option>
                                                 }
+                                                else
+                                                {
+                                                    <option value="Pramoted">Pramoted</option>
+                                                }                                                  
+
+ 
 
                                             </select>
 
@@ -461,10 +468,7 @@
                     msg = msg + 'Please enter ' + docname + 'Passing year\n'
                 }
 
-            
-            
-            
-            }
+             }
             idx++;
         });
         
