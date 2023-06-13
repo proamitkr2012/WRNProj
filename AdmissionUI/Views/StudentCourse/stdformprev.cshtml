@@ -113,7 +113,7 @@
                                     var appdate = "";
                                     if (Model.studentapplyList.Count > 0)
                                      {
-                                        appdate = Model.studentapplyList[0].PaidON.Length > 11 ? Convert.ToDateTime(Model.studentapplyList[0].PaidON, System.Globalization.CultureInfo.GetCultureInfo("EN").DateTimeFormat).ToString("dd/MM/yyyy") : Model.studentapplyList[0].PaidON;
+                                        appdate =( Model.studentapplyList[0].PaidON!=null && Model.studentapplyList[0].PaidON.Length > 11 ) ? Convert.ToDateTime(Model.studentapplyList[0].PaidON, System.Globalization.CultureInfo.GetCultureInfo("EN").DateTimeFormat).ToString("dd/MM/yyyy") : "";
                                   
                                      }
                                  }

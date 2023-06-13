@@ -543,7 +543,7 @@ namespace AdmissionUI.Controllers
 
             printfrm.ApplicationNo=appno;
             printfrm.EncrptedData = str;
-                return View(printfrm);
+            return View(printfrm);
         }
 
 
