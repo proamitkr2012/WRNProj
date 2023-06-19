@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Text.Json.Serialization;
 using Rotativa.AspNetCore;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,21 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+    builder.Services.Configure<FormOptions>(x =>
+    {
+        x.BufferBody = false;
+        x.KeyLengthLimit = 2048; // 2 KiB
+        x.ValueLengthLimit = 4194304; // 32 MiB
+        x.ValueCountLimit = 2048;// 1024
+        x.MultipartHeadersCountLimit = 32; // 16
+        x.MultipartHeadersLengthLimit = 32768; // 16384
+        x.MultipartBoundaryLengthLimit = 256; // 128
+        x.MultipartBodyLengthLimit = 134217728; // 128 MiB
+    });
+
+
+
 builder.Services.AddRazorPages();
 
 

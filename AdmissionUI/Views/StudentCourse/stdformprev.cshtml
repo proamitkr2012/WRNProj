@@ -371,9 +371,7 @@
                     Payment Details(<strong>
                         @{
                           var status=Model.studentapplyList.Count(x => x.IsPaid == 1)>0? "Paid" : "UnPaid"; 
-
-                            
-                        }
+                         }
                         @status
                     </strong>)
                 </span> 
@@ -387,7 +385,7 @@
                             <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
                                 CRN.
                             </th>
-                            <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
+                            <th style="white-space:nowrap; width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
                                 Transaction No.
                             </th>
                             <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">PaymentReferenceNo</th>
@@ -396,6 +394,15 @@
                             </th>
 
                             <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">Date</th>
+                            @if (status == "Paid")
+                            {
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">
+                                     Receipt
+                                    
+                                </th>
+                            }
+
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -403,7 +410,9 @@
                         {
                             @foreach (var itm in Model.studentapplyList)
                             {
-                                <tr>
+                                @if(!string.IsNullOrEmpty(itm.CRN))
+                                { 
+                                    <tr>
                                     <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:14px;font-weight:bold;font-size: 12px; text-transform:uppercase">
                                         @itm.CourseName
                                     </td>
@@ -423,9 +432,16 @@
                                     <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:12px;font-weight:bold;font-size: 12px; text-transform:uppercase">
                                         @itm.PaidON 
                                     </td>
+                                    @if (status == "Paid")
+                                    {
+                                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:12px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                            <a href="https://sabpaisa.agrauniv.online/newadmission/Request.aspx?wn =@Model.ApplicationNo&bno=@itm.TransactionID" target="_blank" class="btn btn-success"style="font-size:10px"> Print</a>
+                                        </td>
+                                    }
+                               
                                 </tr>
                             }
-
+                          }
                         }
 
 
