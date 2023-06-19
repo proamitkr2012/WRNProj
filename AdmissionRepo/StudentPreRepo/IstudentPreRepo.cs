@@ -18,5 +18,6 @@ namespace AdmissionRepo
         Task<int> UploadDocData(string appno, string path);
 
         Task<StudentMasters> GetByMobileNoAsync(string mobileNo);
+        Task<int> IsStudentAdmitted(string applicationNo);
     }  
 }

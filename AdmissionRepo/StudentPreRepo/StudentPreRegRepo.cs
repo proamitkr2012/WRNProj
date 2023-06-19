@@ -50,11 +50,6 @@ namespace AdmissionRepo
 
                 return -1;
             }
-
-
-
-
-
         }
 
         public Task<int> DeleteAsync(string id)
@@ -378,6 +373,46 @@ namespace AdmissionRepo
                 return -1;
             }
         }
+
+        /*---------------------------------Admission -------------------------------*/
+
+        public async Task<int> IsStudentAdmitted(string applicationNo)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "IsStudentAdmitted";
+                    var param = new DynamicParameters();
+                    param.Add("@ApplicationNo", applicationNo);
+                    var rowsInserted = await SqlMapper.QuerySingleOrDefaultAsync<int>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return rowsInserted;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return -1;
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }
 

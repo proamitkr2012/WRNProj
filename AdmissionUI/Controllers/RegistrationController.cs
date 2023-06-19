@@ -316,7 +316,21 @@ namespace AdmissionUI.Controllers
                      var principal = new ClaimsPrincipal(identity);
                      var stdlogin = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                      string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, 1));
-                     return RedirectToAction("stdprofile", "Student", new { tid = str });
+
+                        //Check is Student Take Admission
+
+                        var isadmit =await _iuow.studentPreRepo.IsStudentAdmitted(std.ApplicationNo);
+                        //admited but fees is pending  
+                        if (isadmit == 1)
+                        {
+                           return RedirectToAction("payadmissionFees", "Admission", new { tid = str });
+                        }
+                        //admited and fees is paid  
+                        else if (isadmit == 2)
+                        {  
+                            return RedirectToAction("printAdmissionDetails", "Admission", new { tid = str });
+                        }
+                         return RedirectToAction("stdprofile", "Student", new { tid = str });
                       
                     }
                     else

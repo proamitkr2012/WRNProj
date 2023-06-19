@@ -69,5 +69,16 @@ namespace AdmissionData.Entities
 
         [NotMapped]
         public string? Roles { get; set; }
+
+
+        //19062023
+        [NotMapped]
+        public int? CourseId { get; set; } 
+        [NotMapped]
+        public int? AdmitFlg { get; set; } 
+        [NotMapped]
+        public DateTime? AdmitFlgDate { get; set; }
+       
+
     }
 }
