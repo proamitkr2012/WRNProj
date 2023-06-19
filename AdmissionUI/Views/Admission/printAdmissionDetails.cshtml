@@ -1,5 +1,677 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model PrintFormModel
 @{
+    ViewData["Title"] = "AdmissionForm";
+    Layout = "_Public";
 }
+
+<html>
+<head>
+    <style>
+        td, th {
+            padding: 3px 5px !important;
+        }
+
+        th {
+            border-right: 1px solid #000 !important;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .subpage[size="A4"] {
+            padding: 1cm;
+            border: 5px red solid;
+            height: 256mm;
+            outline: 2cm #FFEAEA solid;
+        }
+
+        /*.subpage {
+                                                padding: 1cm;
+                                                //border: 5px red solid;
+                                    height: 256mm;
+                                    outline: 2cm #FFEAEA solid;
+                                            }*/
+
+
+
+        @@page {
+            size: A4;
+            margin: 0;
+        }
+
+        @@media print {
+            .page {
+                margin: 0;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
+                page-break-after: always;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <form method="post" asp-area="College" asp-controller="Admission" asp-action="ViewStudentCourseDetails">
+
+        <div id="print1" style=" background-color: #fff; color: #000; font-family: Arial; font-size: 14px">
+            <div class="page" style="page-break-after: always;">
+                <div class="subpage">
+
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:2%;vertical-align:top;text-align:center;border:0px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 16px">
+                                <img src="https://admission.agrauniv.online/logo_header.png" style="width: 95px; height: 95px;margin-top:1px" alt="" />
+                            </td>
+                            <td style="width:98%;text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:30px;font-weight:bold;font-size:21px">
+                                DR. BHIMRAO AMBEDKAR UNIVERSITY, AGRA <br />
+                                डॉ० भीमराव आंबेडकर विश्वविद्यालय, आगरा<br />
+                                (FORMERLY AGRA UNIVERSITY, AGRA ) <br />
+
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+
+                    <table style="width:100%;margin-top:10px">
+                        <tr>
+                            <td style="width:50%;text-align:left;white-space:nowrap">
+                                <span style="text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:0px;font-weight:bold;font-size: 14px">
+                                    <!--WRN No. &nbsp;  Model.ApplicationNo-->
+                                </span>
+                            </td>
+                            <td style="width:50%;text-align:right">
+                                <span style="text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:0px;font-weight:bold;font-size: 14px">
+                                    Application Date: @Model.ApplicationDate.Value.ToString("dd/MM/yyyy")
+                                </span>
+                            </td>
+
+
+                        </tr>
+
+                    </table>
+                    <hr style="margin:0.3rem 0 0.5rem 0" />
+                    <table style="width:100%">
+                        <tr>
+
+                            <td style="text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  font-weight:bold;font-size: 18px">
+                                <h2 style="font-family:Arial;font-weight:bold;font-size:16px">Admission Cum Web Registration Form - @Model.Session </h2>
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+                    <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
+                        <tbody>
+
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> College </th>
+
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.CollegeName
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Course </th>
+
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.CourseName
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <th style="width:20%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 16px;color:darkred"> WRN No.</th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:18px;font-weight:bold;font-size: 16px; text-transform:uppercase;color:darkred">
+                                    @Model.ApplicationNo
+                                </td>
+
+                                <td style="vertical-align: top;border:1px solid #000 " rowspan="8" width="150">
+
+                                    <img id="Image1" src="@Model.Std_PHOTO" alt="Photograph" style="width:150px;" /><br />
+
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> CRN </th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.CRN
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Name </th>
+
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.Name
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Father's Name</th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.FatherName
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Mother's Name</th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.MotherName
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Date of Birth</th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.DOB.Value.ToString("dd-MMM-yyyy")
+                                </td>
+                            </tr>
+
+
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Email Id</th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px;">
+                                    @Model.Email
+
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Gender</th>
+                                <td style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+
+                                    @Model.Gender
+
+                                </td>
+
+
+                            </tr>
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Mobile</th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.Mobile
+
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">Alter.Mobile</th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.AltMobile
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px">Aadhar Card </th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+                                    @Model.Aadhar
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Category </th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+
+                                    @Model.Category
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> SubCategory </th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+
+                                    @Model.SubCategory
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Communication Address </th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+
+                                    <p>
+                                        @Model.CurrentAddress
+
+                                    </p>
+
+
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border:1px solid #000;border-bottom :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 13px"> Permanent Address </th>
+                                <td colspan="2" style="width:60%;vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:16px;font-weight:bold;font-size: 13px; text-transform:uppercase">
+
+                                    <p>
+                                        @Model.ParmanentAddress
+
+                                    </p>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+                    <hr style="margin:0.3rem 0 0.5rem 0" />
+
+                    <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Reported Date </th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Admitted Date</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Admission Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                    @Model.ReportFlgDate
+                                </td>
+                                <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                    @Model.AdmitFlgDate
+                                </td>
+                                <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                    @Model.AdmitFeePaidDate
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <hr style="margin:0.3rem 0 0.5rem 0" />
+                    <span style="font-size:14px;font-weight:bold">
+                        Qualification Details
+                         
+                    </span>
+                    <hr style="margin:0.3rem 0 0.5rem 0" />
+                    <table style="width: 100%;border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">S.No.</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Qualification</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Board/University</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Roll No.</th>
+                                @*  <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Evaluation Type	</th>*@
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Total Marks</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Mark Obt</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Passing Year</th>
+                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Obtained %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int j = 0;
+                            }
+                            @if (Model != null)
+                            {
+                                if (Model.QualifationList != null)
+                                {
+                                    foreach (var item in Model.QualifationList)
+                                    {
+                                        j++;
+
+                                        <tr>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @j
+                                            </td>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.DocName
+                                            </td>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.Board_Universty_Name
+
+                                            </td>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.PreRollNo
+
+                                            </td>
+
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.TotalMarks
+
+                                            </td>
+
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.MarkObt
+                                            </td>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.PassingYear
+
+                                            </td>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:14px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                <span> @item.Percentage %</span>@if (item.IsCGPA == true)
+                                                {
+                                                    <span>(CGPA)</span>
+
+                                                }
+                                                else
+                                                {
+                                                    <span>(Per)</span>
+                                                }
+                                            </td>
+
+                                        </tr>
+
+
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                 </div>
+
+            </div>
+
+            <hr style="page-break-before: always; visibility: hidden;" />
+
+            <div class="page">
+                <div class="subpage">
+
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:2%;vertical-align:top;text-align:center;border:0px solid #000;border-bottom :0px solid #000; padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 16px">
+                                <img src="https://admission.agrauniv.online/logo_header.png" style="width: 95px; height: 95px;margin-top:1px" alt="" />
+                            </td>
+                            <td style="width:98%;text-align:center;vertical-align:top;border:0px solid #000;border-bottom :0px solid #000;padding:5px;margin-left:1px;  line-height:30px;font-weight:bold;font-size:21px">
+                                DR. BHIMRAO AMBEDKAR UNIVERSITY, AGRA <br />
+                                डॉ० भीमराव आंबेडकर विश्वविद्यालय, आगरा<br />
+                                (FORMERLY AGRA UNIVERSITY, AGRA ) <br />
+
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+                    <hr style="margin:0.3rem 0 0.5rem 0" />
+
+                    @{
+                        int w = 0;
+                        var TotalWeight = 0;
+                    }
+                    
+
+                    @if (Model.stdweightageList != null && Model.stdweightageList.Count(x => x.Name.Length > 0 && x.StdWeightID > 0) > 0)
+                    {
+
+                        <span style="font-size:14px;font-weight:bold">
+                            Weightage Details
+
+                        </span>
+                        <hr style="margin:0.3rem 0 0.5rem 0" />
+                        <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
+                            <tr>
+                                <td style="width:95%; font-size:14px;font-weight:bold;border:1px solid #000;"> Weightage </td>
+                                <td style="width:30%; font-size:14px;font-weight:bold;border:1px solid #000;">Total</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table style="width: 100%;border-collapse: collapse;" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">S.No.</th>
+                                                <th style="width:80%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Name</th>
+                                                <th style="width:10%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Weightage</th>
+                                            </tr>
+                                        </thead>
+
+                                       
+
+                      
+                                        @foreach (var item in Model.stdweightageList)
+                                        {
+                                            w++;
+                                            <tr>
+                                                <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                    @w
+                                                </td>
+                                                <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                    @item.Name
+                                                </td>
+                                                <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                    @item.Weight
+                                                </td>
+                                            </tr>
+                                            TotalWeight = TotalWeight + @item.Weight;
+                                        }
+                                    </table>
+
+
+                                </td>
+                                <td>
+
+                                    <span style="text-align:justify;font-size:14px;font-weight:bold">
+                                        @( TotalWeight>0 ? ( TotalWeight > 17 ? 17 :  TotalWeight)  : "")
+
+                                    </span>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+
+                    }
+
+
+                     
+                        @if (ViewBag.SubjectSelection != null && ViewBag.SubjectSelection.Count > 0)
+                        {
+                            <hr style="margin:0.3rem 0 0.5rem 0" />
+                            <span style="font-size:14px;font-weight:bold">
+                                Subject Selected
+                                
+                            </span>
+                            <hr style="margin:0.3rem 0 0.5rem 0" />
+                            <br />
+
+                            var srno = 1;
+                            <span style="font-size:14px;font-weight:bold;mt-2;text-underline-position">
+                                <h4>
+                                       @(
+                                        (ViewBag.SubjectSelection)[0].Faculty
+                                        )
+                                </h4>
+                            </span>
+                            <table style="width: 100%;border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:5%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">S.No.</th>
+                                        <th style="width:35%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Subject </th>
+                                        <th style="width:30%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Name</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.SubjectSelection)
+                                    {
+                                        <tr>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @srno
+                                            </td>
+
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.SubCategory
+                                            </td>
+                                            <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                                @item.SubjectName
+                                            </td>
+
+                                        </tr>
+
+                                        srno++;
+                                    }
+                                </tbody>
+                            </table>
+
+
+                        }
+                    
+
+                    @if (Model.subjectList != null && Model.subjectList.Count() > 0)
+                    {
+                        <hr style="margin:0.3rem 0 0.5rem 0" />
+                        <span style="font-size:14px;font-weight:bold">
+                            Subject Prefrences
+                            
+                        </span>
+                        <hr style="margin:0.3rem 0 0.5rem 0" />
+                        <table style="width: 100%;border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">S.No.</th>
+                                    <th style="width:35%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Major-Minor</th>
+                                    <th style="width:30%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Vocational</th>
+                                    <th style="width:30%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">CoCurricular </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.subjectList)
+                                {
+                                    <tr>
+                                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                            @item.ChoiceOrder
+                                        </td>
+
+                                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                            @item.Subject
+                                        </td>
+                                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                            @item.SkillSubject
+                                        </td>
+                                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                            @item.CoSubject
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    }
+
+
+                    <table style="width: 100%;border-collapse: collapse;margin-top:50px">
+                        <tr>
+                            <td style="width:50%;text-align:right">
+
+                                <p>
+                                    Signature of Candidate<br />
+                                    Date:-@DateTime.Now.ToString("dd/MM/yyyy")
+                                </p>
+                            </td>
+                            @*<td style="width:50%;text-align:right">
+                            <img src="@String.Format("data:image/png;base64,{0}",
+                            Convert.ToBase64String(Model.qcore))" height="100" width="100" />
+
+                            </td>*@
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-2">
+                        
+
+                    </div>
+
+                    <div class="col-md-2"><a href="javascript:void(0)" onclick="return DocumentPrint('')" class="btn btn-primary btn-block text-white"> Print</a> </div>
+ 
+                    <input type="hidden" asp-for="@Model.ApplicationNo" />
+                    <input type="hidden" asp-for="@Model.CourseId" />
+                    <input type="hidden" asp-for="@Model.CollegeCode" />
+                    <input type="hidden" asp-for="@Model.CourseTypeId" />
+                </div>
+            </div>
+
+            <div class="col-md-3"></div>
+
+        </div>
+        <br />
+    </form>
+
+
+
+
+
+    <script language="javascript" type="text/javascript">
+
+        function windowclose() {
+            window.close();
+
+
+        }
+
+        function DocumentPrint(name) {
+
+            var display_settings = "toolbar=yes,location=no,directoried=yes,menubar=yes,scrollbars=yes,top=25,left=100,height=500 width=800,resizable=yes";
+            var content = document.getElementById("print1").innerHTML;
+            var docprint = window.open('', '', display_settings);
+            docprint.document.write('<html><head></head><form onLoad="self.print();"><center>' + content + '</center></form></html>');
+            docprint.print();
+            docprint.document.close();
+            docprint.focus();
+            return false;
+        }
+
+
+    </script>
+
+
+</body>
+</html>

@@ -78,7 +78,12 @@ namespace AdmissionData.Entities
         public int? AdmitFlg { get; set; } 
         [NotMapped]
         public DateTime? AdmitFlgDate { get; set; }
-       
 
+        [NotMapped]
+        public DateTime? AdmitFeePaidDate { get; set; }
+        
+        [NotMapped]
+        public int? CourseTypeId { get; set; }
+        
     }
 }

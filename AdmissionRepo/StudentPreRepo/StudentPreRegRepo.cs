@@ -4,6 +4,7 @@ using Dapper;
 using DataAccess.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace AdmissionRepo
 {
@@ -85,6 +86,44 @@ namespace AdmissionRepo
             }
             return null;
         }
+
+
+        public async Task<StudentAllData> AppliedStudentDetailByID(string collegecode, string courseid, string appno)
+        {
+
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var paramList = new
+                    {
+
+                        ccode = collegecode,
+                        courseId = courseid,
+                        ApplicationNo = appno
+
+                    };
+                
+                    var data = await connection.QuerySingleOrDefaultAsync<StudentAllData>("Select_College_StudentByAppNo", paramList, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+            }
+
+            return null;
+        }
+
+
+
 
 
         public async Task<StudentMasters> GetByMobileNoAsync(string mobileNo)

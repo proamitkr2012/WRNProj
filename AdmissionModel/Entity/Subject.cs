@@ -11,5 +11,9 @@ namespace AdmissionModel
 
         public int SubjectId { get; set; }
         public string Subject  { get; set; }
+
+        public int? ChoiceOrder { get; set; }
+        public string? CoSubject { get; set; }
+        public string? SkillSubject { get; set; }
     }
 }

@@ -8,6 +8,13 @@ namespace AdmissionUI.Models
     {
         public string ApplicationNo { get; set; }
         public string? EncrptedData { get; set; }
+        public DateTime? ReportFlgDate { get; set; }
+        public DateTime? AdmitFlgDate { get; set; }
+        public DateTime? FeeDepositDate { get; set; }
+        public DateTime? ApplicationDate { get; set; }
+        
+        public string? CollegeName { get; set; }
+        public string? CRN { get; set; }
         public List<StudentQualification> QualifationList { get; set; }
         public List<StudentWeightage> stdweightageList { get; set; }
         public List<StudentAppliedCourse> studentapplyList { get; set; }

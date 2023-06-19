@@ -16,7 +16,12 @@ namespace AdmissionModel
 		public string? SabTranId { get; set; }
         public string? Amount { get; set; }
 		public string? CRN { get; set; }
+        public string? CollegeName { get; set; }
         public string? EncrptedData { get; set; }
+        public DateTime? ReportFlgDate { get; set; }
+        public DateTime? AdmitFlgDate { get; set; }
+        public DateTime? FeeDepositDate { get; set; }
+        public DateTime? ApplicationDate { get; set; }
 
     }
 }

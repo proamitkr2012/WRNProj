@@ -4,6 +4,7 @@ using Dapper;
 using DataAccess.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using System.Data.SqlClient;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AdmissionRepo
@@ -80,6 +81,64 @@ namespace AdmissionRepo
 
 
 
+        public async Task<IEnumerable<SubjectMaster>> GetAllStudentSubjectAssignbyCollege(string cCode, string appno, int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "getStudentsubjectByCollege";
+                    var param = new DynamicParameters();
+                    param.Add("@Ccode", cCode);
+                    param.Add("@ApplicationNo", appno);
+                    param.Add("@CourseId", courseId);
+                    var list = await SqlMapper.QueryAsync<SubjectMaster>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                    // _logger.LogError(ex.Message);
+                }
+            }
+            return null;
+        }
+
+
+
+        public async Task<IEnumerable<Subjects>> GetChooseSubjectCollegeWise(string appno, string ccode, int courseID)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "selectStudentCollegeSubjetsDetails";
+                    var param = new DynamicParameters();
+                    param.Add("@ApplicationNo", appno);
+                    param.Add("@CCode", ccode);
+                    param.Add("@CourseID", courseID);
+                    var list = await SqlMapper.QueryAsync<Subjects>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+
+        }
 
 
 
