@@ -445,6 +445,37 @@ namespace AdmissionRepo
         }
 
 
+        public async Task<AdmissionPayment> getAdmissionRefrenceNoForPay(string applicationNo,string ccode,int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "CreateReferenceforAdmissionPay";
+                    var param = new DynamicParameters();
+                    param.Add("@ApplicationNo", applicationNo);
+                    param.Add("@ccode", ccode);
+                    param.Add("@CourseID", courseId);
+                    var rowsInserted = await SqlMapper.QuerySingleOrDefaultAsync<AdmissionPayment>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return rowsInserted;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+
+
+
+        }
+
 
 
 

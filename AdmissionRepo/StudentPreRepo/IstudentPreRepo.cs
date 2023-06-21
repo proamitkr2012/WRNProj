@@ -20,6 +20,6 @@ namespace AdmissionRepo
         Task<StudentMasters> GetByMobileNoAsync(string mobileNo);
         Task<int> IsStudentAdmitted(string applicationNo);
         Task<StudentAllData> AppliedStudentDetailByID(string collegecode, string courseid, string appno);
-
+        Task<AdmissionPayment> getAdmissionRefrenceNoForPay(string applicationNo, string ccode, int courseId);
     }  
 }
