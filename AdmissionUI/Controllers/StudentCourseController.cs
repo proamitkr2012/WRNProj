@@ -52,7 +52,11 @@ namespace AdmissionUI.Controllers
 
             var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(studentMasters.CourseTypeID)).ToList();
             courselist.Insert(0, new Course { CourseId = 0 , CourseName = "Select Course" });
-            ViewBag.Courses= courselist;
+            var eligbilitylist = (await _iuow.masterRepo.GetAllCourseEligbility()).ToList();
+
+            ViewBag.Courses = courselist;
+            ViewBag.Eligbility = eligbilitylist;
+
             std.ApplicationNo = appno;
             std.EncrptedData = str;
 
@@ -70,7 +74,7 @@ namespace AdmissionUI.Controllers
             var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
             string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
 
-            if (commandName.ToLower() == "add")
+            if (commandName!=null &&  commandName.ToLower().Contains("eligbile")  )
             {
                 StudentAppliedCourse sc = new StudentAppliedCourse() {ApllicationNo=std.ApplicationNo,CourseId=std.CourseID };
                 int res= await _iuow.studentApplyCourse.AddAsync(sc);
@@ -125,7 +129,11 @@ namespace AdmissionUI.Controllers
 
             var courselist = (await _iuow.masterRepo.GetAllCoursebyCourseType(studentMasters.CourseTypeID)).ToList();
             courselist.Insert(0, new Course { CourseId = 0, CourseName = "Select Course" });
+            var eligbilitylist = (await _iuow.masterRepo.GetAllCourseEligbility()).ToList();
+           
             ViewBag.Courses = courselist;
+            ViewBag.Eligbility = eligbilitylist;
+
             std.ApplicationNo = appno;
             std.EncrptedData = str;
             return View(std);
