@@ -232,19 +232,27 @@ namespace AdmissionUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> getStudentDetailsByWRN( string appno )
         {
-            var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno);
-
-            var config = new MapperConfiguration(cfg =>
+           
+            var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno.Trim());
+            try
             {
-                //Configuring Employee and EmployeeDTO
-                cfg.CreateMap<StudentMasters, StudentRegModel>();
-                //Any Other Mapping Configuration ....
-            });
-            //Create an Instance of Mapper and return that Instance
-            var mapper = new Mapper(config);
-            var std = mapper.Map<StudentRegModel>(stdmaster);
-            std.ApplicationNo = appno;
-            return View(std);
+                var config = new MapperConfiguration(cfg =>
+                {
+                    //Configuring Employee and EmployeeDTO
+                    cfg.CreateMap<StudentMasters, StudentRegModel>();
+                    //Any Other Mapping Configuration ....
+                });
+                //Create an Instance of Mapper and return that Instance
+                var mapper = new Mapper(config);
+                var std = mapper.Map<StudentRegModel>(stdmaster);
+                std.ApplicationNo = appno;
+                return View(std);
+            }
+            catch (Exception ex) {
+                var std = new StudentRegModel();
+                return View(std);
+            }
+           
         }
 
 
