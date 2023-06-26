@@ -21,6 +21,7 @@ namespace SMS_MAIL.GateWay
         public SMS_MAILAPP(ILogger<SMS_MAILAPP> logger, IConfiguration config )
         {
             _config = config;
+            _logger = logger;
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             //string path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
             //configurationBuilder.AddJsonFile(path, false);

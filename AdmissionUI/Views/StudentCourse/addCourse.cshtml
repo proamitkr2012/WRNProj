@@ -126,7 +126,7 @@
                                    id="btnadd" name="commandName" value="Add" onclick="return showEligbility();" />
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" hidden>
 
                         <select  class="form-select" aria-label="Default select example" id="courseeligbility" asp-items="@(new SelectList(ViewBag.Eligbility,"CourseId","Eligibility"))">
                         </select>
