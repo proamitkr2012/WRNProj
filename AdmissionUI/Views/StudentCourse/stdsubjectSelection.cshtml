@@ -122,9 +122,9 @@
                                     <th>Code</th>
                                     <th>College</th>
                                     <th>Course</th>
-                                     
+                                    <!-- 
                                     <th colspan="2">Action</th>
-
+                                    -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,11 +144,12 @@
                                             <td> @item.CourseName</td>
 
                                             <td>
-                                               
+                                               @*
                                                 @if (item.IsNEP == 1)
                                                 {
                                                     <a asp-action="stdSubjects" asp-controller="StudentCourse" asp-route-tid="@Model.EncrptedData" asp-route-cid="@item.CourseId" asp-route-ccid="@item.CollegeCode" class=@(item.IsSubSelect==0?"btn btn-danger btn-block text-white":"btn btn-success btn-block text-white")>Select Subject</a>
-                                                }
+                                                }*@
+                                                <!---Close(Uncomment if Subject Selection)Subject Selection 30/06/2023 --->
 
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].ApplicationNo" />
                                                 <input type="hidden" asp-for="@Model.studentapplycollegeList[srno].CourseId" />
