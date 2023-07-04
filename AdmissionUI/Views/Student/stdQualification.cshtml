@@ -341,7 +341,7 @@
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-<script src="~/js/step2.js"></script>
+@*<script src="~/js/step2.js"></script>*@
 
 <script type="text/javascript">
     function setOther(obj,enterid)
@@ -420,6 +420,10 @@
 
 
                 if (board == null || board == 'Select Board') {
+                    msg = msg + 'Please select  ' + docname + ' Board/University\n'
+                }
+
+                if ((board == null || board == 'Select University' ) && @ViewBag.CourseTypeID==3) {
                     msg = msg + 'Please select  ' + docname + ' Board/University\n'
                 }
 

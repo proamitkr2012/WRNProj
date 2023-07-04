@@ -278,6 +278,8 @@ namespace AdmissionUI.Controllers
             //check course is paid or not
             eligibiltyModel.isPaidCourseFees = await _iuow.studentApplyCourse.IsAnyCoursePaidByStd(appno);
             eligibiltyModel.Roles = roles;
+            var stdmaster2 = await _iuow.studentPreRepo.GetByIdAsync(appno);
+            ViewBag.CourseTypeID = stdmaster2.CourseTypeID;
             return View(eligibiltyModel);
         }
 
