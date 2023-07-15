@@ -28,50 +28,56 @@ namespace AdmissionUI.Controllers
         }
         public async Task< IActionResult> payadmissionFees()
         {
-            if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
+            try
             {
-                return RedirectToAction("stdlogin", "Registration");
+                if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
+                {
+                    return RedirectToAction("stdlogin", "Registration");
+                }
+                var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
+                var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
+
+
+
+                PrintFormModel printfrm = new PrintFormModel();
+                var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno);
+                var config = new MapperConfiguration(cfg =>
+                {
+                    //Configuring Employee and EmployeeDTO
+                    cfg.CreateMap<StudentMasters, PrintFormModel>();
+                    //Any Other Mapping Configuration ....
+                });
+                //Create an Instance of Mapper and return that Instance
+                var mapper = new Mapper(config);
+                printfrm = mapper.Map<PrintFormModel>(stdmaster);
+                var stdalldata = await _iuow.studentPreRepo.AppliedStudentDetailByID(printfrm.CollegeCode, printfrm.CourseId.ToString(), printfrm.ApplicationNo);
+
+                printfrm.ApplicationDate = stdalldata.ApplicationDate;
+                printfrm.CollegeName = stdalldata.CollegeName;
+                printfrm.ReportFlgDate = stdalldata.ReportFlgDate;
+                printfrm.AdmitFlgDate = stdalldata.AdmitFlgDate;
+                printfrm.CourseName = stdalldata.CourseName;
+                printfrm.CRN = stdalldata.CRN;
+
+                var selsublist = await _iuow.studentApplyCourse.GetAllStudentSubjectAssignbyCollege(printfrm.CollegeCode, printfrm.ApplicationNo, Convert.ToInt32(printfrm.CourseId));
+                if (selsublist != null && selsublist.Count() > 0)
+                {
+                    ViewBag.SubjectSelection = selsublist.ToList();
+                }
+
+                var admpayment = await _iuow.studentPreRepo.getAdmissionRefrenceNoForPay(appno, printfrm.CollegeCode, Convert.ToInt32(printfrm.CourseId));
+                ViewBag.AdmissionFees = admpayment;
+
+                printfrm.ApplicationNo = appno;
+                printfrm.seatAvilable = await _iuow.studentPreRepo.GetcollegeCourseAvilabeSeat(printfrm.CollegeCode, Convert.ToInt32(printfrm.CourseId));
+                printfrm.Status = 1;
+                return View(printfrm);
             }
-            var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
-            var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
-            string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
-
-
-
-            PrintFormModel printfrm = new PrintFormModel();
-            var stdmaster = await _iuow.studentPreRepo.GetByIdAsync(appno);
-            var config = new MapperConfiguration(cfg =>
+            catch(Exception ex)
             {
-                //Configuring Employee and EmployeeDTO
-                cfg.CreateMap<StudentMasters, PrintFormModel>();
-                //Any Other Mapping Configuration ....
-            });
-            //Create an Instance of Mapper and return that Instance
-            var mapper = new Mapper(config);
-            printfrm = mapper.Map<PrintFormModel>(stdmaster);
-            var stdalldata = await _iuow.studentPreRepo.AppliedStudentDetailByID(printfrm.CollegeCode, printfrm.CourseId.ToString(), printfrm.ApplicationNo);
-
-            printfrm.ApplicationDate = stdalldata.ApplicationDate;
-            printfrm.CollegeName = stdalldata.CollegeName;
-            printfrm.ReportFlgDate = stdalldata.ReportFlgDate;
-            printfrm.AdmitFlgDate = stdalldata.AdmitFlgDate;
-            printfrm.CourseName = stdalldata.CourseName;
-            printfrm.CRN = stdalldata.CRN;
-
-            var selsublist = await _iuow.studentApplyCourse.GetAllStudentSubjectAssignbyCollege(printfrm.CollegeCode, printfrm.ApplicationNo, Convert.ToInt32(printfrm.CourseId));
-            if (selsublist != null && selsublist.Count() > 0)
-            {
-                ViewBag.SubjectSelection = selsublist.ToList();
+                return RedirectToAction("stdlogin", "Registration", new {msg=ex.Message });
             }
-
-            var admpayment = await _iuow.studentPreRepo.getAdmissionRefrenceNoForPay(appno, printfrm.CollegeCode, Convert.ToInt32(printfrm.CourseId));
-            ViewBag.AdmissionFees = admpayment;
-            
-            printfrm.ApplicationNo = appno;
-            printfrm.seatAvilable= await _iuow.studentPreRepo.GetcollegeCourseAvilabeSeat(printfrm.CollegeCode, Convert.ToInt32(printfrm.CourseId));
-
-            printfrm.Status = 1;
-            return View(printfrm);
 
         }
 
