@@ -41,7 +41,7 @@
                 <hr />
                
 
-                @*@if (Model.Status < 0)
+                @if (Model.Status < 0)
                 {
                     <div class="row">
                         <div class="col-md-12">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                }*@
+                } 
 
                 <div class="row">
                    
@@ -367,8 +367,11 @@
                                                     @ViewBag.AdmissionFees.TotalAmount
                                                 </td>
                                                 <td>
+                                                    @if(Model.seatAvilable>0)
+                                                    {
                                                     <input type="submit" class="btn btn-success btn-block text-white"
                                                            id="btnl" value="Pay Now" />
+                                                   }
                                                 </td>
 
                                             </tr>

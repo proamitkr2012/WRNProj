@@ -478,7 +478,30 @@ namespace AdmissionRepo
 
 
 
-
+        public async Task<int> GetcollegeCourseAvilabeSeat(string code,int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "IsSeatAvilable";
+                    var param = new DynamicParameters();
+                    param.Add("@CCode", code);
+                    param.Add("@CourseID", courseId);
+                    var list = await SqlMapper.QuerySingleOrDefaultAsync<int>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return 0;
+        }
 
 
 

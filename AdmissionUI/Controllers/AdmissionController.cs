@@ -68,6 +68,9 @@ namespace AdmissionUI.Controllers
             ViewBag.AdmissionFees = admpayment;
             
             printfrm.ApplicationNo = appno;
+            printfrm.seatAvilable= await _iuow.studentPreRepo.GetcollegeCourseAvilabeSeat(printfrm.CollegeCode, Convert.ToInt32(printfrm.CourseId));
+
+            printfrm.Status = 1;
             return View(printfrm);
 
         }
@@ -75,9 +78,21 @@ namespace AdmissionUI.Controllers
         [HttpPost]
         public async Task<IActionResult> payadmissionFees(PrintFormModel printfrm)
         {
-            if (printfrm.CRN != null && printfrm.Amount != null && printfrm.Amount > 0)
+            var seat = await _iuow.studentPreRepo.GetcollegeCourseAvilabeSeat(printfrm.CollegeCode, Convert.ToInt32(printfrm.CourseId));
+
+            printfrm.seatAvilable = seat;
+            if (seat > 0) 
             {
-                return Redirect("https://sabpaisa.agrauniv.online/newadmission/RequestAdmt.aspx?appno=" + printfrm.CRN);
+                if (printfrm.CRN != null && printfrm.Amount != null && printfrm.Amount > 0)
+                {
+                    return Redirect("https://sabpaisa.agrauniv.online/newadmission/RequestAdmt.aspx?appno=" + printfrm.CRN);
+                }
+            }
+            else
+            {
+                printfrm.Status = -1;
+                printfrm.Msg = "Seat is full !";
+
             }
             return View(printfrm);
         }
