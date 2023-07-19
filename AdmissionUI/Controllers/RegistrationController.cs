@@ -306,8 +306,8 @@ namespace AdmissionUI.Controllers
                 {
                     if (stddata.IsActive == true)
                     {
-
-                        var identity = new ClaimsIdentity(new[] {
+                        std.ApplicationNo = stddata.ApplicationNo;
+                       var identity = new ClaimsIdentity(new[] {
                      new Claim(ClaimTypes.Sid,stddata.ApplicationNo )
                     ,new Claim(ClaimTypes.Role,"0" )
                     ,new Claim(ClaimTypes.Name,stddata.Name )
