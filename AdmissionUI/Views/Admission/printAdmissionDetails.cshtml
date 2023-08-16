@@ -599,6 +599,38 @@
 
                     }
 
+                    @if (ViewBag.AdmissionFees!=null)
+                    {
+                        <hr style="margin:0.3rem 0 0.5rem 0" />
+                        <span style="font-size:14px;font-weight:bold">
+                           Admission Fees Details
+                        </span>
+                        <hr style="margin:0.3rem 0 0.5rem 0" />
+
+
+                    <table style="width: 100%;border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="width:5%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000;border-left :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Refrence No</th>
+                                <th style="width:35%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Amount </th>
+                                <th style="width:30%;vertical-align:top;text-align:left  ;border-bottom:1px solid #000;border-top :1px solid #000; padding:5px;margin-left:1px;  font-weight:bold;font-size: 14px">Receipt</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                @ViewBag.AdmissionFees.RefrenceNo
+                        </td>
+                          <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                    @ViewBag.AdmissionFees.TotalAmount
+                                        </td>
+                        <td style="vertical-align:top;border:1px solid #000;border-bottom :1px solid #000;padding:5px;margin-left:1px;  line-height:21px;font-weight:bold;font-size: 12px; text-transform:uppercase">
+                                <a target="_blank" href="https://sabpaisa.agrauniv.online/newadmission/Receiptadmt.aspx?refNo=@(CypherUtility.Cypher.Encrypt(ViewBag.AdmissionFees.RefrenceNo))"><span class="fa fa-print"></span>Print</a>
+                        </td>
+
+                        </tbody>
+                        </table>
+                    }
 
                     <table style="width: 100%;border-collapse: collapse;margin-top:50px">
                         <tr>

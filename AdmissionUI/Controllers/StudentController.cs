@@ -27,11 +27,7 @@ namespace AdmissionUI.Controllers
         }
        
          
-
-
-
-
-        public IActionResult dashboard()
+       public IActionResult dashboard()
         {
             if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
             {
@@ -302,6 +298,8 @@ namespace AdmissionUI.Controllers
 
             ViewBag.Boards = await _iuow.masterRepo.GetEducationalBoard();
             ViewBag.University = await _iuow.masterRepo.GetAlllUniversity();
+
+
             var config = new MapperConfiguration(cfg =>
             {
                 //Configuring Employee and EmployeeDTO
@@ -354,8 +352,9 @@ namespace AdmissionUI.Controllers
                 return RedirectToAction("stdWeightage", new { tid = str });
 
             }
-            
-             return View(elg);
+            var stdmaster2 = await _iuow.studentPreRepo.GetByIdAsync(appno);
+            ViewBag.CourseTypeID = stdmaster2.CourseTypeID;
+            return View(elg);
         }
 
 
@@ -476,29 +475,37 @@ namespace AdmissionUI.Controllers
 
 
 
-        //public async Task<IActionResult> ChooseCourse_College(string? id)
-        //{
-        //    if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
-        //    {
-        //        return RedirectToAction("stdlogin", "Registration");
-        //    }
-            
-        //    var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
-        //    var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
-        //    string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
-        //    StudentMasters studentMasters = await _iuow.studentPreRepo.GetByIdAsync(appno);
-            
-        //    ViewBag.Courses = await _iuow.masterRepo.GetAllCoursebyCourseType(studentMasters.CourseTypeID);
-        //    StudentCollegesModel std = new StudentCollegesModel();
-        //    std.ApplicationNo = appno;
-        //    std.EncrptedData = str;
-            
-        //    return View(std);
-        //}
+        public IActionResult stdCancelForm(string? tid)
+        {
+            if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
+            {
+                return RedirectToAction("stdlogin", "Registration");
+            }
+            var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
+            var FullName = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+            string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", appno, 0));
+            //StudentMasters studentMasters = await _iuow.studentPreRepo.GetByIdAsync(appno);
+            StudentCollegesModel std = new StudentCollegesModel();
+            std.ApplicationNo = appno;
+            std.EncrptedData = str;
+
+            return View(std);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> stdCancelForm(StudentCollegesModel std)
+        {
+            if (HttpContext.User != null && HttpContext.User.Claims != null && HttpContext.User.Claims.ToList().Count == 0)
+            {
+                return RedirectToAction("stdlogin", "Registration");
+            }
+            var appno = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
+            int res = await _iuow.studentPreRepo.cancelForm(std.ApplicationNo, 1);
+            return RedirectToAction("stdlogout", "Registration");
+        }
 
 
-
-            [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> checkAadhar([FromBody] HomeModels models)
         {
             var result =await _iuow.studentPreRepo.IsAadharExists(models.Aadhar);
@@ -559,7 +566,7 @@ namespace AdmissionUI.Controllers
             return Json("-1");
         }
 
-
+        
 
 
         public string EncryptQueryString(string strQueryString)

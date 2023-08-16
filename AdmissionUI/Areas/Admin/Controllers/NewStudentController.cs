@@ -255,6 +255,48 @@ namespace AdmissionUI.Areas.Admin.Controllers
            
         }
 
+        public async Task<IActionResult> UgPGChange()
+        {
+            SearchStudentModel search = new SearchStudentModel();
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+            return View(search);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UgPGChange(SearchStudentModel sm, string commandname)
+        {
+            if (commandname.ToLower() == "search")
+            {
+                SearchStudent ss = new SearchStudent();
+             
+                ss.SearchText = !string.IsNullOrEmpty(sm.SearchText) ? sm.SearchText : "";
+                ss.CourseTypeId = sm.CourseTypeId;
+                ss.SearchText = !string.IsNullOrEmpty(sm.SearchText) ? sm.SearchText : "";
+                var list = await _iuow.adminDashBoard.SearchUnpaiStudentsData(ss);
+                sm.studentList= list.ToList();
+            }
+            else
+            {
+                if (commandname.ToLower() == "save")
+                {
+                    SearchStudent ss = new SearchStudent();
+                    if (!string.IsNullOrEmpty(sm.SearchText) && sm.CourseTypeId != 0)
+                    {
+                        ss.SearchText = !string.IsNullOrEmpty(sm.SearchText) ? sm.SearchText : "";
+                        ss.CourseTypeId = sm.CourseTypeId;
+                        ss.SearchText = !string.IsNullOrEmpty(sm.SearchText) ? sm.SearchText : "";
+                        var list = await _iuow.adminDashBoard.ChangeUG_PG(ss);
+                        sm.studentList = list.ToList();
+                    }
+                }
+            }
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+            return View(sm);
+        }
+
 
 
         public string EncryptQueryString(string strQueryString)

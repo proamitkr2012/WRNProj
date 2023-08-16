@@ -1,0 +1,175 @@
+﻿@model StudentCollegesModel
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<form asp-action="stdCancelForm" method="post" onsubmit="return formconfirm()">
+
+    <div class="container p-3">
+        <ul class="steps">
+            <li class="step step-active">
+                <div class="step-content">
+                    <span class="step-circle">1</span>
+                    <span class="step-text">Profile</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">2</span>
+                    <span class="step-text">Qualification</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">3</span>
+                    <span class="step-text">Weightage</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">4</span>
+                    <span class="step-text">Photo</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">5</span>
+                    <span class="step-text">Add Course</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">6</span>
+                    <span class="step-text">Add College</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">7</span>
+                    <span class="step-text">Add Subject</span>
+                </div>
+
+            </li>
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle">8</span>
+                    <span class="step-text">View Form</span>
+                </div>
+
+            </li>
+
+            <li class="step">
+                <div class="step-content">
+                    <span class="step-circle" style="font-size:12px;color:crimson;font-weight:bold">Log Out</span>
+                    <span class="step-text">
+                        <a asp-action="stdlogout" asp-controller="Registration" style="font-size:12px;color:crimson;font-weight:bold;font-style:normal">Click Here !</a>
+                    </span>
+                </div>
+
+            </li>
+        </ul>
+
+
+
+        <div class="text-center mt-5">
+            <h2>Admission Cum Web Registration Form - (2023)</h2>
+
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+              Cancel  Registration
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                  <b> This Registration will be no longer valid for any admission related process.
+                      I am solely responsible for cancel my WRN Registration. 
+                 </b>
+                </h5>
+                <hr />
+                @Html.HiddenFor(x=>x.EncrptedData)
+                @Html.HiddenFor(x=>x.ApplicationNo)
+                @if (Model.Status < 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span class="text-danger" style="font-weight:bold">@Model.Msg</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    
+                    <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                           Instructions 
+                        </div>
+                    </div>
+                  
+
+                     
+                    </div>
+                   
+                    <div class="row">
+
+                        @if (Model.Roles.ToLower() == "admin" || Model.Roles.ToLower() == "emp")
+                        {
+                            <div class="col-md-4">
+                                <input type="submit" class="btn btn-success btn-block text-white"
+                                       id="btnl" value="Submit" />
+                            </div>
+                            <div class="col-md-4">
+                                <a asp-action="stdprofile" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-4">
+                              <input type="submit" class="btn btn-danger btn-block text-white"
+                                       id="btnl" value="Cancel Application Form" />
+                             </div>
+                           
+
+                            <div class="col-md-4">
+                                <a asp-action="stdprofile" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-success btn-block text-white">Back</a>
+                            </div>
+
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="~/js/step2.js"></script>
+<script>
+    function formconfirm()
+    {
+      if(confirm('Are you sure want to cancel the web registration form !'))
+      {
+       return true;
+       
+      }
+
+
+        return false ;
+    }
+
+
+</script>
+ 

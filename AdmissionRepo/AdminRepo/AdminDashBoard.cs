@@ -160,6 +160,35 @@ namespace AdmissionRepo
         }
 
 
+        public async Task<IEnumerable<StudentAllData>> SearchUnpaiStudentsData(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "SearchUnPaidStudentsData";
+                    var param = new DynamicParameters();
+                    param.Add("@CourseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@CourseID", searchStudent.CourseID);
+                    param.Add("@SearchText", searchStudent.SearchText);
+                    param.Add("@PgIndex", searchStudent.PgIndex);
+                    param.Add("@PgSize", searchStudent.PgSize);
+                    var list = await SqlMapper.QueryAsync<StudentAllData>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+        }
 
 
 
@@ -309,5 +338,40 @@ namespace AdmissionRepo
                 return null;
             }
         }
+
+
+        public async Task<IEnumerable<StudentAllData>> ChangeUG_PG(SearchStudent searchStudent)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                      
+
+                    var query = "CandidateShiftugtoPg";
+                    var param = new DynamicParameters();
+                    param.Add("@WRN", searchStudent.SearchText);
+                    param.Add("@CourseTypeID", searchStudent.CourseTypeId);
+                    param.Add("@Action", 1);
+                    var list = await SqlMapper.QueryAsync<StudentAllData>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+        }
+
+
+
+
     }
 }

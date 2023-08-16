@@ -170,13 +170,17 @@
                                             <input type="text" class="form-control" asp-for="@Model.QualifationList[idx].PreRollNo" />  </td>
                                         <td>
 
-
+                                            @{
+                                                var fromhyear = ViewBag.CourseTypeID==2? 1980:1971;
+                                                 var fromIyear = ViewBag.CourseTypeID==2? 1982:1973;
+                                                var fromgyear = ViewBag.CourseTypeID == 2 ? 1984 : 1975;
+                                            }
                                             <select asp-for="@Model.QualifationList[idx].PassingYear" class=" form-control">
                                                 <option value="">--Year--</option>
                                                 
                                                 @if (item.DocName == "10th")
                                                 {
-                                                    for (int i = 1980; i < 2022; i++)
+                                                    for (int i = fromhyear; i < 2022; i++)
                                                     {
                                                         if (!string.IsNullOrEmpty(item.PassingYear))
                                                         {
@@ -200,7 +204,7 @@
                                                 }
                                                 else if (item.DocName == "12th")
                                                 {
-                                                    for (int i = 1980; i < 2024; i++)
+                                                    for (int i = fromIyear; i < 2024; i++)
                                                     {
                                                         if (!string.IsNullOrEmpty(item.PassingYear))
                                                         {
@@ -221,7 +225,8 @@
                                                 }
                                                 else
                                                 {
-                                                    for (int i = 1992; i < 2024; i++)
+
+                                                    for (int i = fromgyear; i < 2024; i++)
                                                     {
                                                         if (!string.IsNullOrEmpty(item.PassingYear))
                                                         {

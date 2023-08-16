@@ -22,6 +22,9 @@ namespace AdmissionRepo
         Task<StudentAllData> AppliedStudentDetailByID(string collegecode, string courseid, string appno);
         Task<AdmissionPayment> getAdmissionRefrenceNoForPay(string applicationNo, string ccode, int courseId);
         Task<int> GetcollegeCourseAvilabeSeat(string code, int courseId);
+        Task<int> candidatCancelAdmissionSeat(string appno, string code, int courseId, string createdby, string remarks);
+        Task<AdmissionPayment> getAdmissionfeesPaymentDetails(string applicationNo, string ccode, int courseId);
+        Task<int> cancelForm(string id, int Isconfirm);
 
 
     }  

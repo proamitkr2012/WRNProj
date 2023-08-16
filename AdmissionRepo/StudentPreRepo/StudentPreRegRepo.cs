@@ -478,6 +478,40 @@ namespace AdmissionRepo
 
 
 
+        public async Task<AdmissionPayment> getAdmissionfeesPaymentDetails(string applicationNo, string ccode, int courseId)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+
+                try
+                {
+                    var query = "getRefrenceAdmissionPay";
+                    var param = new DynamicParameters();
+                    param.Add("@ApplicationNo", applicationNo);
+                    param.Add("@ccode", ccode);
+                    param.Add("@CourseID", courseId);
+                    var rowsInserted = await SqlMapper.QuerySingleOrDefaultAsync<AdmissionPayment>(connection, query, param, commandType: System.Data.CommandType.StoredProcedure);
+                    connection.Close();
+                    return rowsInserted;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+
+                return null;
+            }
+
+
+
+        }
+
+
+
+
         public async Task<int> GetcollegeCourseAvilabeSeat(string code,int courseId)
         {
             using (IDbConnection connection = _connectionFactory.GetConnection)
@@ -504,6 +538,59 @@ namespace AdmissionRepo
         }
 
 
+
+        public async Task<int> candidatCancelAdmissionSeat(string appno,string code, int courseId,string createdby,string remarks)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "CancelCandidatePreAdmission";
+                    var param = new DynamicParameters();
+                    param.Add("@ApplicationNo", appno);
+                    param.Add("@CourseId", courseId);
+                    param.Add("@Ccode", code);
+                    param.Add("@CreatedBy", createdby);
+                    param.Add("@Remarks", remarks);
+                    var list = await SqlMapper.QuerySingleOrDefaultAsync<int>(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return 0;
+        }
+
+        public async Task<int> cancelForm(string id,int Isconfirm)
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "Cancel_WRN_Registration";
+                    var param = new DynamicParameters();
+                    param.Add("@Appno", id);
+                    param.Add("@Isconfirm", Isconfirm);
+                    var list = await SqlMapper.ExecuteAsync(connection, query, param, commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list;
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return 0;
+        }
 
 
     }

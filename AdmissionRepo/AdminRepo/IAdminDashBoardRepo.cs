@@ -15,5 +15,9 @@ namespace AdmissionRepo
         public Task<IEnumerable<StudentAllData>> Bed_StudentFees_List(SearchStudent searchStudent);
         public Task<IEnumerable<StudentAllData>> SearchStudentsData(SearchStudent searchStudent);
         public   Task<IEnumerable<DashBoardEntityCount>> CourseWiseStudentCount (SearchStudent searchStudent);
+        public Task<IEnumerable<StudentAllData>> ChangeUG_PG(SearchStudent searchStudent);
+        Task<IEnumerable<StudentAllData>> SearchUnpaiStudentsData(SearchStudent searchStudent);
+
+
     }
 }

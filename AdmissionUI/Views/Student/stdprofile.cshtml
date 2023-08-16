@@ -403,6 +403,12 @@
                                 <a asp-action="stdQualification" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-primary btn-block text-white">Next</a>
                             }
                         </div>
+
+                            <div class="col-md-4">
+                                <a asp-action="stdcancelform" asp-controller="Student" asp-route-tid="@Model.EncrptedData" class="btn btn-danger btn-block text-white">Cancel Web Registration </a>
+                                 
+                            </div>
+
                       }
                     
                  </div>
@@ -633,6 +639,18 @@
     
      return false;
     }
+
+function  cancelform('@Model.ApplicationNo')
+{
+    
+   
+
+
+
+  return false;
+}
+
+
 
     
 </script>

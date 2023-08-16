@@ -11,5 +11,7 @@ namespace AdmissionModel
         public string ApplicationNo { get; set; }
         public string RefrenceNo { get; set; }
         public double  TotalAmount { get; set; }
+
+        //public int  Status { get; set; }
     }
 }
