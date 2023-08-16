@@ -1,4 +1,5 @@
-﻿using AdmissionModel;
+﻿using AdmissionData.Entities;
+using AdmissionModel;
 using AdmissionModel.Entity;
 using Dapper;
 using DataAccess.Infrastructure;
@@ -352,6 +353,32 @@ namespace AdmissionRepo
                     var query = "selectCourseEligbilty";
                     var param = new DynamicParameters();
                     var list = await SqlMapper.QueryAsync<CourseEligbility>(connection, query,  commandType: CommandType.StoredProcedure);
+                    connection.Close();
+                    return list.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return null;
+        }
+
+
+        public async Task<List<Course>> GetCoursesList()
+        {
+            using (IDbConnection connection = _connectionFactory.GetConnection)
+            {
+                try
+                {
+                    var query = "SelectAllCourseList_AM";
+                    var param = new DynamicParameters();
+                    var list = await SqlMapper.QueryAsync<Course>(connection, query, commandType: CommandType.StoredProcedure);
                     connection.Close();
                     return list.ToList();
 

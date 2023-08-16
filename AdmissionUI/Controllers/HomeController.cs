@@ -411,7 +411,7 @@ where  Roll='" + Enrollment.Trim() + "'";
 
                     if (model != null)
                     {
-                         Enrollment = model.Roll;
+                        Enrollment = model.Roll;
 
                         model.EncrptedRoll = id;
                         model.GetDocUoloadList = UOF.IAdmin.GetDocUoloadList(Enrollment);
@@ -634,6 +634,42 @@ where  Roll='" + Enrollment.Trim() + "'";
             return RedirectToAction("Index", "Home");
         }
 
+        [Route("~/counsellingdata")]
+        public async Task<IActionResult> CounsellingData()
+        {
+            try
+            {
 
+                StudentCounsellingDataDTO model = new StudentCounsellingDataDTO();
+                model.Courselist = await UOF.masterRepo.GetCoursesList();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> CounsellingData([FromBody] StudentCounsellingDataDTO model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    int appid = await UOF.IAdmin.CounsellingDataAdd(model);
+                    return Json(appid);
+                }
+                return Json(0);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return Json(null);
+
+        }
+        
     }
 }

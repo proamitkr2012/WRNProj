@@ -493,10 +493,116 @@ namespace AdmissionUI.Controllers
         }
 
 
-       
 
+        public async Task<IActionResult> precRegistration(string mobile)
+        {
+            var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+            listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+            ViewBag.CourseType = listcoursetype;
+            StudentPreRegModel studentPreReg = new StudentPreRegModel();
+            studentPreReg.MobileNo = mobile;
+            return View(studentPreReg);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> precRegistration(StudentPreRegModel studentPreReg)
+        {
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    StudentMasters studentMasters = new StudentMasters();
+                    studentMasters.Name = studentPreReg.StudentName;
+                    studentMasters.FatherName = studentPreReg.FatherName;
+                    studentMasters.Mobile = studentPreReg.MobileNo;
+                    studentMasters.Email = studentPreReg.EmailID;
+                    studentMasters.CourseTypeID = studentPreReg.CourseTypeID;
+                    if (studentMasters.Mobile.Length == 10)
+                    {
+                        int ismobexists = await _iuow.studentPreRepo.IsMobileExistsAsync(studentPreReg.MobileNo);
+                        if (ismobexists > 0)
+                        {
+                            var stddata = await _iuow.studentPreRepo.GetByMobileAsync(studentPreReg.MobileNo);
+                            string rnd = General.GenerateRandomOTP(4);
+                            if (ismobexists == 1)//Mobile No exists but not verified
+                            {
+                                string tempid = _iconfig.GetSection("SMS:OTPTEMPID").Value;
+                                string msg = rnd + " is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
+                                //Integrate Sms gateway Here 
+                                var t = await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
+                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, "DBRAU OTP Verification ", msg);
+                                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.PreRegID_PK, rnd));
+                                return RedirectToAction("preVaildateOTP", new { tid = str });
+                            }
+                            else if (ismobexists == 2)//Mobile No exists and verified  but Password is Not Create
+                            {
+                                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, stddata.PreRegID_PK));
+                                return RedirectToAction("createpassword", new { tid = str });
+                            }
+                            else if (ismobexists == 3)
+                            {
+                                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.ApplicationNo, stddata.PreRegID_PK));
+                                return RedirectToAction("createpassword", new { tid = str });
+                            }
+                            else if (ismobexists == 4)
+                            {
+                                // string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", stddata.PreRegID_PK, rnd));
+                                return RedirectToAction("stdlogin");
+                            }
+
+                        }
+                        else
+                        {
+                            int regid = await _iuow.studentPreRepo.AddAsync(studentMasters);
+                            if (regid > 0)
+                            {
+
+                                string rnd = General.GenerateRandomOTP(4);
+                                string str = EncryptQueryString(string.Format("MEMCODE={0}&SMS={1}", regid, rnd));
+
+                                //Integrate Sms gateway Here 
+                                string tempid = _iconfig.GetSection("SMS:OTPTEMPID").Value;
+                                string msg = rnd + " is the OTP to validate your mobile at Dr. Bhimrao Ambedkar University. Kindly do not share the OTP with anyone ";
+                                //Integrate Sms gateway Here 
+                                var t = await _iuow.iSMS.sendSMS(studentMasters.Mobile, msg, tempid);
+                                var e = await _iuow.iSMS.sendMail(studentMasters.Email, "DBRAU OTP Verification ", msg);
+                                return RedirectToAction("preVaildateOTP", new { tid = str });
+
+                            }
+                            else
+                            {
+                                studentPreReg.Status = -1;
+                                studentPreReg.Msg = "OOps Server error !";
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        studentPreReg.Status = -1;
+                        studentPreReg.Msg = "Invalid Mobile Number!";
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message);
+
+                }
+
+                return View(studentPreReg);
+            }
+            else
+            {
+                var listcoursetype = (await _iuow.masterRepo.GetCourseType()).ToList().Where(x => x.CourseTypeId > 1).ToList();
+                listcoursetype.Insert(0, new CourseType { CourseTypeId = 0, CourseTypeName = "Select Course Type" });
+                ViewBag.CourseType = listcoursetype;
+                return View(studentPreReg);
+            }
+        }
 
 
     }

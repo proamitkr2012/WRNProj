@@ -22,8 +22,9 @@ namespace AdmissionData
         public DbSet<QualifationMasters> QualifationMasters { get; set; }
         public DbSet<StudentDocUploaded> StudentDocUploaded { get; set; }
         public DbSet<CollegeMasters> CollegeMasters { get; set; }
-
+        public DbSet<CounsellingData_AM> CounsellingData_AM { get; set; }
         
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

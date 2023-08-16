@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="Areas\Admin\Views\Dashboard\BedNewEntry.cshtml" />
+    <Content Remove="Views\Registration\precRegistration.cshtml" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
@@ -44,7 +45,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
     <PackageReference Include="QRCoder" Version="1.4.1" />
     <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
   </ItemGroup>
@@ -69,6 +70,7 @@
     <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Views\Registration\createpassword.cshtml" />
     <None Include="Views\Registration\Index.cshtml" />
+    <None Include="Views\Registration\precRegistration.cshtml" />
     <None Include="Views\Registration\preRegistration.cshtml" />
     <None Include="Views\Registration\preVaildateOTP.cshtml" />
     <None Include="Views\Registration\stdlogin.cshtml" />

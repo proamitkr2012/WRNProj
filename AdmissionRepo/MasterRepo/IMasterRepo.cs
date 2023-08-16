@@ -1,4 +1,6 @@
-﻿using AdmissionModel;
+﻿using AdmissionData.Entities;
+using AdmissionModel;
+using AdmissionModel.DTO;
 using AdmissionModel.Entity;
 
 namespace AdmissionRepo
@@ -19,6 +21,8 @@ namespace AdmissionRepo
         Task<IEnumerable<Subjects>> GetAllCollegeSkillSubjects(string cCode, int courseId);
         Task<IEnumerable<Subjects>> GetAllCollegeMajorSubjects(string cCode, int courseId);
         Task<IEnumerable<CourseEligbility>> GetAllCourseEligbility();
+        public Task<List<Course>> GetCoursesList();
+       
 
 
     }

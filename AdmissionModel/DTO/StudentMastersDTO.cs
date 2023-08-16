@@ -10,7 +10,7 @@ namespace AdmissionModel.DTO
 {
     public class StudentMastersDTO
     {
-                public long EntryID { get; set; }
+        public long EntryID { get; set; }
         public string Roll { get; set; }
         public string? Name { get; set; }
         public string? FatherName { get; set; }
@@ -21,9 +21,9 @@ namespace AdmissionModel.DTO
         public string? Gender { get; set; }
         public DateTime? DOB { get; set; }
         public string? DOBStr { get; set; }
-        
+
         public string? AltMobile { get; set; }
-       
+
         public string? Category { get; set; }
         public string? CollegeCode { get; set; }
         public string? CollegeName { get; set; }
@@ -32,7 +32,7 @@ namespace AdmissionModel.DTO
         public bool? IsVerified { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? CreatedDate { get; set; }
-     
+
         public string? CurrentAddress { get; set; }
         public string? CState { get; set; }
         public string? CDistrict { get; set; }
@@ -45,7 +45,7 @@ namespace AdmissionModel.DTO
         public string EncrptedRoll { get; set; }
         public List<DocSetting> DocRequired { get; set; }
         public List<QualifationMasters> QualifationList { get; set; }
-       public List<StudentDocUploaded> GetDocUoloadList { get; set; }
+        public List<StudentDocUploaded> GetDocUoloadList { get; set; }
 
 
         public int DegreeID { get; set; }
@@ -61,6 +61,23 @@ namespace AdmissionModel.DTO
         //raj 15/05/2023
         public string? PWD { get; set; }
         public int IsNewadm { get; set; }
+
+    }
+
+    public class StudentCounsellingDataDTO
+    {
+        [Required(ErrorMessage = "Please enter CounsellingNo")]
+        public string CounsellingNo { get; set; }
+        [Required(ErrorMessage = "Please enter Amount")]
+        public decimal Amount { get; set; }
+        [Required(ErrorMessage = "Please enter Mobile")]
+        public string? Mobile { get; set; }
+        [Required(ErrorMessage = "Please select CourseId")]
+        public int CourseId { get; set; }
+
+        [NotMapped]
+        public List<Course>? Courselist { get; set; }
+
 
     }
 }

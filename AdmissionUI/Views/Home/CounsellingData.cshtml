@@ -1,0 +1,109 @@
+﻿@model StudentCounsellingDataDTO
+@{
+    ViewData["Title"] = "AdmissionForm";
+}
+
+<div class="container p-3">
+    <ul class="steps">
+        <li class="step step-active">
+
+            <div class="step-content">
+                <span class="step-circle">1</span>
+                <span class="step-text">Admission Form</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">2</span>
+                <span class="step-text">Profile</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">3</span>
+                <span class="step-text">Qualification</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">4</span>
+                <span class="step-text">Documents</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">5</span>
+                <span class="step-text">Preview</span>
+            </div>
+
+        </li>
+        <li class="step">
+            <div class="step-content">
+                <span class="step-circle">6</span>
+                <span class="step-text">Payment</span>
+            </div>
+
+        </li>
+    </ul>
+    <div class="text-center mt-5">
+        <h2>Admission Web Registration  Form - (2023)</h2>
+
+    </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Registration
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Candidate's Profile 
+            </h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Counselling No :</label>
+                        <input asp-for="CounsellingNo" type="text" placeholder="Counselling No"  class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Candidate's Mobile No.:</label>
+                        <input type="text" asp-for="Mobile" maxlength="10"   placeholder="Candidate's Mobile No."  class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Course :
+                        </label>
+                        <select class="form-select" aria-label="Default" asp-for="CourseId">
+                            <option selected value="">Select Course</option>
+                            @foreach (var item in Model.Courselist)
+                            {
+                                <option value="@item.CourseId">@item.CourseName</option>
+
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            Amount <span class="text-danger">(Fees Already paid for admission)</span>
+                        </label>
+                        <input type="number" asp-for="Amount"   min="100" placeholder="Amount" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4 offset-md-4 mt-4">
+                    <a class="btn btn-primary btn-block text-white" onclick="SubmitCButtonOnclick()">Save & Next</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/js/counselling.js"></script>

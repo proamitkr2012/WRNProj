@@ -26,5 +26,6 @@ namespace AdmissionRepo
         Task<int> AddPreRegistration(StudentMastersDTO model ,int UserId=0,string ip="");
 
         List<StudentMastersDTO> GETStudentNewAdded(int UserId=0);
+        Task<int> CounsellingDataAdd(StudentCounsellingDataDTO Model);
     }
 }

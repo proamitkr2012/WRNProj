@@ -14,5 +14,6 @@ namespace AdmissionModel
      public int CourseTypeId { get; set; }
      public int IsNEP { get; set; }
      public string CourseCode { get; set; }
+     public bool IsProfessional { get; set; }
     }
 }

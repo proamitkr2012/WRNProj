@@ -716,7 +716,7 @@ namespace AdmissionRepo
                         slist.Add(pn);
                     }
 
-                    return slist.OrderByDescending(x=>x.CreatedDate).ToList();
+                    return slist.OrderByDescending(x => x.CreatedDate).ToList();
                 }
 
             }
@@ -725,6 +725,36 @@ namespace AdmissionRepo
 
             }
             return null;
+        }
+
+        public async Task<int> CounsellingDataAdd(StudentCounsellingDataDTO Model)
+        {
+            try
+            {
+                var check = _dbContext.CounsellingData_AM.Where(x =>  x.Mobile == Model.Mobile).FirstOrDefault();
+
+                if (check == null)
+                {
+                    CounsellingData_AM d = new CounsellingData_AM();
+                    d.CourseId = Model.CourseId;
+                    d.CounsellingNo = Model.CounsellingNo;
+                    d.Mobile = Model.Mobile;
+                    d.Amount = Model.Amount;
+                    _dbContext.CounsellingData_AM.Add(d);
+                    await _dbContext.SaveChangesAsync();
+                    return 2;
+
+                }
+                else {
+                    return 1;
+                }
+               
+            }
+            catch (Exception r)
+            {
+
+            }
+            return 0;
         }
     }
 }
